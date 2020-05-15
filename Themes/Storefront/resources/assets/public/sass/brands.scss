@@ -1,0 +1,16 @@
+.brands-wrapper {
+    background: #f4f6f8;
+    padding: 30px 0;
+
+    .brand-image {
+        display: flex;
+        height: 64px;
+        align-items: center;
+        justify-content: center;
+
+        > img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+}
