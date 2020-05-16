@@ -142,7 +142,6 @@ h6 {
 
 .main-header {
 	position: relative;
-	width: 250px;
 	background: #303641;
 	transition: 200ms ease-in-out;
     z-index: 2;
@@ -389,6 +388,8 @@ h6 {
 	}
 }
 
+
+
 .left-side {
 	position: absolute;
 	left: 0;
@@ -437,10 +438,6 @@ h6 {
 
 		.content-wrapper {
 			margin-left: 0;
-		}
-
-		.main-footer {
-			left: 50px;
 		}
 
 		.left-side {
@@ -540,7 +537,7 @@ h6 {
 
 .main-footer {
 	position: absolute;
-	left: 250px;
+	left: 0;
 	right: 0;
 	bottom: 0;
 	background: #ffffff;
@@ -971,11 +968,6 @@ select {
 			left: 0;
 		}
 
-		.main-footer {
-			left: 250px;
-			right: -250px;
-		}
-
 		.wrapper {
 			margin-right: -250px;
 		}
@@ -1060,6 +1052,8 @@ select {
 		}
 	}
 }
+
+
 
 @media screen and (min-width: 991px) {
 	.sidebar-mini.sidebar-collapse .main-header .logo {

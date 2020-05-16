@@ -1,0 +1,409 @@
+0 silly input []
+1 silly flags { _: [ 'bootstrap' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   args: [] }
+2 verbose rootPath C:\wamp64\www\laxmi_electronics
+3 info version 2.11.0
+4 silly existsSync C:\wamp64\www\laxmi_electronics\VERSION
+5 silly initialize attempt
+6 silly npmConfig { registry: undefined,
+6 silly npmConfig   npmClient: 'yarn',
+6 silly npmConfig   npmClientArgs: undefined,
+6 silly npmConfig   mutex: 'network:42424' }
+7 silly initialize success
+8 silly execute attempt
+9 info Bootstrapping 7 packages
+10 info lifecycle preinstall
+11 silly runScript preinstall admin-module
+12 silly admin-module
+13 silly runScript preinstall category-module
+14 silly category-module
+15 silly runScript preinstall media-module
+16 silly media-module
+17 silly runScript preinstall menu-module
+18 silly menu-module
+19 silly runScript preinstall translation-module
+20 silly translation-module
+21 silly runScript preinstall user-module
+22 silly user-module
+23 silly runScript preinstall storefront-theme
+24 silly storefront-theme
+25 silly hasDependencyInstalled admin-module bootstrap
+26 silly dependencyIsSatisfied [ 'bootstrap',
+26 silly dependencyIsSatisfied   '^3.3.7',
+26 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+27 verbose dependencyIsSatisfied bootstrap false
+28 silly hasDependencyInstalled storefront-theme bootstrap
+29 silly dependencyIsSatisfied [ 'bootstrap',
+29 silly dependencyIsSatisfied   '^3.3.7',
+29 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+30 verbose dependencyIsSatisfied bootstrap false
+31 silly hasDependencyInstalled admin-module chart.js
+32 silly dependencyIsSatisfied [ 'chart.js',
+32 silly dependencyIsSatisfied   '^2.7.3',
+32 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+33 verbose dependencyIsSatisfied chart.js false
+34 silly hasDependencyInstalled admin-module datatables.net
+35 silly dependencyIsSatisfied [ 'datatables.net',
+35 silly dependencyIsSatisfied   '^1.10.15',
+35 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+36 verbose dependencyIsSatisfied datatables.net false
+37 silly hasDependencyInstalled admin-module datatables.net-bs
+38 silly dependencyIsSatisfied [ 'datatables.net-bs',
+38 silly dependencyIsSatisfied   '^1.10.15',
+38 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+39 verbose dependencyIsSatisfied datatables.net-bs false
+40 silly hasDependencyInstalled admin-module flatpickr
+41 silly dependencyIsSatisfied [ 'flatpickr',
+41 silly dependencyIsSatisfied   '^3.0.6',
+41 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+42 verbose dependencyIsSatisfied flatpickr false
+43 silly hasDependencyInstalled admin-module font-awesome
+44 silly dependencyIsSatisfied [ 'font-awesome',
+44 silly dependencyIsSatisfied   '^4.7.0',
+44 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+45 verbose dependencyIsSatisfied font-awesome false
+46 silly hasDependencyInstalled storefront-theme font-awesome
+47 silly dependencyIsSatisfied [ 'font-awesome',
+47 silly dependencyIsSatisfied   '^4.7.0',
+47 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+48 verbose dependencyIsSatisfied font-awesome false
+49 silly hasDependencyInstalled admin-module jquery
+50 silly dependencyIsSatisfied [ 'jquery',
+50 silly dependencyIsSatisfied   '^3.2.1',
+50 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+51 verbose dependencyIsSatisfied jquery false
+52 silly hasDependencyInstalled storefront-theme jquery
+53 silly dependencyIsSatisfied [ 'jquery',
+53 silly dependencyIsSatisfied   '^3.3.1',
+53 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+54 verbose dependencyIsSatisfied jquery false
+55 silly hasDependencyInstalled admin-module jquery-slimscroll
+56 silly dependencyIsSatisfied [ 'jquery-slimscroll',
+56 silly dependencyIsSatisfied   '^1.3.8',
+56 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+57 verbose dependencyIsSatisfied jquery-slimscroll false
+58 silly hasDependencyInstalled storefront-theme jquery-slimscroll
+59 silly dependencyIsSatisfied [ 'jquery-slimscroll',
+59 silly dependencyIsSatisfied   '^1.3.8',
+59 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+60 verbose dependencyIsSatisfied jquery-slimscroll false
+61 silly hasDependencyInstalled admin-module lodash
+62 silly dependencyIsSatisfied [ 'lodash',
+62 silly dependencyIsSatisfied   '^4.17.4',
+62 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+63 verbose dependencyIsSatisfied lodash false
+64 silly hasDependencyInstalled admin-module mousetrap
+65 silly dependencyIsSatisfied [ 'mousetrap',
+65 silly dependencyIsSatisfied   '^1.6.1',
+65 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+66 verbose dependencyIsSatisfied mousetrap false
+67 silly hasDependencyInstalled admin-module nprogress
+68 silly dependencyIsSatisfied [ 'nprogress',
+68 silly dependencyIsSatisfied   '^0.2.0',
+68 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+69 verbose dependencyIsSatisfied nprogress false
+70 silly hasDependencyInstalled admin-module selectize
+71 silly dependencyIsSatisfied [ 'selectize',
+71 silly dependencyIsSatisfied   '^0.12.6',
+71 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+72 verbose dependencyIsSatisfied selectize false
+73 silly hasDependencyInstalled storefront-theme selectize
+74 silly dependencyIsSatisfied [ 'selectize',
+74 silly dependencyIsSatisfied   '^0.12.6',
+74 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+75 verbose dependencyIsSatisfied selectize false
+76 silly hasDependencyInstalled admin-module sortablejs
+77 silly dependencyIsSatisfied [ 'sortablejs',
+77 silly dependencyIsSatisfied   'https://github.com/RubaXa/Sortable',
+77 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+78 verbose dependencyIsSatisfied sortablejs false
+79 silly hasDependencyInstalled admin-module tinymce
+80 silly dependencyIsSatisfied [ 'tinymce',
+80 silly dependencyIsSatisfied   '^4.6.4',
+80 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\node_modules' ]
+81 verbose dependencyIsSatisfied tinymce false
+82 silly hasDependencyInstalled category-module jstree
+83 silly dependencyIsSatisfied [ 'jstree',
+83 silly dependencyIsSatisfied   '^3.3.4',
+83 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Category\\node_modules' ]
+84 verbose dependencyIsSatisfied jstree false
+85 silly hasDependencyInstalled media-module dropzone
+86 silly dependencyIsSatisfied [ 'dropzone',
+86 silly dependencyIsSatisfied   '^5.4.0',
+86 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Media\\node_modules' ]
+87 verbose dependencyIsSatisfied dropzone false
+88 silly hasDependencyInstalled menu-module nestable2
+89 silly dependencyIsSatisfied [ 'nestable2',
+89 silly dependencyIsSatisfied   '^1.6.0',
+89 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Menu\\node_modules' ]
+90 verbose dependencyIsSatisfied nestable2 false
+91 silly hasDependencyInstalled translation-module x-editable
+92 silly dependencyIsSatisfied [ 'x-editable',
+92 silly dependencyIsSatisfied   '^1.5.1',
+92 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Translation\\node_modules' ]
+93 verbose dependencyIsSatisfied x-editable false
+94 silly hasDependencyInstalled storefront-theme animate.css
+95 silly dependencyIsSatisfied [ 'animate.css',
+95 silly dependencyIsSatisfied   '^3.5.2',
+95 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+96 verbose dependencyIsSatisfied animate.css false
+97 silly hasDependencyInstalled storefront-theme devbridge-autocomplete
+98 silly dependencyIsSatisfied [ 'devbridge-autocomplete',
+98 silly dependencyIsSatisfied   '^1.4.9',
+98 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+99 verbose dependencyIsSatisfied devbridge-autocomplete false
+100 silly hasDependencyInstalled storefront-theme drift-zoom
+101 silly dependencyIsSatisfied [ 'drift-zoom',
+101 silly dependencyIsSatisfied   '^1.3.0',
+101 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+102 verbose dependencyIsSatisfied drift-zoom false
+103 silly hasDependencyInstalled storefront-theme jquery.easing
+104 silly dependencyIsSatisfied [ 'jquery.easing',
+104 silly dependencyIsSatisfied   '^1.4.1',
+104 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+105 verbose dependencyIsSatisfied jquery.easing false
+106 silly hasDependencyInstalled storefront-theme nouislider
+107 silly dependencyIsSatisfied [ 'nouislider',
+107 silly dependencyIsSatisfied   '^11.1.0',
+107 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+108 verbose dependencyIsSatisfied nouislider false
+109 silly hasDependencyInstalled storefront-theme slick-carousel
+110 silly dependencyIsSatisfied [ 'slick-carousel',
+110 silly dependencyIsSatisfied   '^1.7.1',
+110 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+111 verbose dependencyIsSatisfied slick-carousel false
+112 silly hasDependencyInstalled storefront-theme slick-lightbox
+113 silly dependencyIsSatisfied [ 'slick-lightbox',
+113 silly dependencyIsSatisfied   '^0.2.10',
+113 silly dependencyIsSatisfied   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\node_modules' ]
+114 verbose dependencyIsSatisfied slick-lightbox false
+115 silly root dependencies []
+116 silly leaf dependencies {
+116 silly leaf dependencies   "admin-module": [
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "bootstrap@^3.3.7",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "chart.js@^2.7.3",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "datatables.net@^1.10.15",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "datatables.net-bs@^1.10.15",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "flatpickr@^3.0.6",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "font-awesome@^4.7.0",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "jquery@^3.2.1",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "jquery-slimscroll@^1.3.8",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "lodash@^4.17.4",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "mousetrap@^1.6.1",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "nprogress@^0.2.0",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "selectize@^0.12.6",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "sortablejs@https://github.com/RubaXa/Sortable",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "tinymce@^4.6.4",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     }
+116 silly leaf dependencies   ],
+116 silly leaf dependencies   "storefront-theme": [
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "bootstrap@^3.3.7",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "font-awesome@^4.7.0",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "jquery@^3.3.1",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "jquery-slimscroll@^1.3.8",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "selectize@^0.12.6",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "animate.css@^3.5.2",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "devbridge-autocomplete@^1.4.9",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "drift-zoom@^1.3.0",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "jquery.easing@^1.4.1",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "nouislider@^11.1.0",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "slick-carousel@^1.7.1",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     },
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "slick-lightbox@^0.2.10",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     }
+116 silly leaf dependencies   ],
+116 silly leaf dependencies   "category-module": [
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "jstree@^3.3.4",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     }
+116 silly leaf dependencies   ],
+116 silly leaf dependencies   "media-module": [
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "dropzone@^5.4.0",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     }
+116 silly leaf dependencies   ],
+116 silly leaf dependencies   "menu-module": [
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "nestable2@^1.6.0",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     }
+116 silly leaf dependencies   ],
+116 silly leaf dependencies   "translation-module": [
+116 silly leaf dependencies     {
+116 silly leaf dependencies       "dependency": "x-editable@^1.5.1",
+116 silly leaf dependencies       "isSatisfied": false
+116 silly leaf dependencies     }
+116 silly leaf dependencies   ]
+116 silly leaf dependencies }
+117 info Installing external dependencies
+118 verbose actions 6 actions, concurrency 4
+119 silly installInDir Admin [ 'bootstrap@^3.3.7',
+119 silly installInDir   'chart.js@^2.7.3',
+119 silly installInDir   'datatables.net@^1.10.15',
+119 silly installInDir   'datatables.net-bs@^1.10.15',
+119 silly installInDir   'flatpickr@^3.0.6',
+119 silly installInDir   'font-awesome@^4.7.0',
+119 silly installInDir   'jquery@^3.2.1',
+119 silly installInDir   'jquery-slimscroll@^1.3.8',
+119 silly installInDir   'lodash@^4.17.4',
+119 silly installInDir   'mousetrap@^1.6.1',
+119 silly installInDir   'nprogress@^0.2.0',
+119 silly installInDir   'selectize@^0.12.6',
+119 silly installInDir   'sortablejs@https://github.com/RubaXa/Sortable',
+119 silly installInDir   'tinymce@^4.6.4' ]
+120 silly installInDir backup C:\wamp64\www\laxmi_electronics\Modules\Admin\package.json
+121 silly rename [ 'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\package.json',
+121 silly rename   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin\\package.json.lerna_backup' ]
+122 silly installInDir Storefront [ 'bootstrap@^3.3.7',
+122 silly installInDir   'font-awesome@^4.7.0',
+122 silly installInDir   'jquery@^3.3.1',
+122 silly installInDir   'jquery-slimscroll@^1.3.8',
+122 silly installInDir   'selectize@^0.12.6',
+122 silly installInDir   'animate.css@^3.5.2',
+122 silly installInDir   'devbridge-autocomplete@^1.4.9',
+122 silly installInDir   'drift-zoom@^1.3.0',
+122 silly installInDir   'jquery.easing@^1.4.1',
+122 silly installInDir   'nouislider@^11.1.0',
+122 silly installInDir   'slick-carousel@^1.7.1',
+122 silly installInDir   'slick-lightbox@^0.2.10' ]
+123 silly installInDir backup C:\wamp64\www\laxmi_electronics\Themes\Storefront\package.json
+124 silly rename [ 'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\package.json',
+124 silly rename   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\package.json.lerna_backup' ]
+125 silly installInDir Category [ 'jstree@^3.3.4' ]
+126 silly installInDir backup C:\wamp64\www\laxmi_electronics\Modules\Category\package.json
+127 silly rename [ 'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Category\\package.json',
+127 silly rename   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Category\\package.json.lerna_backup' ]
+128 silly installInDir Media [ 'dropzone@^5.4.0' ]
+129 silly installInDir backup C:\wamp64\www\laxmi_electronics\Modules\Media\package.json
+130 silly rename [ 'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Media\\package.json',
+130 silly rename   'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Media\\package.json.lerna_backup' ]
+131 silly installInDir writing tempJson { dependencies:
+131 silly installInDir    { bootstrap: '^3.3.7',
+131 silly installInDir      'chart.js': '^2.7.3',
+131 silly installInDir      'datatables.net': '^1.10.15',
+131 silly installInDir      'datatables.net-bs': '^1.10.15',
+131 silly installInDir      flatpickr: '^3.0.6',
+131 silly installInDir      'font-awesome': '^4.7.0',
+131 silly installInDir      jquery: '^3.2.1',
+131 silly installInDir      'jquery-slimscroll': '^1.3.8',
+131 silly installInDir      lodash: '^4.17.4',
+131 silly installInDir      mousetrap: '^1.6.1',
+131 silly installInDir      nprogress: '^0.2.0',
+131 silly installInDir      selectize: '^0.12.6',
+131 silly installInDir      sortablejs: 'https://github.com/RubaXa/Sortable',
+131 silly installInDir      tinymce: '^4.6.4' } }
+132 silly installInDir writing tempJson { dependencies: { dropzone: '^5.4.0' } }
+133 silly installInDir writing tempJson { dependencies: { jstree: '^3.3.4' } }
+134 silly installInDir writing tempJson { dependencies:
+134 silly installInDir    { bootstrap: '^3.3.7',
+134 silly installInDir      'font-awesome': '^4.7.0',
+134 silly installInDir      jquery: '^3.3.1',
+134 silly installInDir      'jquery-slimscroll': '^1.3.8',
+134 silly installInDir      selectize: '^0.12.6',
+134 silly installInDir      'animate.css': '^3.5.2',
+134 silly installInDir      'devbridge-autocomplete': '^1.4.9',
+134 silly installInDir      'drift-zoom': '^1.3.0',
+134 silly installInDir      'jquery.easing': '^1.4.1',
+134 silly installInDir      nouislider: '^11.1.0',
+134 silly installInDir      'slick-carousel': '^1.7.1',
+134 silly installInDir      'slick-lightbox': '^0.2.10' } }
+135 silly getExecOpts { cwd: 'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront' }
+136 silly installInDir [ 'yarn',
+136 silly installInDir   [ 'install', '--mutex', 'network:42424', '--non-interactive' ] ]
+137 silly getExecOpts { cwd: 'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Media' }
+138 silly installInDir [ 'yarn',
+138 silly installInDir   [ 'install', '--mutex', 'network:42424', '--non-interactive' ] ]
+139 silly getExecOpts { cwd: 'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Category' }
+140 silly installInDir [ 'yarn',
+140 silly installInDir   [ 'install', '--mutex', 'network:42424', '--non-interactive' ] ]
+141 silly getExecOpts { cwd: 'C:\\wamp64\\www\\laxmi_electronics\\Modules\\Admin' }
+142 silly installInDir [ 'yarn',
+142 silly installInDir   [ 'install', '--mutex', 'network:42424', '--non-interactive' ] ]
+143 silly installInDir cleanup C:\wamp64\www\laxmi_electronics\Themes\Storefront\package.json
+144 silly renameSync [ 'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\package.json.lerna_backup',
+144 silly renameSync   'C:\\wamp64\\www\\laxmi_electronics\\Themes\\Storefront\\package.json' ]
+145 verbose installed leaf storefront-theme
+146 error execute callback with error
+147 error Error: spawn yarn ENOENT
+147 error     at notFoundError (C:\wamp64\www\laxmi_electronics\node_modules\lerna\node_modules\cross-spawn\lib\enoent.js:11:11)
+147 error     at verifyENOENT (C:\wamp64\www\laxmi_electronics\node_modules\lerna\node_modules\cross-spawn\lib\enoent.js:46:16)
+147 error     at ChildProcess.cp.emit (C:\wamp64\www\laxmi_electronics\node_modules\lerna\node_modules\cross-spawn\lib\enoent.js:33:19)

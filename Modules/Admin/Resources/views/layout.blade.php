@@ -22,15 +22,14 @@
         @include('admin::partials.globals')
     </head>
 
-    <body class="skin-blue sidebar-mini offcanvas clearfix {{ is_rtl() ? 'rtl' : 'ltr' }}">
-        <div class="left-side"></div>
-
-        @include('admin::partials.sidebar')
-
+    <body class="skin-blue offcanvas clearfix {{ is_rtl() ? 'rtl' : 'ltr' }}">
         <div class="wrapper">
-            <div class="content-wrapper">
+            <header class="main-header clearfix">
                 @include('admin::partials.top_nav')
-
+                
+                @include('admin::partials.sidebar')
+            </header>
+            <div class="content-wrapper">
                 <section class="content-header clearfix">
                     @yield('content_header')
                 </section>
