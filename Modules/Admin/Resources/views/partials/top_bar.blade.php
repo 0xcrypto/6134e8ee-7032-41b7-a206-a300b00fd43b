@@ -2,7 +2,7 @@
     <ul class="navbar-nav mr-auto align-items-center">
         <li class="nav-item">
             <a class="nav-link logo" href="{{ route('admin.dashboard.index') }}">
-                <span class="logo-lg">FleetCart</span>
+                <span class="logo-lg">Laxmi Electronics</span>
             </a>
         </li>
     </ul>

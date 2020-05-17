@@ -25,7 +25,7 @@
     <body class="skin-blue offcanvas clearfix {{ is_rtl() ? 'rtl' : 'ltr' }}">
         <div class="wrapper">
             <header class="main-header clearfix">
-                @include('admin::partials.top_nav')
+                @include('admin::partials.top_bar')
                 
                 @include('admin::partials.sidebar')
             </header>
