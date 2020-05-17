@@ -13,13 +13,7 @@ class SidebarExtender extends BaseSidebarExtender
     {
         $menu->group(trans('admin::sidebar.content'), function (Group $group) {
             $group->item(trans('product::sidebar.products'), function (Item $item) {
-                $item->item(trans('review::sidebar.reviews'), function (Item $item) {
-                    $item->weight(30);
-                    $item->route('admin.reviews.index');
-                    $item->authorize(
-                        $this->auth->hasAccess('admin.reviews.index')
-                    );
-                });
+                
             });
         });
     }
