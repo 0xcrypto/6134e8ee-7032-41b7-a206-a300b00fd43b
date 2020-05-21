@@ -9,8 +9,13 @@ use Modules\Message\Http\Requests\SaveMessageRequest;
 
 class MessageController extends Controller
 {
-    use HasCrudActions;
+    
+    //use HasCrudActions;
 
+    public function index()
+    {
+        return view("{$this->viewPath}.index", ['name'=>'ankit']);
+    }
     /**
      * Model for the resource.
      *
