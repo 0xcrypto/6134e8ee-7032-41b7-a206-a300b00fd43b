@@ -1,0 +1,11 @@
+{
+    "name": "Branch",
+    "alias": "branch",
+    "description": "The FleetCart Branch Module.",
+    "active": 1,
+    "order": 100,
+    "providers": [
+        "Modules\\Branch\\Providers\\BranchServiceProvider",
+        "Modules\\Branch\\Providers\\RouteServiceProvider"
+    ]
+}

@@ -15,7 +15,7 @@ class AdminSidebarCreator
 
     /**
      * @var \Maatwebsite\Sidebar\Presentation\SidebarRenderer
-     */
+     */ 
     protected $renderer;
 
     /**

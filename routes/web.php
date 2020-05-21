@@ -1,4 +1,4 @@
-<?php
+v<?php
 
 Route::get('install/pre-installation', 'InstallController@preInstallation');
 Route::get('install/configuration', 'InstallController@getConfiguration');

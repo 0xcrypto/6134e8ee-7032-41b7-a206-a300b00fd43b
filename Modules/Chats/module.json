@@ -1,0 +1,11 @@
+{
+    "name": "Chats",
+    "alias": "chats",
+    "description": "The FleetCart Chats Module.",
+    "active": 1,
+    "order": 100,
+    "providers": [
+        "Modules\\Chats\\Providers\\ChatsServiceProvider",
+        "Modules\\Chats\\Providers\\RouteServiceProvider"
+    ]
+}
