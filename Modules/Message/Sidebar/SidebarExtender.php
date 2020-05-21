@@ -12,11 +12,10 @@ class SidebarExtender extends BaseSidebarExtender
     public function extend(Menu $menu)
     {
         $menu->group(trans('admin::sidebar.content'), function (Group $group) {
-            $group->weight(5);
-            $group->item(trans('message::message.message'), function (Item $item) {
-                $item->icon('fa fa-email');
-                $item->route('message.inbox.index');
-                //$item->isActiveWhen(route('admin.dashboard.index', null, false));
+            $group->item(trans('message::messages.messages'), function (Item $item) {
+                $item->icon('fa fa-envelope');
+                $item->route('admin.messages.index');
+                //$item->isActiveWhen(route('admin.messages.index', null, false));
             });
         });
     }
