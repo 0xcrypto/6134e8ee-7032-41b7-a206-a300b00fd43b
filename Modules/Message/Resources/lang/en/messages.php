@@ -5,5 +5,6 @@ return [
     'messages' => 'E-Mails',
     'inbox' => 'Inbox',
     'outbox' => 'Outbox',
-    'compose' => 'Compose Mail'
+    'compose' => 'Compose Mail',
+    'send' => 'Send'    
 ];

@@ -17,7 +17,7 @@ class MessageServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->addAdminAssets('admin.messages.index', ['admin.message.css', 'admin.message.js']);
     }
 
     /**

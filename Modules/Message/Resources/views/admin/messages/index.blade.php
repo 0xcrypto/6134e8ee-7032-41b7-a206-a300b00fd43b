@@ -22,7 +22,10 @@
                         <div class="panel-body">
                             <ul class="accordion-tab nav nav-tabs">
                                 <li class="active ">
-                                    <a href="#inbox" data-toggle="tab">{{ trans('message::messages.inbox') }}</a>
+                                    <a href="#inbox" data-toggle="tab">
+                                        {{ trans('message::messages.inbox') }}
+                                        <span class="badge badge-light"> 4 </span>
+                                    </a>
                                 </li>
                                 <li class=" ">
                                     <a href="#outbox" data-toggle="tab">{{ trans('message::messages.outbox') }}</a>
@@ -42,22 +45,19 @@
         <div class="accordion-box-content">
             <div class="tab-content clearfix">
                 <div class="tab-pane fade in active" id="inbox">
-                    <h3 class="tab-content-title">{{ trans('message::messages.inbox') }}</h3>
-                    <div class="row">
-                        Inbox Content
-                    </div>
+                    <h3 class="tab-content-title">
+                        {{ trans('message::messages.inbox') }} 
+                        <span class="badge badge-light"> 4 </span>
+                    </h3>
+                    @include('message::admin.messages.partials.inbox')
                 </div>
                 <div class="tab-pane fade in " id="outbox">
                     <h3 class="tab-content-title">{{ trans('message::messages.outbox') }}</h3>
-                    <div class="row">
-                        Outbox Content
-                    </div>
+                    @include('message::admin.messages.partials.outbox')
                 </div>
                 <div class="tab-pane fade in " id="compose">
                     <h3 class="tab-content-title">{{ trans('message::messages.compose') }}</h3>
-                    <div class="row">
-                        Compose Mail
-                    </div>
+                    @include('message::admin.messages.partials.compose')
                 </div>
             </div>
         </div>

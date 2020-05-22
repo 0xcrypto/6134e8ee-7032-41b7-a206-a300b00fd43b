@@ -7,7 +7,7 @@ return [
     |--------------------------------------------------------------------------
     | These assets are registered on the asset manager
     */
-    'all-assets' => [
+    'all_assets' => [
         'admin.message.css' => ['module' => 'message:admin/css/message.css'],
         'admin.message.js' => ['module' => 'message:admin/js/message.js'],
     ],
@@ -18,5 +18,5 @@ return [
     | through the asset pipeline
     |--------------------------------------------------------------------------
     */
-    'required-assets' => [],
+    'required_assets' => [],
 ];

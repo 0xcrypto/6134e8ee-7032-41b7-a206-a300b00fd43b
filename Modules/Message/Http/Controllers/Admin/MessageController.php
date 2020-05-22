@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Traits\HasCrudActions;
 use Modules\Message\Entities\Message;
 use Modules\Message\Http\Requests\SaveMessageRequest;
+use Modules\User\Entities\User;
 
 class MessageController extends Controller
 {
@@ -14,7 +15,11 @@ class MessageController extends Controller
 
     public function index()
     {
-        return view("{$this->viewPath}.index", ['name'=>'ankit']);
+        $message = new Message;
+        $users = User::get()->pluck('full_name', 'id');
+        $buttonOffset = trans('message::messages.send');
+        
+        return view("{$this->viewPath}.index", compact('message', 'users', 'buttonOffset'));
     }
     /**
      * Model for the resource.
