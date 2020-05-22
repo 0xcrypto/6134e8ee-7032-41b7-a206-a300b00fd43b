@@ -11,7 +11,7 @@ Route::get('stores', [
 Route::get('stores/create', [
     'as' => 'admin.stores.create',
     'uses' => 'StoreController@create',
-    'middleware' => 'can:admin.stores.create',
+    //'middleware' => 'can:admin.stores.create',
 ]);
 
 

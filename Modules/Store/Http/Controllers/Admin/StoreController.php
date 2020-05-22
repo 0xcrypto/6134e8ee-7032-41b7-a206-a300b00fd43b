@@ -18,6 +18,15 @@ class StoreController extends Controller
      */
     protected $model = Store::class;
 
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    //protected $with = ['values'];
+
+
     /**
      * Label of the resource.
      *
