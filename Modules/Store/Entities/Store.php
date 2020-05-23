@@ -3,7 +3,6 @@
 namespace Modules\Store\Entities;
 
 use Modules\Admin\Ui\AdminTable;
-
 use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
 
@@ -39,6 +38,7 @@ class Store extends Model
      * @var array
      */
     public $translatedAttributes = [];
+
 
     public function table()
     {
