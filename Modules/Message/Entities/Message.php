@@ -4,6 +4,7 @@ namespace Modules\Message\Entities;
 
 use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
+use Modules\User\Entities\User;
 
 class Message extends Model
 {
@@ -21,7 +22,7 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['sender_id', 'subject', 'body'];
 
     /**
      * The attributes that should be cast to native types.
@@ -36,4 +37,14 @@ class Message extends Model
      * @var array
      */
     public $translatedAttributes = [];
+
+    public function recipients()
+    {
+        return $this->hasMany(MessageRecipient::class);
+    }
+
+    public function sender()
+    {
+        return $this->belongsTo(User::class, 'sender_id', 'id');
+    }
 }

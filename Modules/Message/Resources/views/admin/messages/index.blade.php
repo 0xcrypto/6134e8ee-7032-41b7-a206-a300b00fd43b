@@ -21,17 +21,17 @@
                     <div id="messages_information" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul class="accordion-tab nav nav-tabs">
-                                <li class="active ">
+                                <li class="active">
+                                    <a href="#compose" data-toggle="tab">{{ trans('message::messages.compose') }}</a>
+                                </li>
+                                <li>
                                     <a href="#inbox" data-toggle="tab">
                                         {{ trans('message::messages.inbox') }}
-                                        <span class="badge badge-light"> 4 </span>
+                                        <span class="badge badge-light"> {{ count($inbox_mails) }} </span>
                                     </a>
                                 </li>
-                                <li class=" ">
+                                <li>
                                     <a href="#outbox" data-toggle="tab">{{ trans('message::messages.outbox') }}</a>
-                                </li>
-                                <li class=" ">
-                                    <a href="#compose" data-toggle="tab">{{ trans('message::messages.compose') }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -44,20 +44,20 @@
     <div class="col-lg-9 col-md-8">
         <div class="accordion-box-content">
             <div class="tab-content clearfix">
-                <div class="tab-pane fade in active" id="inbox">
+                <div class="tab-pane fade in active" id="compose">
+                    <h3 class="tab-content-title">{{ trans('message::messages.compose') }}</h3>
+                    @include('message::admin.messages.partials.compose')
+                </div>
+                <div class="tab-pane fade in" id="inbox">
                     <h3 class="tab-content-title">
                         {{ trans('message::messages.inbox') }} 
-                        <span class="badge badge-light"> 4 </span>
+                        <span class="badge badge-light"> {{ count($inbox_mails) }} </span>
                     </h3>
                     @include('message::admin.messages.partials.inbox')
                 </div>
                 <div class="tab-pane fade in " id="outbox">
                     <h3 class="tab-content-title">{{ trans('message::messages.outbox') }}</h3>
                     @include('message::admin.messages.partials.outbox')
-                </div>
-                <div class="tab-pane fade in " id="compose">
-                    <h3 class="tab-content-title">{{ trans('message::messages.compose') }}</h3>
-                    @include('message::admin.messages.partials.compose')
                 </div>
             </div>
         </div>

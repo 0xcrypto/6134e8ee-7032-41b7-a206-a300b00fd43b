@@ -6,10 +6,10 @@ Route::get('messages', [
     //'middleware' => 'can:admin.messages.index',
 ]);
 
-Route::get('messages/create', [
-    'as' => 'admin.messages.create',
-    'uses' => 'MessageController@create',
-    'middleware' => 'can:admin.messages.create',
+Route::post('messages/send', [
+    'as' => 'admin.messages.send',
+    'uses' => 'MessageController@send',
+    //'middleware' => 'can:admin.messages.create',
 ]);
 
 Route::post('messages', [

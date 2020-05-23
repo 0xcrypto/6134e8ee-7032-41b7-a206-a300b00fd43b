@@ -20,6 +20,10 @@ class SaveMessageRequest extends Request
      */
     public function rules()
     {
-        return [];
+        return [
+            'recipients' => 'required',
+            'subject' => 'required',
+            'message' => 'required|min:3|max:2000'
+        ];
     }
 }

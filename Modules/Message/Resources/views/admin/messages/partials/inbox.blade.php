@@ -42,30 +42,20 @@
     <div class="table-responsive">
         <table class="table">
             <tbody>
-                <tr>
-                    <td class="action"><input type="checkbox" /></td>
-                    <td class="name"><a href="#">Larry Gardner</a></td>
-                    <td class="subject"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-                    <td class="time">08:30 PM</td>
-                </tr>
-                <tr class="read">
-                    <td class="action"><input type="checkbox" /></td>
-                    <td class="name"><a href="#">Larry Gardner</a></td>
-                    <td class="subject"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-                    <td class="time">08:30 PM</td>
-                </tr>
-                <tr class="read">
-                    <td class="action"><input type="checkbox" /></td>
-                    <td class="name"><a href="#">Larry Gardner</a></td>
-                    <td class="subject"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-                    <td class="time">08:30 PM</td>
-                </tr>
-                <tr class="read">
-                    <td class="action"><input type="checkbox" /></td>
-                    <td class="name"><a href="#">Larry Gardner</a></td>
-                    <td class="subject"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </a></td>
-                    <td class="time">08:30 PM</td>
-                </tr>
+                @foreach ($inbox_mails as $mail)
+                <tr class="{{ $mail->recipients->keyBy('user_id')->get(auth()->user()->id)->is_read == 1 ? 'read' : ''}}"> 
+                        <td class="action"><input type="checkbox" /></td>
+                        <td class="name">{{ $mail->sender->full_name }}</td>
+                        <td class="subject">{{ \Illuminate\Support\Str::limit($mail->subject, 80, $end='...') }}</a></td>
+                        <td class="time">
+                            @if(strtotime($mail->created_at) > strtotime(date('Y-m-d H:i:s')) + 86400)         
+                                {{ date('d/m/Y', strtotime($mail->created_at)) }}
+                            @else
+                                {{ date('h:i A', strtotime($mail->created_at)) }}
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -18,7 +18,7 @@ class CreateMessageRecipientTranslationsTable extends Migration
 
             $table->string('locale');
 
-            $table->unique(['message_recipient_id', 'locale']);
+            $table->unique(['message_recipient_id', 'locale'], 'm_r_t_message_recipient_id_locale_unique');
         });
     }
 

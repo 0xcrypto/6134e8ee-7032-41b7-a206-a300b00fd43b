@@ -14,10 +14,10 @@ class CreateMessageTranslationsTable extends Migration
     {
         Schema::create('message_translations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('message_id');
+            $table->integer('message_id')->unsigned();
             $table->string('locale');
+
             $table->unique(['message_id', 'locale']);
-            
             $table->foreign('message_id')->references('id')->on('messages')->onDelete('cascade');
         });
     }

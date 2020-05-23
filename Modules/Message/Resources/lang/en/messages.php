@@ -6,5 +6,7 @@ return [
     'inbox' => 'Inbox',
     'outbox' => 'Outbox',
     'compose' => 'Compose Mail',
-    'send' => 'Send'    
+    'send' => 'Send',
+    'mail_sent' => 'Mail sent successfully'
+    
 ];

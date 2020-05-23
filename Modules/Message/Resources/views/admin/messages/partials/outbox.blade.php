@@ -42,30 +42,25 @@
     <div class="table-responsive">
         <table class="table">
             <tbody>
-                <tr class="read">
-                    <td class="action"><input type="checkbox" /></td>
-                    <td class="name">To: Larry Gardner</td>
-                    <td class="subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </td>
-                    <td class="time">08:30 PM</td>
-                </tr>
-                <tr class="read">
-                    <td class="action"><input type="checkbox" /></td>
-                    <td class="name">To: Larry Gardner</td>
-                    <td class="subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </td>
-                    <td class="time">08:30 PM</td>
-                </tr>
-                <tr class="read">
-                    <td class="action"><input type="checkbox" /></td>
-                    <td class="name">To: Larry Gardner</td>
-                    <td class="subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </td>
-                    <td class="time">08:30 PM</td>
-                </tr>
-                <tr class="read">
-                    <td class="action"><input type="checkbox" /></td>
-                    <td class="name">To: Larry Gardner</td>
-                    <td class="subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </td>
-                    <td class="time">08:30 PM</td>
-                </tr>
+                @foreach ($outbox_mails as $mail)
+                    <tr class="read">
+                        <td class="action"><input type="checkbox" /></td>
+                        <td class="name">To:
+                            @foreach ($mail->recipients->slice(0, 3) as $recipient)
+                                {{ $loop->first ? '' : ',' }}
+                                {{ $recipient->receiver->full_name }}
+                            @endforeach
+                        </td>
+                        <td class="subject">{{ \Illuminate\Support\Str::limit($mail->subject, 50, $end='...') }}</a></td>
+                        <td class="time">
+                            @if(strtotime($mail->created_at) > strtotime(date('Y-m-d H:i:s')) + 86400)         
+                                {{ date('d/m/Y', strtotime($mail->created_at)) }}
+                            @else
+                                {{ date('h:i A', strtotime($mail->created_at)) }}
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
