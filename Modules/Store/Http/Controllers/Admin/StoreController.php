@@ -16,8 +16,8 @@ class StoreController extends Controller
      *
      * @var string
      */
+    
     protected $model = Store::class;
-
 
     /**
      * The relations to eager load on every query.

@@ -2,6 +2,8 @@
 
 namespace Modules\Store\Entities;
 
+use Modules\Admin\Ui\AdminTable;
+
 use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
 
@@ -21,7 +23,8 @@ class Store extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+
+    protected $fillable = ['name','latitude_longitude','address'];
 
     /**
      * The attributes that should be cast to native types.
@@ -36,4 +39,9 @@ class Store extends Model
      * @var array
      */
     public $translatedAttributes = [];
+
+    public function table()
+    {
+        return new AdminTable($this->newQuery());
+    }
 }

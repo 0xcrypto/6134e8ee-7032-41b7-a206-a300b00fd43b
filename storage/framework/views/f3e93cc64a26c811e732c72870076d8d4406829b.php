@@ -13,6 +13,11 @@
         <?php $__env->slot('thead'); ?>
             <tr>
                 <?php echo $__env->make('admin::partials.table.select_all', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                <th><?php echo e(trans('store::admin.table.id')); ?></th>
+                <th><?php echo e(trans('store::admin.table.name')); ?></th>
+                <th><?php echo e(trans('store::admin.table.latitude_longitude')); ?></th>
+                <th><?php echo e(trans('store::admin.table.address')); ?></th>
+                <th><?php echo e(trans('store::admin.table.created')); ?></th>
             </tr>
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
@@ -22,7 +27,12 @@
     <script>
         new DataTable('#stores-table .table', {
             columns: [
-                { data: 'checkbox', orderable: false, searchable: false, width: '3%' },
+                { data: 'checkbox', orderable: false, searchable: false, width: '3%' },  
+                { data: 'id', orderable: false, searchable: false, width: '3%' },
+                { data: 'name', orderable: false, searchable: false, width: '3%' },
+                { data: 'latitude_longitude', orderable: false, searchable: false, width: '3%' },
+                { data: 'address', orderable: false, searchable: false, width: '3%' },  
+                { data: 'created_at', orderable: false, searchable: false, width: '3%' },       
                 //
             ],
         });

@@ -8,16 +8,17 @@ use Modules\Admin\Ui\Tabs;
 
 class StoreTabs extends Tabs
 {
+
     public function make()
     {
-        $this->group('store_set_information', trans('attribute::admin.tabs.group.attribute_information'))
+        $this->group('store_set_information', trans('store::admin.tabs.group.store_information'))
             ->active()
             ->add($this->general());
     }
 
     private function general()
     {
-        return tap(new Tab('general', trans('attribute::admin.tabs.general')), function (Tab $tab) {
+        return tap(new Tab('Add Store', trans('store::admin.tabs.general')), function (Tab $tab) {
             $tab->active();
             $tab->weight(5);
             $tab->fields(['name']);
@@ -33,4 +34,5 @@ class StoreTabs extends Tabs
 
         return $attributeSets->prepend(trans('admin::admin.form.please_select'), '');
     }
+    
 }
