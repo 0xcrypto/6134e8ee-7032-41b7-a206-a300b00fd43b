@@ -14,6 +14,7 @@
         {{ method_field('put') }}
 
         {!! $tabs->render(compact('product')) !!}
+        
     </form>
 @endsection
 

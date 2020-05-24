@@ -4,7 +4,8 @@ namespace Modules\Store\Admin;
 
 use Modules\Admin\Ui\Tab;
 use Modules\Admin\Ui\Tabs;
-//use Modules\Store\Entities\StoreUnit;
+use Modules\Store\Entities\StoreUnit;
+use Modules\Store\Entities\Store;
 
 class StoreTabs extends Tabs
 {
@@ -18,21 +19,21 @@ class StoreTabs extends Tabs
 
     private function general()
     {
-        return tap(new Tab('Add Store', trans('store::admin.tabs.general')), function (Tab $tab) {
+        return tap(new Tab('Add StoreUnit', trans('store::admin.tabs.general')), function (Tab $tab) {
             $tab->active();
             $tab->weight(5);
             $tab->fields(['name']);
             $tab->view('store::admin.stores.tabs.addstore', [
-                //'attributeSets' => $this->getAttributeSets(),
+                'attributeSets' => $this->getAttributeSets(),
             ]);
         });
     }
 
     private function getAttributeSets()
     {
-        $attributeSets = AttributeSet::all()->sortBy('name')->pluck('name', 'id');
-
+        $attributeSets = Store::all()->sortBy('name')->pluck('name', 'id');
         return $attributeSets->prepend(trans('admin::admin.form.please_select'), '');
-    }
+    } 
+
     
 }

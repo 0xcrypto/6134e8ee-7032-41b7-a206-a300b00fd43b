@@ -12,6 +12,7 @@
         {{ csrf_field() }}
 
         {!! $tabs->render(compact('attribute')) !!}
+        
     </form>
 @endsection
 

@@ -1,4 +1,4 @@
-@extends('admin::master')
+@extends('admin::layout')
 
 @component('admin::components.page.header')
     @slot('title', trans('admin::resource.edit', ['resource' => trans('store::stores.store')]))
@@ -10,8 +10,13 @@
 
 @section('content')
     <form method="POST" action="{{ route('admin.stores.update', $store) }}" class="form-horizontal" id="store-edit-form" novalidate>
+
         {{ csrf_field() }}
+
         {{ method_field('put') }}
+        
+        {!! $tabs->render(compact('store')) !!}
+
     </form>
 @endsection
 

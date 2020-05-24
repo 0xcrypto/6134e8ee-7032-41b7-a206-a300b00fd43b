@@ -1,10 +1,12 @@
 <?php
 
 return [
+
 	'form' => [
-		'name' => 'name',
-		'latiutde_longitude' => 'latiutde_longitude',
-		'address' => 'address',
+		'name' => 'Name',
+		'latitude_longitude' => 'Latitude_Longitude',
+		'address' => 'Address',
 		'submit' => 'submit',
 	],
+
 ];
