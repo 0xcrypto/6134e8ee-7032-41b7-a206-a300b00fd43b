@@ -14,7 +14,7 @@ class SidebarExtender extends BaseSidebarExtender
         $menu->group(trans('admin::sidebar.content'), function (Group $group) {
             $group->item(trans('message::messages.messages'), function (Item $item) {
                 $item->icon('fa fa-envelope');
-                $item->route('admin.messages.index');
+                $item->route('admin.messages.index', array('currentTab' => 'inbox'));
                 //$item->isActiveWhen(route('admin.messages.index', null, false));
             });
         });

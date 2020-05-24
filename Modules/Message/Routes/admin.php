@@ -1,6 +1,12 @@
 <?php
 
-Route::get('messages', [
+Route::get('messages/show/{currentTab}/{id}/{total_inbox}', [
+    'as' => 'admin.messages.show',
+    'uses' => 'MessageController@show',
+    //'middleware' => 'can:admin.messages.index',
+]);
+
+Route::get('messages/{currentTab}/{searchString?}', [
     'as' => 'admin.messages.index',
     'uses' => 'MessageController@index',
     //'middleware' => 'can:admin.messages.index',

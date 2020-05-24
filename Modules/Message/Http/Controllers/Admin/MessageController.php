@@ -20,18 +20,77 @@ class MessageController extends Controller
      *
      */
 
-    public function index()
+    public function index($currentTab, $searchString = null)
     {
+        $currentUser = auth()->user();
         $message = new Message;
         $users = User::get()->pluck('full_name', 'id');
         $buttonOffset = trans('message::messages.send');
-        $outbox_mails = Message::where('sender_id', '=', auth()->user()->id)->get();
-        $inbox_mails = Message::with('recipients')->whereHas('recipients', function ($query) {
-            $query->where('user_id', '=', auth()->user()->id);
-        })->get();
+        $searchString = urldecode($searchString);
+
+        if($searchString){ 
+            if($currentTab == 'outbox'){
+                $outbox_mails = Message::where('sender_id', '=', $currentUser->id)
+                                        ->where('subject', 'LIKE', "%{$searchString}%")
+                                        ->orWhere('body', 'LIKE', "%{$searchString}%")
+                                        ->orderBy('created_at', 'DESC')
+                                        ->paginate(10);
+                $inbox_mails = Message::with('recipients')
+                                        ->whereHas('recipients', function ($query) use ($currentUser) {
+                                                $query->where('user_id', '=', $currentUser->id); 
+                                        })
+                                        ->orderBy('created_at', 'DESC')
+                                        ->paginate(10);
+            }
+            if($currentTab == 'inbox'){
+                $inbox_mails = Message::where('subject', 'LIKE', "%{$searchString}%")
+                                        ->orWhere('body', 'LIKE', "%{$searchString}%")
+                                        ->with('recipients')
+                                        ->whereHas('recipients', function ($query) use ($currentUser) {
+                                                $query->where('user_id', '=', $currentUser->id); 
+                                        })
+                                        ->orderBy('created_at', 'DESC')
+                                        ->paginate(10);
+                
+                $outbox_mails = Message::where('sender_id', '=', $currentUser->id)
+                                ->orderBy('created_at', 'DESC')
+                                ->paginate(10);
+            }
+        }
+        else{ 
+            $outbox_mails = Message::where('sender_id', '=', $currentUser->id)
+                                ->orderBy('created_at', 'DESC')
+                                ->paginate(10);
+
+            $inbox_mails = Message::with('recipients')
+                                ->whereHas('recipients', function ($query) use ($currentUser) {
+                                        $query->where('user_id', '=', $currentUser->id); 
+                                })
+                                ->orderBy('created_at', 'DESC')
+                                ->paginate(10);
+        }
+
+        $total_inbox = Message::with('recipients')
+                                ->whereHas('recipients', function ($query) use ($currentUser) {
+                                        $query->where('user_id', '=', $currentUser->id); 
+                                })
+                                ->count();
 
         return view("{$this->viewPath}.index", compact(['message', 'users', 'buttonOffset', 
-        'outbox_mails', 'inbox_mails']));
+        'outbox_mails', 'inbox_mails', 'currentTab', 'total_inbox', 'searchString']));
+    }
+
+    /**
+     * show message details
+     *
+     */
+
+    public function show($currentTab, $id, $total_inbox)
+    {
+        $mail = Message::findOrFail($id);
+        if($mail){
+            return view("{$this->viewPath}.show", compact(['currentTab', 'mail', 'total_inbox']));
+        }
     }
 
     /**
@@ -58,7 +117,7 @@ class MessageController extends Controller
             ]);
         }
         
-        return redirect()->route("admin.messages.index")
+        return redirect()->route("admin.messages.index", array('currentTab'=> 'outbox'))
             ->withSuccess(trans('message::messages.mail_sent'));
     }
 

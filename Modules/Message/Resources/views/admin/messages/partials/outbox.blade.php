@@ -26,16 +26,14 @@
             </div>
         </div>
         <div class="col-md-6 search-form">
-            <form action="#" class="text-right">
-                <div class="input-group">
-                    <input type="text" class="form-control input-sm" placeholder="Search">
-                    <span class="input-group-btn"> 
-                        <button type="submit" name="search" class="btn_ btn-primary btn-sm search">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
+            <div class="input-group">
+                <input type="text" class="form-control input-sm" placeholder="Search" id="txtSearchStringOutbox" value="{{ $searchString }}">
+                <span class="input-group-btn"> 
+                    <button type="button" id="buttonOutboxSearch" name="search" class="btn_ btn-primary btn-sm search">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
         </div>
     </div>
     <br/>
@@ -51,7 +49,11 @@
                                 {{ $recipient->receiver->full_name }}
                             @endforeach
                         </td>
-                        <td class="subject">{{ \Illuminate\Support\Str::limit($mail->subject, 50, $end='...') }}</a></td>
+                        <td class="subject">
+                            <a href="{{route('admin.messages.show', array('currentTab'=>'outbox', 'id'=>$mail->id, 'total_inbox'=> $total_inbox )) }}">
+                                {{ \Illuminate\Support\Str::limit($mail->subject, 50, $end='...') }}
+                            </a>
+                        </td>
                         <td class="time">
                             @if(strtotime($mail->created_at) > strtotime(date('Y-m-d H:i:s')) + 86400)         
                                 {{ date('d/m/Y', strtotime($mail->created_at)) }}
@@ -65,13 +67,16 @@
         </table>
     </div>
     <br>
-    <ul class="pagination">
-        <li class="disabled"><a href="#">«</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">»</a></li>
-    </ul>
+    {{ $outbox_mails->links() }}
 </div>
+
+@push('scripts')
+    <script>
+        $(document).ready(function(){
+            $('#buttonOutboxSearch').click(function(){
+                var searchString = $('#txtSearchStringOutbox').val();
+                window.location.href = "{{ route('admin.messages.index', array('currentTab'=>'outbox')) }}/"+encodeURI(searchString);
+            });
+        })
+    </script>
+@endpush

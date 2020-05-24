@@ -9,7 +9,6 @@
     {{ Form::text('subject', trans('message::attributes.subject'), $errors, $message, ['labelCol' => 2, 'required' => true]) }}
     {{ Form::wysiwyg('message', trans('message::attributes.message'), $errors, $message, ['labelCol' => 2, 'required' => true]) }}
     
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <button type="submit" class="btn btn-primary" data-loading>

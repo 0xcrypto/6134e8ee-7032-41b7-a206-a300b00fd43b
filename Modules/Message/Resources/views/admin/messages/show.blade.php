@@ -44,20 +44,8 @@
     <div class="col-lg-9 col-md-8">
         <div class="accordion-box-content">
             <div class="tab-content clearfix">
-                <div class="tab-pane fade in {{ $currentTab == 'compose' ? 'active' : ''}}">
-                    <h3 class="tab-content-title">{{ trans('message::messages.compose') }}</h3>
-                    @include('message::admin.messages.partials.compose')
-                </div>
-                <div class="tab-pane fade in {{ $currentTab == 'inbox' ? 'active' : ''}}">
-                    <h3 class="tab-content-title">
-                        {{ trans('message::messages.inbox') }} 
-                        <span class="badge badge-light"> {{ $total_inbox }} </span>
-                    </h3>
-                    @include('message::admin.messages.partials.inbox')
-                </div>
-                <div class="tab-pane fade in {{ $currentTab == 'outbox' ? 'active' : ''}}">
-                    <h3 class="tab-content-title">{{ trans('message::messages.outbox') }}</h3>
-                    @include('message::admin.messages.partials.outbox')
+                <div class="tab-pane fade in active">
+                    @include('message::admin.messages.partials.mail')
                 </div>
             </div>
         </div>
