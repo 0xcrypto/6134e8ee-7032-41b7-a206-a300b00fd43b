@@ -8,17 +8,15 @@
                 </div>
             </label>
             <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> Action <span class="caret"></span> </button>
-                <ul class="dropdown-menu" role="menu">
-                    <!--
-                    <li><a href="#">Mark as read</a></li>
-                    <li><a href="#">Mark as unread</a></li>
-                    <li><a href="#">Mark as important</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Report spam</a></li>
-                    -->
-                    <li><a href="#">Delete</a></li>
-                </ul>
+                <form method="POST" action="{{ route('admin.messages.inbox.delete') }}" class="form-horizontal" id="message-create-form" novalidate>
+                    {{ csrf_field() }}
+                    
+                   <input type="hidden" name="user_id" value="{{ $currentUser->id }}">
+                   <input type="hidden" name="mail_ids" id="inbox_mail_ids">
+                   <button class="btn btn-light btn-inbox-delete" type="submit" disabled>
+                       <i class="fa fa-trash"></i> {{ trans('message::messages.delete') }}
+                    </button>
+                </form>
             </div>
         </div>
         <div class="col-md-6 search-form">
@@ -37,8 +35,8 @@
         <table class="table">
             <tbody>
                 @foreach ($inbox_mails as $mail)
-                <tr class="{{ $mail->recipients->keyBy('user_id')->get(auth()->user()->id)->is_read == 1 ? 'read' : ''}}"> 
-                        <td class="action"><input type="checkbox" /></td>
+                    <tr class="{{ $mail->recipients->keyBy('user_id')->get(auth()->user()->id)->is_read == 1 ? 'read' : ''}}"> 
+                        <td class="action"><input type="checkbox" class="in-checkbox" value="{{ $mail->id }}"/></td>
                         <td class="name">{{ $mail->sender->full_name }}</td>
                         <td class="subject">
                             <a href="{{ route('admin.messages.show', array('currentTab'=>'inbox', 'id'=>$mail->id, 'total_inbox'=> $total_inbox )) }}">
@@ -67,6 +65,11 @@
             $('#buttonInboxSearch').click(function(){
                 var searchString = $('#txtSearchStringInbox').val();
                 window.location.href = "{{ route('admin.messages.index', array('currentTab'=>'inbox')) }}/"+encodeURI(searchString);
+            });
+
+            $(".in-checkbox").click(function(){
+                $('#inbox_mail_ids').val(getSelectedMails('in'));
+                $('.btn-inbox-delete').prop('disabled', $('input.in-checkbox:checked').length == 0);
             });
         })
     </script>

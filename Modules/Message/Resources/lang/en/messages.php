@@ -7,6 +7,8 @@ return [
     'outbox' => 'Outbox',
     'compose' => 'Compose Mail',
     'send' => 'Send',
-    'mail_sent' => 'Mail sent successfully'
+    'delete' => 'Delete',
+    'mail_sent' => 'Mail sent successfully',
+    'mail_deleted' => 'Mail deleted successfully'
     
 ];

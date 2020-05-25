@@ -18,7 +18,9 @@ class CreateMessagesTable extends Migration
             $table->integer('sender_id')->unsigned();
             $table->mediumText('body')->nullable();
             $table->string('attachement')->nullable();
-            $table->softDeletes();
+            $table->tinyInteger('is_deleted')->default(0);
+
+            //$table->softDeletes();
             $table->timestamps();
             
             $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');

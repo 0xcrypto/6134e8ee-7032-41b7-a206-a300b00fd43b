@@ -18,6 +18,19 @@ Route::post('messages/send', [
     //'middleware' => 'can:admin.messages.create',
 ]);
 
+Route::post('messages/inboxDelete', [
+    'as' => 'admin.messages.inbox.delete',
+    'uses' => 'MessageController@inboxDelete',
+    //'middleware' => 'can:admin.messages.create',
+]);
+
+Route::post('messages/outboxDelete', [
+    'as' => 'admin.messages.outbox.delete',
+    'uses' => 'MessageController@outboxDelete',
+    //'middleware' => 'can:admin.messages.create',
+]);
+
+
 Route::post('messages', [
     'as' => 'admin.messages.store',
     'uses' => 'MessageController@store',

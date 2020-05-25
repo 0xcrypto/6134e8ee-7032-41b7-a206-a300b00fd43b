@@ -17,6 +17,7 @@ class CreateMessageRecipientsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('message_id')->unsigned();
             $table->boolean('is_read')->default(0);
+            $table->tinyInteger('is_deleted')->default(0);
             $table->timestamps();
             
             $table->foreign('message_id')->references('id')->on('messages')->onDelete('cascade');

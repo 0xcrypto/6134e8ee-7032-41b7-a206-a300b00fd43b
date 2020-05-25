@@ -12,17 +12,14 @@
                 <div class="icheckbox_square-blue" style="position: relative;"><input type="checkbox" id="check-all" class="icheck" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
             </label>
             <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> Action <span class="caret"></span> </button>
-                <ul class="dropdown-menu" role="menu">
-                    <!--
-                    <li><a href="#">Mark as read</a></li>
-                    <li><a href="#">Mark as unread</a></li>
-                    <li><a href="#">Mark as important</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Report spam</a></li>
-                    -->
-                    <li><a href="#">Delete</a></li>
-                </ul>
+                <form method="POST" action="{{ route('admin.messages.outbox.delete') }}" class="form-horizontal" id="message-create-form" novalidate>
+                    {{ csrf_field() }}
+                    
+                   <input type="hidden" name="mail_ids" id="outbox_mail_ids">
+                   <button class="btn btn-light btn-outbox-delete" type="submit" disabled>
+                       <i class="fa fa-trash"></i> {{ trans('message::messages.delete') }}
+                    </button>
+                </form>
             </div>
         </div>
         <div class="col-md-6 search-form">
@@ -42,7 +39,7 @@
             <tbody>
                 @foreach ($outbox_mails as $mail)
                     <tr class="read">
-                        <td class="action"><input type="checkbox" /></td>
+                        <td class="action"><input type="checkbox" class="out-checkbox" value="{{ $mail->id }}"/></td>
                         <td class="name">To:
                             @foreach ($mail->recipients->slice(0, 3) as $recipient)
                                 {{ $loop->first ? '' : ',' }}
@@ -77,6 +74,22 @@
                 var searchString = $('#txtSearchStringOutbox').val();
                 window.location.href = "{{ route('admin.messages.index', array('currentTab'=>'outbox')) }}/"+encodeURI(searchString);
             });
-        })
+
+            $(".out-checkbox").click(function(){ 
+                $('#outbox_mail_ids').val(getSelectedMails('out'));
+                $('.btn-outbox-delete').prop('disabled', $('input.out-checkbox:checked').length == 0);
+            });
+        });
+
+        function getSelectedMails(type){
+            var Ids = [];
+            $('.' + type + '-checkbox').each(function(input, index){
+                if($(this).is(':checked')){
+                    Ids.push(parseInt($(this).val()));
+                }
+            });
+                
+            return Ids.join(',');
+        }
     </script>
 @endpush

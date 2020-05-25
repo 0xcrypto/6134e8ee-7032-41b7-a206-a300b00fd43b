@@ -28,56 +28,40 @@ class MessageController extends Controller
         $buttonOffset = trans('message::messages.send');
         $searchString = urldecode($searchString);
 
-        if($searchString){ 
-            if($currentTab == 'outbox'){
-                $outbox_mails = Message::where('sender_id', '=', $currentUser->id)
-                                        ->where('subject', 'LIKE', "%{$searchString}%")
-                                        ->orWhere('body', 'LIKE', "%{$searchString}%")
-                                        ->orderBy('created_at', 'DESC')
-                                        ->paginate(10);
-                $inbox_mails = Message::with('recipients')
-                                        ->whereHas('recipients', function ($query) use ($currentUser) {
-                                                $query->where('user_id', '=', $currentUser->id); 
-                                        })
-                                        ->orderBy('created_at', 'DESC')
-                                        ->paginate(10);
-            }
-            if($currentTab == 'inbox'){
-                $inbox_mails = Message::where('subject', 'LIKE', "%{$searchString}%")
-                                        ->orWhere('body', 'LIKE', "%{$searchString}%")
-                                        ->with('recipients')
-                                        ->whereHas('recipients', function ($query) use ($currentUser) {
-                                                $query->where('user_id', '=', $currentUser->id); 
-                                        })
-                                        ->orderBy('created_at', 'DESC')
-                                        ->paginate(10);
-                
-                $outbox_mails = Message::where('sender_id', '=', $currentUser->id)
-                                ->orderBy('created_at', 'DESC')
-                                ->paginate(10);
-            }
-        }
-        else{ 
-            $outbox_mails = Message::where('sender_id', '=', $currentUser->id)
-                                ->orderBy('created_at', 'DESC')
-                                ->paginate(10);
+        $outbox_mails = Message::when(($searchString && $currentTab == 'outbox'),
+                                        function($query) use($searchString){
+                                            return $query->where('subject', 'LIKE', "%{$searchString}%")
+                                                    ->orWhere('body', 'LIKE', "%{$searchString}%");
+                                        }
+                                    )
+                                    ->where('sender_id', '=', $currentUser->id)
+                                    ->where('is_deleted', '=', 0)
+                                    ->orderBy('created_at', 'DESC')
+                                    ->paginate(10);
 
-            $inbox_mails = Message::with('recipients')
+        $inbox_mails = Message::when(($searchString && $currentTab == 'inbox'),
+                                        function($query) use($searchString){
+                                            return $query->where('subject', 'LIKE', "%{$searchString}%")
+                                                ->orWhere('body', 'LIKE', "%{$searchString}%");
+                                    }
+                                )
+                                ->with('recipients')
                                 ->whereHas('recipients', function ($query) use ($currentUser) {
-                                        $query->where('user_id', '=', $currentUser->id); 
+                                        $query->where('user_id', '=', $currentUser->id)
+                                        ->where('is_deleted', '=', 0); 
                                 })
                                 ->orderBy('created_at', 'DESC')
                                 ->paginate(10);
-        }
 
         $total_inbox = Message::with('recipients')
                                 ->whereHas('recipients', function ($query) use ($currentUser) {
-                                        $query->where('user_id', '=', $currentUser->id); 
+                                        $query->where('user_id', '=', $currentUser->id)
+                                        ->where('is_deleted', '=', 0); 
                                 })
                                 ->count();
 
         return view("{$this->viewPath}.index", compact(['message', 'users', 'buttonOffset', 
-        'outbox_mails', 'inbox_mails', 'currentTab', 'total_inbox', 'searchString']));
+        'outbox_mails', 'inbox_mails', 'currentTab', 'total_inbox', 'searchString', 'currentUser']));
     }
 
     /**
@@ -91,6 +75,34 @@ class MessageController extends Controller
         if($mail){
             return view("{$this->viewPath}.show", compact(['currentTab', 'mail', 'total_inbox']));
         }
+    }
+
+    public function inboxDelete(Request $request)
+    {
+        $ids = explode(",", $request->input('mail_ids'));
+        $user_id = $request->input('user_id');
+        foreach($ids as $id){
+            $message_recipient = MessageRecipient::where('message_id', '=', $id)
+                                                ->where('user_id', '=', $user_id)->first();
+            $message_recipient->is_deleted = 1;
+            $message_recipient->save();
+        }
+
+        return redirect()->route("admin.messages.index", array('currentTab'=> 'outbox'))
+            ->withSuccess(trans('message::messages.mail_deleted'));
+    }
+
+    public function outboxDelete(Request $request)
+    {
+        $ids = explode(",", $request->input('mail_ids'));
+        foreach($ids as $id){ 
+            $message = Message::find($id);
+            $message->is_deleted = 1;
+            $message->save();
+        }
+
+        return redirect()->route("admin.messages.index", array('currentTab'=> 'outbox'))
+            ->withSuccess(trans('message::messages.mail_deleted'));
     }
 
     /**
