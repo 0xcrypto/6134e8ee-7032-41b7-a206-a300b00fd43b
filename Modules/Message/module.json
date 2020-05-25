@@ -1,0 +1,11 @@
+{
+    "name": "Message",
+    "alias": "message",
+    "description": "The FleetCart Message Module.",
+    "active": 1,
+    "order": 100,
+    "providers": [
+        "Modules\\Message\\Providers\\MessageServiceProvider",
+        "Modules\\Message\\Providers\\RouteServiceProvider"
+    ]
+}

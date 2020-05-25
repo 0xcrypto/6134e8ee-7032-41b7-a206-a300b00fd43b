@@ -1,0 +1,172 @@
+/* EMAIL */
+
+.senden-img {
+	width: 50px;
+	height: 50px;
+}
+
+.inner-all {
+	padding: 10px;
+}
+
+.email {
+	padding: 20px 10px 15px 10px;
+	font-size: 1em;
+	.btn.search {
+		font-size: 0.9em;
+	}
+	h2 {
+		margin-top: 0;
+		padding-bottom: 8px;
+	}
+	.nav.nav-pills {
+		>li {
+			>a {
+				border-top: 3px solid transparent;
+				>.fa {
+					margin-right: 5px;
+				}
+				&:hover {
+					background-color: #f6f6f6;
+				}
+			}
+		}
+		>li.active {
+			>a {
+				background-color: #f6f6f6;
+				border-top-color: #3c8dbc;
+				font-weight: 600;
+				&:hover {
+					background-color: #f6f6f6;
+					border-top-color: #3c8dbc;
+				}
+			}
+		}
+	}
+	.nav.nav-pills.nav-stacked {
+		>li {
+			>a {
+				color: #666;
+				border-top: 0;
+				border-left: 3px solid transparent;
+				border-radius: 0px;
+			}
+		}
+		>li.active {
+			>a {
+				background-color: #f6f6f6;
+				border-left-color: #3c8dbc;
+				color: #444;
+				&:hover {
+					background-color: #f6f6f6;
+					border-left-color: #3c8dbc;
+					color: #444;
+				}
+			}
+		}
+		>li.header {
+			color: #777;
+			text-transform: uppercase;
+			position: relative;
+			padding: 0px 0 10px 0;
+		}
+	}
+	table {
+		font-weight: 600;
+		a {
+			color: #666;
+		}
+		tr.read {
+			>td {
+				background-color: #f6f6f6;
+				font-weight: 400;
+			}
+		}
+		tr {
+			td {
+				>i.fa {
+					font-size: 1.2em;
+					line-height: 1.5em;
+					text-align: center;
+				}
+				>i.fa-star {
+					color: #f39c12;
+				}
+				>i.fa-bookmark {
+					color: #e74c3c;
+				}
+			}
+			>td.action {
+				padding-left: 0px;
+				padding-right: 2px;
+			}
+		}
+	}
+}
+
+.panel-teal {
+	.panel-heading {
+		background-color: #37BC9B;
+		border: 1px solid #36b898;
+		color: white;
+	}
+}
+
+.panel {
+	.panel-heading {
+		padding: 5px;
+		border-top-right-radius: 3px;
+		border-top-left-radius: 3px;
+		border-bottom: 1px solid #DDD;
+		-moz-border-radius: 0px;
+		-webkit-border-radius: 0px;
+		border-radius: 0px;
+		.panel-title {
+			padding: 10px;
+			font-size: 17px;
+		}
+	}
+}
+
+form {
+	.form-group {
+		position: relative;
+		margin-left: 0px !important;
+		margin-right: 0px !important;
+	}
+}
+.attachment-mail {
+	padding: 10px;
+	width: 100%;
+	display: inline-block;
+	margin: 20px 0px;
+	border-top: 1px solid #EFF2F7;
+	p {
+		margin-bottom: 0px;
+	}
+	a {
+		color: #32323A;
+	}
+	ul {
+		padding: 0px;
+		li {
+			float: left;
+			width: 200px;
+			margin-right: 15px;
+			margin-top: 15px;
+			list-style: none;
+			a.atch-thumb {
+				img {
+					width: 200px;
+					margin-bottom: 10px;
+				}
+			}
+			a.name {
+				span {
+					float: right;
+					color: #767676;
+				}
+			}
+		}
+	}
+}
