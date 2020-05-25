@@ -12,12 +12,10 @@ if (! function_exists('permission_value')) {
     {
         $value = array_get($permissions, $permission);
 
-        if (is_null($value)) {
+        if (is_null($value) || !$value) {
             return 0;
         } elseif ($value) {
             return 1;
-        } elseif (! $value) {
-            return -1;
         }
     }
 }

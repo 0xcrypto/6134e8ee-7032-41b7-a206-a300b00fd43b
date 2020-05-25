@@ -89,7 +89,7 @@ class Permission
             return true;
         }
 
-        if ($permission === '-1') {
+        if ($permission === '0') {
             return false;
         }
     }
