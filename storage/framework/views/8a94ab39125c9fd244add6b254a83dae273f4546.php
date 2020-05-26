@@ -15,8 +15,8 @@
                 <?php echo $__env->make('admin::partials.table.select_all', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                 <th><?php echo e(trans('storeunit::attributes.form.name')); ?></th>
                 <th><?php echo e(trans('storeunit::attributes.form.store')); ?></th>
-                <th><?php echo e(trans('storeunit::attributes.form.product')); ?></th>
-                <th><?php echo e(trans('storeunit::attributes.form.quantity')); ?></th>
+                <!-- <th><?php echo e(trans('storeunit::attributes.form.product')); ?></th>
+                <th><?php echo e(trans('storeunit::attributes.form.quantity')); ?></th> -->
                 <th><?php echo e(trans('storeunit::attributes.form.availability')); ?></th>
             </tr>
         <?php $__env->endSlot(); ?>
@@ -30,8 +30,10 @@
                 { data: 'checkbox', orderable: false, searchable: false, width: '3%' },
                 { data: 'name', orderable: false, searchable: false, width: '3%' },
                 { data: 'store', orderable: false, searchable: false, width: '3%' },
-                { data: 'product', orderable: false, searchable: false, width: '3%' },
-                { data: 'quantity', orderable: false, searchable: false, width: '3%' },
+
+                //{ data: 'product', orderable: false, searchable: false, width: '3%' },
+                //{ data: 'quantity', orderable: false, searchable: false, width: '3%' },
+                
                 { data: 'availability', orderable: false, searchable: false, width: '3%' },
                 //
             ],

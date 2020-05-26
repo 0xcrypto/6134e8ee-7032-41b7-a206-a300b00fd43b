@@ -16,8 +16,8 @@ class CreatestoreunitsTable extends Migration
             $table->increments('id');
             $table->string("name");
             $table->string("store");
-            $table->string("product");
-            $table->string("quantity");
+            $table->string("product")->nullable();
+            $table->string("quantity")->nullable();
             $table->string("availability");
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreatestoreunitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('storeunits');
+        //Schema::dropIfExists('storeunits');
     }
 }

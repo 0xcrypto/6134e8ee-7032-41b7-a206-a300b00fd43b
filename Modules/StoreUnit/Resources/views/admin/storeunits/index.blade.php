@@ -17,8 +17,8 @@
                 @include('admin::partials.table.select_all')
                 <th>{{ trans('storeunit::attributes.form.name') }}</th>
                 <th>{{ trans('storeunit::attributes.form.store') }}</th>
-                <th>{{ trans('storeunit::attributes.form.product') }}</th>
-                <th>{{ trans('storeunit::attributes.form.quantity') }}</th>
+                <!-- <th>{{ trans('storeunit::attributes.form.product') }}</th>
+                <th>{{ trans('storeunit::attributes.form.quantity') }}</th> -->
                 <th>{{ trans('storeunit::attributes.form.availability') }}</th>
             </tr>
         @endslot
@@ -32,8 +32,10 @@
                 { data: 'checkbox', orderable: false, searchable: false, width: '3%' },
                 { data: 'name', orderable: false, searchable: false, width: '3%' },
                 { data: 'store', orderable: false, searchable: false, width: '3%' },
-                { data: 'product', orderable: false, searchable: false, width: '3%' },
-                { data: 'quantity', orderable: false, searchable: false, width: '3%' },
+
+                //{ data: 'product', orderable: false, searchable: false, width: '3%' },
+                //{ data: 'quantity', orderable: false, searchable: false, width: '3%' },
+                
                 { data: 'availability', orderable: false, searchable: false, width: '3%' },
                 //
             ],

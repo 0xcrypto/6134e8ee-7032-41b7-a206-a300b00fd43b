@@ -6,6 +6,7 @@ use Modules\Admin\Ui\Tab;
 use Modules\Admin\Ui\Tabs;
 use Modules\Attribute\Entities\Attribute;
 use Modules\Attribute\Entities\AttributeSet;
+use Modules\Store\Entities\Store;
 
 class ProductTabsExtender
 {
@@ -26,11 +27,19 @@ class ProductTabsExtender
             $tab->fields(['attributes.*.attribute_id', 'attributes.*.values']);
             $tab->view(function ($data) {
                 return view('attribute::admin.products.tabs.attributes', [
+                    'getStore' => $this->getStore(),
                     'productAttributes' => $this->getProductAttributes($data['product']),
                     'attributeSets' => $this->getAttributeSets(),
                 ]);
             });
         });
+    }
+
+
+    public function getStore()
+    {
+        $storeData = Store::all()->sortBy('name');
+        
     }
 
     private function getProductAttributes($product)

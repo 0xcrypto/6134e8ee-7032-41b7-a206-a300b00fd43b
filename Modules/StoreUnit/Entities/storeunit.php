@@ -5,6 +5,8 @@ namespace Modules\StoreUnit\Entities;
 use Modules\Admin\Ui\AdminTable;
 use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
+use Modules\Product\Entities\Product;
+
 
 class storeunit extends Model
 {
@@ -22,7 +24,7 @@ class storeunit extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','store','product','quantity','availability'];
+    protected $fillable = ['name','store','availability'];
 
     /**
      * The attributes that should be cast to native types.
@@ -37,6 +39,18 @@ class storeunit extends Model
      * @var array
      */
     public $translatedAttributes = [];
+
+
+    /**
+     * The StoreUnit that belong to the Product.
+     */
+
+    
+    public function Products()
+    {
+        return $this->belongsToMany(Product::class, 'unit_product');
+    }
+    
 
     public function table()
     {
