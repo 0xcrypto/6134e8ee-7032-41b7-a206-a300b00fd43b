@@ -7,6 +7,7 @@ use Modules\Admin\Ui\Tabs;
 use Modules\Attribute\Entities\Attribute;
 use Modules\Attribute\Entities\AttributeSet;
 use Modules\Store\Entities\Store;
+use Modules\Store\Entities\CreateUnitProduct;
 
 class ProductTabsExtender
 {
@@ -38,12 +39,14 @@ class ProductTabsExtender
 
     public function getStore()
     {
-        $storeData = Store::all()->sortBy('name');
-        
+        $storeData = Store::all()->sortBy('name');        
     }
+
 
     private function getProductAttributes($product)
     {
+
+        //dd($product);
         $old = old('attributes');
 
         if (is_null($old)) {
@@ -52,6 +55,9 @@ class ProductTabsExtender
 
         return $this->getOldAttributes($old);
     }
+
+
+
 
     public function getOldAttributes($old)
     {

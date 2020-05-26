@@ -19,6 +19,7 @@ class CreateUnitProduct extends Migration
             $table->integer('product_id')->unsigned();
             $table->integer('storeunit_id')->unsigned();
             $table->double('quantity');
+            $table->integer('in_stock');
             $table->timestamps();
 
             $table->foreign('storeunit_id')

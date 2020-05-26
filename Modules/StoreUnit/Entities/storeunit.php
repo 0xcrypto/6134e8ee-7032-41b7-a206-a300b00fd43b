@@ -17,6 +17,7 @@ class storeunit extends Model
      *
      * @var array
      */
+
     protected $with = ['translations'];
 
     /**
@@ -24,6 +25,7 @@ class storeunit extends Model
      *
      * @var array
      */
+    
     protected $fillable = ['name','store','availability'];
 
     /**
@@ -48,9 +50,10 @@ class storeunit extends Model
     
     public function Products()
     {
-        return $this->belongsToMany(Product::class, 'unit_product');
+        return $this->belongsToMany(Product::class, 'create_unit_products');
     }
     
+   
 
     public function table()
     {

@@ -10,6 +10,7 @@
     <form method="POST" action="<?php echo e(route('admin.products.update', $product)); ?>" class="form-horizontal" id="product-edit-form" novalidate>
         <?php echo e(csrf_field()); ?>
 
+        
         <?php echo e(method_field('put')); ?>
 
 

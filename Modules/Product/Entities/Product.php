@@ -544,7 +544,7 @@ class Product extends Model
 
     public function storeUnits()
     {
-        return $this->belongsToMany(storeunit::class, 'unit_product');
+        return $this->belongsToMany(storeunit::class, 'create_unit_products');
     }
 
 
