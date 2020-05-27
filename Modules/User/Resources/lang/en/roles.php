@@ -12,6 +12,7 @@ return [
         'permissions' => 'Permissions',
     ],
     'permissions' => [
+        'select_unselect'=> 'Select All / Unselect All',
         'allow_all' => 'Allow all',
         'deny_all' => 'Deny all',
         'inherit_all' => 'Inherit all',

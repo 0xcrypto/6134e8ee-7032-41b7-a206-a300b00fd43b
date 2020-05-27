@@ -39,7 +39,7 @@
                         <td class="action"><input type="checkbox" class="in-checkbox" value="{{ $mail->id }}"/></td>
                         <td class="name">{{ $mail->sender->full_name }}</td>
                         <td class="subject">
-                            <a href="{{ route('admin.messages.show', array('currentTab'=>'inbox', 'id'=>$mail->id, 'total_inbox'=> $total_inbox )) }}">
+                            <a href="{{ route('admin.messages.show', array('currentTab'=>'inbox', 'id'=>$mail->id )) }}">
                                 {{ \Illuminate\Support\Str::limit($mail->subject, 80, $end='...') }}
                             </a>
                         </td>

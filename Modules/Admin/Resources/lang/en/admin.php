@@ -36,4 +36,10 @@ return [
         '500_title' => 'Oops! Something went wrong',
         '500_description' => 'An administrator was notified.',
     ],
+    'route' => [
+        'list' => 'List',
+        'create' => 'Create',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+    ]
 ];

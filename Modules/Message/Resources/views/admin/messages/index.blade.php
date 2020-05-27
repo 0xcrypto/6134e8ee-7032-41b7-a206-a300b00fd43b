@@ -26,7 +26,7 @@
                                 <li class="{{ $currentTab == 'inbox' ? 'active' : ''}}">
                                     <a href="{{ route('admin.messages.index', array('currentTab'=>'inbox')) }}">
                                         {{ trans('message::messages.inbox') }}
-                                        <span class="badge badge-light"> {{ $total_inbox }} </span>
+                                        <span class="badge badge-light"> {{ $total_unread_mails }} </span>
                                     </a>
                                 </li>
                                 <li class="{{ $currentTab == 'outbox' ? 'active' : ''}}">
@@ -51,7 +51,7 @@
                 <div class="tab-pane fade in {{ $currentTab == 'inbox' ? 'active' : ''}}">
                     <h3 class="tab-content-title">
                         {{ trans('message::messages.inbox') }} 
-                        <span class="badge badge-light"> {{ $total_inbox }} </span>
+                        <span class="badge badge-light"> {{ $total_unread_mails }} </span>
                     </h3>
                     @include('message::admin.messages.partials.inbox')
                 </div>

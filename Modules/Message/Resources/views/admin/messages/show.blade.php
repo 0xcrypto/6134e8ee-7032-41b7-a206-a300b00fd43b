@@ -26,7 +26,7 @@
                                 <li class="{{ $currentTab == 'inbox' ? 'active' : ''}}">
                                     <a href="{{ route('admin.messages.index', array('currentTab'=>'inbox')) }}">
                                         {{ trans('message::messages.inbox') }}
-                                        <span class="badge badge-light"> {{ $total_inbox }} </span>
+                                        <span class="badge badge-light"> {{ $total_unread_mails }} </span>
                                     </a>
                                 </li>
                                 <li class="{{ $currentTab == 'outbox' ? 'active' : ''}}">

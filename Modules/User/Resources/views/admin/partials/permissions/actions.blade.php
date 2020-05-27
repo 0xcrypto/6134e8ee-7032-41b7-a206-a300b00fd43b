@@ -1,38 +1,44 @@
-<div class="permission-row">
-    <div class="row">
-        <div class="col-md-5 col-sm-4">
-            <span class="permission-label">{{ trans($permissionLabel) }}</sapn>
-        </div>
+<div class="col-md-3 index-col">
+    @if(array_key_exists('index', $groupPermissions) && ! is_null($entity))
+         @php
+             $permissionValue = old('permissions')["{$group}.index"] ?? permission_value($entity->permissions, "{$group}.index")
+         @endphp
 
-        <div class="col-md-7 col-sm-8">
-            <div class="row">
-                <div class="radio-btn clearfix">
+         <input type="checkbox" class="checkbox" id="{{ "{$group}-index" }}" 
+         {{ isset($permissionValue) && $permissionValue == 1 ? 'checked' : '' }}/>
+         <input type="hidden" name="permissions[{{ "{$group}.index" }}]" value="{{$permissionValue}}"/>
+    @endif
+ </div>
+ <div class="col-md-3 create-col">
+     @if(array_key_exists('create', $groupPermissions) && ! is_null($entity))
+         @php
+             $permissionValue = old('permissions')["{$group}.create"] ?? permission_value($entity->permissions, "{$group}.create")
+         @endphp
 
-                    @if (! is_null($entity))
-                        @php
-                            $permissionValue = old('permissions')["{$group}.{$permissionAction}"] ?? permission_value($entity->permissions, "{$group}.{$permissionAction}")
-                        @endphp
-                    @endif
+         <input type="checkbox" class="checkbox" id="{{ "{$group}-create" }}" 
+         {{ isset($permissionValue) && $permissionValue == 1 ? 'checked' : '' }}/>
+         <input type="hidden" name="permissions[{{ "{$group}.create" }}]" value="{{$permissionValue}}"/>
+    @endif
+ </div>
+ <div class="col-md-3 edit-col">
+     @if(array_key_exists('edit', $groupPermissions) && ! is_null($entity))
+         @php
+             $permissionValue = old('permissions')["{$group}.edit"] ?? permission_value($entity->permissions, "{$group}.edit")
+         @endphp
 
-                    <div class="radio">
-                        <input type="radio" value="0" id="{{ "{$group}-{$permissionAction}" }}-inherit" name="permissions[{{ "{$group}.{$permissionAction}" }}]" class="permission-inherit" {{ isset($permissionValue) && $permissionValue == 0 ? 'checked' : '' }}>
+         <input type="checkbox" class="checkbox" id="{{ "{$group}-edit" }}" 
+         {{ isset($permissionValue) && $permissionValue == 1 ? 'checked' : '' }}/>
+         <input type="hidden" name="permissions[{{ "{$group}.edit" }}]" value="{{$permissionValue}}"/>
+    @endif
+ </div>
+ <div class="col-md-3 destroy-col">
+     @if(array_key_exists('destroy', $groupPermissions) && ! is_null($entity))
+         @php
+             $permissionValue = old('permissions')["{$group}.destroy"] ?? permission_value($entity->permissions, "{$group}.destroy")
+         @endphp
 
-                        <label for="{{ "{$group}-{$permissionAction}" }}-inherit">{{ trans('user::roles.permissions.inherit') }}</label>
-                    </div>
-
-                    <div class="radio">
-                        <input type="radio" value="-1" id="{{ "{$group}-{$permissionAction}" }}-deny" name="permissions[{{ "{$group}.{$permissionAction}" }}]" class="permission-deny" {{ isset($permissionValue) && $permissionValue == -1 ? 'checked' : '' }}>
-
-                        <label for="{{ "{$group}-{$permissionAction}" }}-deny">{{ trans('user::roles.permissions.deny') }}</label>
-                    </div>
-
-                    <div class="radio">
-                        <input type="radio" value="1" id="{{ "{$group}-{$permissionAction}" }}-allow" name="permissions[{{ "{$group}.{$permissionAction}" }}]" class="permission-allow" {{ isset($permissionValue) && $permissionValue == 1 ? 'checked' : '' }}>
-
-                        <label for="{{ "{$group}-{$permissionAction}" }}-allow">{{ trans('user::roles.permissions.allow') }}</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+         <input type="checkbox" class="checkbox" id="{{ "{$group}-destroy" }}" 
+         {{ isset($permissionValue) && $permissionValue == 1 ? 'checked' : '' }}/>
+         <input type="hidden" name="permissions[{{ "{$group}.destroy" }}]" value="{{$permissionValue}}"/>
+    @endif
+ </div>

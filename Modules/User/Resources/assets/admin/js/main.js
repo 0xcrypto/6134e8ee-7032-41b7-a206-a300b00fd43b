@@ -1,21 +1,16 @@
 window.admin.removeSubmitButtonOffsetOn(['#permissions']);
 
-$('.permission-parent-actions > .allow-all, .permission-parent-actions > .deny-all, .permission-parent-actions > .inherit-all').on('click', (e) => {
-    let action = e.currentTarget.className.split(/\s+/)[2].split(/-/)[0];
-
-    $(`.permission-${action}`).prop('checked', true);
-});
-
-$('.permission-group-actions > .allow-all, .permission-group-actions > .deny-all, .permission-group-actions > .inherit-all').on('click', (e) => {
-    let action = e.currentTarget.className.split(/\s+/)[2].split(/-/)[0];
-
-    $(e.currentTarget).closest('.permission-group')
-        .find(`.permission-${action}`)
-        .each((index, value) => {
-            $(value).prop('checked', true);
-        });
+$('.btn-index-all, .btn-create-all, .btn-edit-all, .btn-destroy-all').on('click', (e) => {
+    let action = '.'+e.currentTarget.className.split(/-/)[1];
+    var checked = $(e.currentTarget).prop('checked');
+    $(action + '-col > input[type=checkbox]').prop('checked', checked);
+    $(action + '-col > input[type=checkbox]').next('input[type=hidden]').val(+checked);
 });
 
 $('.delete-api-key').on('click', (e) => {
     $('#confirmation-form').attr('action', e.currentTarget.dataset.action);
+});
+
+$('.checkbox').click(function(){
+    $(this).is(':checked') ? $(this).next('input[type=hidden]').val(1) : $(this).next('input[type=hidden]').val(0);
 });
