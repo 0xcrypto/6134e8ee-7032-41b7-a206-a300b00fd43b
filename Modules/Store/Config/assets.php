@@ -7,10 +7,7 @@ return [
     |--------------------------------------------------------------------------
     | These assets are registered on the asset manager
     */
-    'all-assets' => [
-        'admin.store.css' => ['module' => 'store:admin/css/store.css'],
-        'admin.store.js' => ['module' => 'store:admin/js/store.js'],
-    ],
+    'all-assets' => 'all_assets',
 
     /*
     |--------------------------------------------------------------------------
@@ -18,5 +15,5 @@ return [
     | through the asset pipeline
     |--------------------------------------------------------------------------
     */
-    'required-assets' => [],
+    'required-assets' => 'required_assets',
 ];

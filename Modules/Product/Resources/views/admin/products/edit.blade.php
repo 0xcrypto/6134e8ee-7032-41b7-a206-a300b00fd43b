@@ -11,11 +11,9 @@
 @section('content')
     <form method="POST" action="{{ route('admin.products.update', $product) }}" class="form-horizontal" id="product-edit-form" novalidate>
         {{ csrf_field() }}
-        
         {{ method_field('put') }}
 
         {!! $tabs->render(compact('product')) !!}
-        
     </form>
 @endsection
 

@@ -6,20 +6,14 @@ use Illuminate\Routing\Controller;
 use Modules\Product\Entities\Product;
 use Modules\Product\Entities\ProductTranslation;
 use Modules\Admin\Traits\HasCrudActions;
-
 use Modules\Product\Http\Requests\SaveProductRequest;
-
 use Modules\Product\Entities\CreateUnitProduct;
 use Modules\StoreUnit\Entities\storeunit;
 use Modules\Category\Entities\Category;
 
-
-
 class ProductController extends Controller
 {
-
     public function store(){
-
         $saveData = new Product();  
         $saveData->name = request()->name;
         $saveData->tax_class_id = request()->tax_class_id;
@@ -34,16 +28,12 @@ class ProductController extends Controller
         $saveData->new_to = request()->new_to;
         $saveData->description = request()->description;
         $saveData->short_description = request()->short_description;
-
         $saveData->save();
-
         $quantity = request()->quantity;
         $unit = request()->unit;
         $storeData = array_combine($unit, $quantity);
         $in_stock = request()->in_stock;
-
         $storeStock = array_combine($unit, $in_stock);
-
         foreach ($storeData as $key => $value) {
             $unitProduct = new CreateUnitProduct();
             $unitProduct->product_id = $saveData->id;
@@ -52,19 +42,12 @@ class ProductController extends Controller
             $unitProduct->in_stock = $storeStock[$key];
             $unitProduct->save(); 
         }
-
         return redirect()->route("admin.products.index");
-       
     }
-
-
 
     public function update($id)
     {
-        // save product data
-        $saveData = Product::find($id);  
-        abort_unless($saveData, 404);
-
+        $saveData = Product::findOrFail($id);  
         $saveData->name = request()->name;
         $saveData->tax_class_id = request()->tax_class_id;
         $saveData->price = request()->price;
@@ -78,18 +61,13 @@ class ProductController extends Controller
         $saveData->new_to = request()->new_to;
         $saveData->description = request()->description;
         $saveData->short_description = request()->short_description;
-
         $saveData->save();
-
         $quantity = request()->quantity;
         $unit = request()->unit;
         $storeData = array_combine($unit, $quantity);
         $in_stock = request()->in_stock;
-
         $storeStock = array_combine($unit, $in_stock);
-        
         CreateUnitProduct::whereIn("storeunit_id", $unit)->where("product_id", $saveData->id)->delete();
-
         foreach ($storeData as $key => $value) {
             $unitProduct = new CreateUnitProduct();
             $unitProduct->product_id = $saveData->id;
@@ -98,11 +76,8 @@ class ProductController extends Controller
             $unitProduct->in_stock = $storeStock[$key];
             $unitProduct->save(); 
         }
-
         return redirect()->route("admin.products.index");
     }
-
-
 
     use HasCrudActions;
 
@@ -132,7 +107,5 @@ class ProductController extends Controller
      *
      * @var array|string
      */
-    protected $validation = SaveProductRequest::class;
-
-   
+    protected $validation = SaveProductRequest::class;  
 }

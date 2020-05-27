@@ -12,24 +12,24 @@ class StoreTabs extends Tabs
 
     public function make()
     {
-        $this->group('store_set_information', trans('store::admin.tabs.group.store_information'))
+        $this->group('store_information', trans('store::admin.tabs.group.store_information'))
             ->active()
             ->add($this->general());
     }
 
     private function general()
     {
-        return tap(new Tab('Add StoreUnit', trans('store::admin.tabs.general')), function (Tab $tab) {
+        return tap(new Tab('Add Store Unit', trans('store::admin.tabs.general')), function (Tab $tab) {
             $tab->active();
             $tab->weight(5);
             $tab->fields(['name']);
             $tab->view('store::admin.stores.tabs.addstore', [
-                'attributeSets' => $this->getAttributeSets(),
+                'stores' => $this->getStores(),
             ]);
         });
     }
 
-    private function getAttributeSets()
+    private function getStores()
     {
         $attributeSets = Store::all()->sortBy('name')->pluck('name', 'id');
         return $attributeSets->prepend(trans('admin::admin.form.please_select'), '');

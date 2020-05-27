@@ -6,7 +6,6 @@ use Modules\Support\Traits\AddsAsset;
 use Illuminate\Support\ServiceProvider;
 use Modules\Support\Traits\LoadsConfig;
 use Modules\Admin\Ui\Facades\TabManager;
-
 use Modules\Attribute\Admin\AttributeTabs;
 use Modules\Attribute\Admin\AttributeSetTabs;
 use Modules\Attribute\Admin\ProductTabsExtender;

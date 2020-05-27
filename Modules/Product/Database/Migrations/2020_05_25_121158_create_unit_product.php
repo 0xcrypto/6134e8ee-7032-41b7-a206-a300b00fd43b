@@ -14,20 +14,16 @@ class CreateUnitProduct extends Migration
     public function up()
     {
         Schema::create('create_unit_products', function (Blueprint $table) {
-            
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->integer('storeunit_id')->unsigned();
+            $table->integer('store_unit_id')->unsigned();
             $table->double('quantity');
             $table->integer('in_stock');
             $table->timestamps();
-
             $table->foreign('storeunit_id')
                   ->references('id')->on('storeunits')->onDelete('cascade');
-
             $table->foreign('product_id')
                   ->references('id')->on('products')->onDelete('cascade');
-
         });
     }
 

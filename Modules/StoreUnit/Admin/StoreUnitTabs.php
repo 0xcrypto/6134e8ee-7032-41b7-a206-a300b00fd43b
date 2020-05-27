@@ -29,17 +29,17 @@ class StoreUnitTabs extends Tabs
             $tab->fields(['name']);
             $tab->view('storeunit::admin.storeunits.tabs.addstoreunit', [
                 'availability' => $this->getAvailability(),
-                'attributeSets' => $this->getAttributeSets(),
+                'stores' => $this->getStores(),
             ]);
         });
     }
 
 
 
-    private function getAttributeSets()
+    private function getStores()
     {
-        $attributeSets = Store::all()->sortBy('name')->pluck('name', 'id');
-        return $attributeSets->prepend(trans('admin::admin.form.please_select'), '');
+        $stores = Store::all()->sortBy('name')->pluck('name', 'id');
+        return $stores->prepend(trans('admin::admin.form.please_select'), '');
     }
 
 

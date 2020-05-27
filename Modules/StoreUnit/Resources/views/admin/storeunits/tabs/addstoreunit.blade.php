@@ -4,7 +4,7 @@
     	{{ Form::text('name', trans('storeunit::attributes.form.name'), $errors, $storeunit , ['required' => true] ) }}
 
     	{{ Form::select('store', trans('storeunit::attributes.form.store'), $errors,
-    	 $attributeSets, $storeunit, ['required' => true]) }}
+    	 $stores, $storeunit, ['required' => true]) }}
 
     	<!-- {{ Form::text('Product', trans('storeunit::attributes.form.product'), $errors, $storeunit, ['required' => true] ) }} -->
 
