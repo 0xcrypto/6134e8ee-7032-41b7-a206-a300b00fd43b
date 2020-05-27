@@ -6,9 +6,9 @@ return [
     
     'tabs' => [
         'group' => [
-            'storeunit_information' => 'StoreUnit Information',
+            'storeunit_information' => 'Store Unit Information',
         ],
-        'general' => 'Add StoreUnit',
+        'general' => 'Add Store Unit',
     ],
 
     'table' => [

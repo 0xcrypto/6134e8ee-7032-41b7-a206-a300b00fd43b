@@ -6,7 +6,9 @@ use Illuminate\Routing\Controller;
 use Modules\Product\Entities\Product;
 use Modules\Product\Entities\ProductTranslation;
 use Modules\Admin\Traits\HasCrudActions;
+
 use Modules\Product\Http\Requests\SaveProductRequest;
+
 use Modules\Product\Entities\CreateUnitProduct;
 use Modules\StoreUnit\Entities\storeunit;
 use Modules\Category\Entities\Category;
@@ -18,7 +20,6 @@ class ProductController extends Controller
 
     public function store(){
 
-        // save product data
         $saveData = new Product();  
         $saveData->name = request()->name;
         $saveData->tax_class_id = request()->tax_class_id;

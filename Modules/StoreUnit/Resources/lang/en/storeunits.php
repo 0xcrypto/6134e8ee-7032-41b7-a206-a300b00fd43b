@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'storeunit' => 'Storeunit',
-    'storeunits' => 'Storeunits',
+    'storeunit' => 'Store unit',
+    'storeunits' => 'Store units',
 ];

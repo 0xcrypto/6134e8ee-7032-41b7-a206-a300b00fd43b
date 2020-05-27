@@ -10,7 +10,7 @@
 
             	@foreach($store->storeUnit as $storeunit)
                  <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-5">
 
                     @php
                     $pivottable = $storeunit->Products()->where("product_id", $product->id)->withPivot("quantity", "in_stock")->first();
@@ -22,9 +22,9 @@
             	<input type="hidden" name="unit[]" value="{{$storeunit->id}}">
                 </div>
 
-                <div class="col-sm-4">
+                <div class="col-sm-5">
 
-                {{ Form::select('in_stock[]', 'Stock', $errors, ['Out Of Stock','In Stock'] ,$pivottable, trans('product::products.form.stock_availability_states')) }}
+                {{ Form::select('in_stock[]', 'Availability', $errors, ['In Stock' ,'Out Of Stock'] ,$pivottable, trans('product::products.form.stock_availability_states')) }}
 
                 </div>
                  </div>

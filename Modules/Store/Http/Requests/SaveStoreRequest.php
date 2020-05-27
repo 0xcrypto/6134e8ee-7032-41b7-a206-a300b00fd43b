@@ -18,8 +18,13 @@ class SaveStoreRequest extends Request
      *
      * @return array
      */
+    
     public function rules()
     {
-        return [];
+        return [
+            'name' => 'required',
+            'latitude_longitude' =>'required',
+            'address' => 'required'
+        ];
     }
 }

@@ -6,11 +6,13 @@ use Modules\Core\Http\Requests\Request;
 
 class SavestoreunitRequest extends Request
 {
+    
     /**
      * Available attributes.
      *
      * @var string
      */
+
     protected $availableAttributes = 'storeunit::attributes';
 
     /**
@@ -18,8 +20,13 @@ class SavestoreunitRequest extends Request
      *
      * @return array
      */
+
     public function rules()
     {
-        return [];
+        return [
+            'name' => 'required',
+            'store' => 'required',
+            'availability' => 'required',
+        ];
     }
 }
