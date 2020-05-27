@@ -47,7 +47,7 @@
                             @endforeach
                         </td>
                         <td class="subject">
-                            <a href="{{route('admin.messages.show', array('currentTab'=>'outbox', 'id'=>$mail->id, 'total_inbox'=> $total_inbox )) }}">
+                            <a href="{{route('admin.messages.show', array('currentTab'=>'outbox', 'id'=>$mail->id)) }}">
                                 {{ \Illuminate\Support\Str::limit($mail->subject, 50, $end='...') }}
                             </a>
                         </td>

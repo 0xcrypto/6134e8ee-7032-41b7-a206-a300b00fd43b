@@ -53,15 +53,16 @@ class MessageController extends Controller
                                 ->orderBy('created_at', 'DESC')
                                 ->paginate(10);
 
-        $total_inbox = Message::with('recipients')
+        $total_unread_mails = Message::with('recipients')
                                 ->whereHas('recipients', function ($query) use ($currentUser) {
                                         $query->where('user_id', '=', $currentUser->id)
-                                        ->where('is_deleted', '=', 0); 
+                                        ->where('is_deleted', '=', 0)
+                                        ->where('is_read', '=', 0); 
                                 })
                                 ->count();
 
         return view("{$this->viewPath}.index", compact(['message', 'users', 'buttonOffset', 
-        'outbox_mails', 'inbox_mails', 'currentTab', 'total_inbox', 'searchString', 'currentUser']));
+        'outbox_mails', 'inbox_mails', 'currentTab', 'total_unread_mails', 'searchString', 'currentUser']));
     }
 
     /**
@@ -69,11 +70,30 @@ class MessageController extends Controller
      *
      */
 
-    public function show($currentTab, $id, $total_inbox)
+    public function show($currentTab, $id)
     {
         $mail = Message::findOrFail($id);
+        $currentUser = auth()->user();
+
+        $reciverInfo = $mail->recipients->filter(function ($recipient) use($currentUser) {
+            return $recipient->user_id == $currentUser->id;
+        })->first();
+
+        if(!$reciverInfo->is_read){
+            $reciverInfo->is_read = 1;
+            $reciverInfo->save();
+        }
+
+        $total_unread_mails = Message::with('recipients')
+                                ->whereHas('recipients', function ($query) use ($currentUser) {
+                                        $query->where('user_id', '=', $currentUser->id)
+                                        ->where('is_deleted', '=', 0)
+                                        ->where('is_read', '=', 0); 
+                                })
+                                ->count();
+
         if($mail){
-            return view("{$this->viewPath}.show", compact(['currentTab', 'mail', 'total_inbox']));
+            return view("{$this->viewPath}.show", compact(['currentTab', 'mail', 'total_unread_mails']));
         }
     }
 
@@ -88,7 +108,7 @@ class MessageController extends Controller
             $message_recipient->save();
         }
 
-        return redirect()->route("admin.messages.index", array('currentTab'=> 'outbox'))
+        return redirect()->route("admin.messages.index", array('currentTab'=> 'inbox'))
             ->withSuccess(trans('message::messages.mail_deleted'));
     }
 
