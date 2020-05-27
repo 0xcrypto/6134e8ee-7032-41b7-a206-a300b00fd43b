@@ -8,8 +8,10 @@ use Maatwebsite\Sidebar\Group;
 
 class SidebarExtender extends BaseSidebarExtender
 {
+
     public function extend(Menu $menu)
     {
+        
         $menu->group(trans('admin::sidebar.content'), function (Group $group) {
             $group->weight(5);
             $group->hideHeading();
@@ -20,6 +22,8 @@ class SidebarExtender extends BaseSidebarExtender
                 $item->isActiveWhen(route('admin.dashboard.index', null, false));
             });
         });
+
+
 
         $menu->group(trans('admin::sidebar.system'), function (Group $group) {
             $group->weight(10);
@@ -32,5 +36,6 @@ class SidebarExtender extends BaseSidebarExtender
                 );
             });
         });
+
     }
 }

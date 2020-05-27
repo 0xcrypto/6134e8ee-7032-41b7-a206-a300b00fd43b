@@ -32,7 +32,7 @@ class Attribute extends Model
      */
     protected $casts = [
         'is_filterable' => 'boolean',
-    ];
+    ];  
 
     /**
      * The attributes that are translatable.

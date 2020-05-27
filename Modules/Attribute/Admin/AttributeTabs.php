@@ -33,9 +33,10 @@ class AttributeTabs extends Tabs
     private function getAttributeSets()
     {
         $attributeSets = AttributeSet::all()->sortBy('name')->pluck('name', 'id');
-
         return $attributeSets->prepend(trans('admin::admin.form.please_select'), '');
-    }
+    } 
+
+    
 
     private function values()
     {

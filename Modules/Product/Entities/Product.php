@@ -17,6 +17,7 @@ use Modules\Support\Eloquent\Sluggable;
 use Modules\Support\Eloquent\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Attribute\Entities\ProductAttribute;
+use Modules\StoreUnit\Entities\storeunit;
 
 class Product extends Model
 {
@@ -116,6 +117,11 @@ class Product extends Model
 
         static::addActiveGlobalScope();
     }
+
+
+    
+
+
 
     public static function newArrivals($limit)
     {
@@ -529,4 +535,17 @@ class Product extends Model
     {
         return ['name'];
     }
+
+
+    /**
+     * The products that belong to the StoreUnit.
+     */
+
+
+    public function storeUnits()
+    {
+        return $this->belongsToMany(storeunit::class, 'create_unit_products');
+    }
+
+
 }

@@ -12,13 +12,15 @@ class ScaffoldModuleCommand extends Command
      *
      * @var string
      */
+    
     protected $name = 'scaffold:module';
 
     /**
      * The console command description.
      *
      * @var string
-     */
+    */
+
     protected $description = 'Scaffold a new module';
 
     /**
@@ -26,6 +28,7 @@ class ScaffoldModuleCommand extends Command
      *
      * @var \FleetCart\Scaffold\Module\ModuleScaffold
      */
+    
     private $scaffolder;
 
     /**

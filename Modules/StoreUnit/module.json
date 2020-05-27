@@ -1,0 +1,11 @@
+{
+    "name": "StoreUnit",
+    "alias": "storeunit",
+    "description": "The FleetCart StoreUnit Module.",
+    "active": 1,
+    "order": 100,
+    "providers": [
+        "Modules\\StoreUnit\\Providers\\StoreUnitServiceProvider",
+        "Modules\\StoreUnit\\Providers\\RouteServiceProvider"
+    ]
+}

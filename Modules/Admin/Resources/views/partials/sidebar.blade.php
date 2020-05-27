@@ -7,5 +7,7 @@
             <span class="icon-bar"></span>
         </button>
     </div>
+
     {!! $sidebar !!}
+    
 </nav>

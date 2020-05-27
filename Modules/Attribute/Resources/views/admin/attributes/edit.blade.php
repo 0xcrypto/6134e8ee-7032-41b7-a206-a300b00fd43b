@@ -10,10 +10,13 @@
 
 @section('content')
     <form method="POST" action="{{ route('admin.attributes.update', $attribute) }}" class="form-horizontal" id="attribute-edit-form" novalidate>
+    	
         {{ csrf_field() }}
+
         {{ method_field('put') }}
 
         {!! $tabs->render(compact('attribute')) !!}
+        
     </form>
 @endsection
 

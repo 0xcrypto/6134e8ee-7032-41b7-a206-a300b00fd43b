@@ -8,11 +8,14 @@
 @endcomponent
 
 @section('content')
+    
     <form method="POST" action="{{ route('admin.attributes.store') }}" class="form-horizontal" id="attribute-create-form" novalidate>
         {{ csrf_field() }}
 
         {!! $tabs->render(compact('attribute')) !!}
+        
     </form>
+
 @endsection
 
 @include('attribute::admin.attributes.partials.shortcuts')
