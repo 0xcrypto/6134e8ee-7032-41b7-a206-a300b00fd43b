@@ -37,9 +37,7 @@
                         </div>
                         <div class="col-md-8 col-sm-8">
                             <div class="row">
-                                @foreach ($groupPermissions as $permissionAction => $permissionLabel)
-                                    @include('user::admin.partials.permissions.actions')
-                                @endforeach
+                                @include('user::admin.partials.permissions.actions')
                             </div>
                         </div>
                     </div>
