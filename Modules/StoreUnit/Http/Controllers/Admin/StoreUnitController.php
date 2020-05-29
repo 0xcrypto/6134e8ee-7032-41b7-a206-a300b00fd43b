@@ -41,4 +41,26 @@ class StoreUnitController extends Controller
      */
     protected $validation = SaveStoreUnitRequest::class;
 
+
+    // public function index(Request $request)
+    // {
+    //     if ($request->has('query')) {
+    //         return $this->getModel()
+    //             ->search($request->get('query'))
+    //             ->query()
+    //             ->limit($request->get('limit', 10))
+    //             ->get();
+    //     }
+
+    //     if ($request->has('table')) {
+    //         $storeUnit = new StoreUnit();
+    //         $storeUnit->store = $storeUnit->fetchStore->name ?? "";
+    //         return $storeUnit->table($request);
+
+    //     }
+
+    //     return view("{$this->viewPath}.index");
+    // }
+
+
 }

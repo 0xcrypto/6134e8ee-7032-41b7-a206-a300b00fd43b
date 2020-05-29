@@ -6,7 +6,7 @@ use Modules\Admin\Ui\AdminTable;
 use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
 use Modules\Product\Entities\Product;
-use Modules\Product\Entities\Store;
+use Modules\Store\Entities\Store;
 
 
 class StoreUnit extends Model
