@@ -4,7 +4,7 @@ return [
 
 	'form' => [
 		'name' => 'Name',
-		'latitude_longitude' => 'Latitude/Longitude',
+		'latitude_longitude' => 'Store Latitude & Longitude',
 		'address' => 'Address',
 		'submit' => 'submit',
 	],

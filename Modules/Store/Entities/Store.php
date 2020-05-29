@@ -5,7 +5,7 @@ namespace Modules\Store\Entities;
 use Modules\Admin\Ui\AdminTable;
 use Modules\Support\Eloquent\Model;
 use Modules\Support\Eloquent\Translatable;
-use Modules\StoreUnit\Entities\storeunit;
+use Modules\StoreUnit\Entities\StoreUnit;
 
 class Store extends Model
 {
@@ -45,10 +45,10 @@ class Store extends Model
     {
         return new AdminTable($this->newQuery());
     }
+    
 
-
-    public function storeUnit()
+    public function storeUnits()
     {
-        return $this->hasMany(storeunit::class, 'store');
+        return $this->hasMany(StoreUnit::class, 'store_id');
     }
 }
