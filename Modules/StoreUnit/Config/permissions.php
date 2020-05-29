@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'admin.storeunits' => [
+    'admin.store_units' => [
         'index' => 'storeunit::permissions.index',
         'create' => 'storeunit::permissions.create',
         'edit' => 'storeunit::permissions.edit',

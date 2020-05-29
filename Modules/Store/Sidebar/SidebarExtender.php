@@ -33,7 +33,7 @@ class SidebarExtender extends BaseSidebarExtender
 
                 $item->item(trans('store::stores.store_unit'), function (Item $item) {
                     $item->weight(10);
-                    $item->route('admin.storeunits.index');
+                    $item->route('admin.store_units.index');
                     $item->authorize(
                         $this->auth->hasAccess('admin.attribute_sets.index')
                     );

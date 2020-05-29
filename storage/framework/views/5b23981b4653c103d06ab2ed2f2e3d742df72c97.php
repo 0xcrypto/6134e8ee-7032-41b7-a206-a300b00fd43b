@@ -7,7 +7,8 @@
             <span class="icon-bar"></span>
         </button>
     </div>
-    
+
     <?php echo $sidebar; ?>
 
+    
 </nav>

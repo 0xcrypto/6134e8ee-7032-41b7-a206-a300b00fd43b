@@ -10,16 +10,13 @@
     <form method="POST" action="<?php echo e(route('admin.products.update', $product)); ?>" class="form-horizontal" id="product-edit-form" novalidate>
         <?php echo e(csrf_field()); ?>
 
-        
         <?php echo e(method_field('put')); ?>
 
 
         <?php echo $tabs->render(compact('product')); ?>
 
-        
     </form>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('product::admin.products.partials.shortcuts', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
 <?php echo $__env->make('admin::layout', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

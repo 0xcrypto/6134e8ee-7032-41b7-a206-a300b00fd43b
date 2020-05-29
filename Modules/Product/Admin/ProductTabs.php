@@ -6,6 +6,9 @@ use Modules\Admin\Ui\Tab;
 use Modules\Admin\Ui\Tabs;
 use Modules\Tax\Entities\TaxClass;
 use Modules\Category\Entities\Category;
+use Modules\Product\Entities\UnitProduct;
+use Modules\Store\Entities\Store;
+use Modules\StoreUnit\Entities\StoreUnit;
 
 class ProductTabs extends Tabs
 {
@@ -67,8 +70,21 @@ class ProductTabs extends Tabs
         return tap(new Tab('inventory', trans('product::products.tabs.inventory')), function (Tab $tab) {
             $tab->weight(15);
             $tab->fields(['manage_stock', 'qty', 'in_stock']);
-            $tab->view('product::admin.products.tabs.inventory');
+            $tab->view('product::admin.products.tabs.inventory',[
+                'stores' => $this->store(),
+                'stock' => $this->availabilityStock(),
+            ]);
         });
+    }
+
+    private function store()
+    {
+        return $stores = Store::all() ?? [];
+    }
+
+    private function availabilityStock()
+    { 
+        return $stock = ['In Stock' ,'Out Of Stock'];
     }
 
     private function images()

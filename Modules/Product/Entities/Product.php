@@ -17,7 +17,7 @@ use Modules\Support\Eloquent\Sluggable;
 use Modules\Support\Eloquent\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Attribute\Entities\ProductAttribute;
-use Modules\StoreUnit\Entities\storeunit;
+use Modules\StoreUnit\Entities\StoreUnit;
 
 class Product extends Model
 {
@@ -544,7 +544,7 @@ class Product extends Model
 
     public function storeUnits()
     {
-        return $this->belongsToMany(storeunit::class, 'create_unit_products');
+        return $this->belongsToMany(StoreUnit::class, 'unit_products');
     }
 
 

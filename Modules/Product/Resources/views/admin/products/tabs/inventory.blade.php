@@ -6,27 +6,28 @@
         {{ Form::text('sku', trans('product::attributes.sku'), $errors, $product) }}
         {{ Form::select('manage_stock', trans('product::attributes.manage_stock'), $errors, trans('product::products.form.manage_stock_states'), $product) }}
 
-            @foreach((Modules\Store\Entities\Store::all() ?? []) as $store)
+            @foreach($stores as $store)
 
-            	@foreach($store->storeUnit as $storeunit)
+            	@foreach($store->storeUnits as $storeUnit)
                  <div class="row">
-                <div class="col-sm-5">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            
+                            @php
+                                $unitProduct=$storeUnit->products()->where("product_id",$product->id)->withPivot("quantity", "in_stock")->first()->pivot ?? null;
+                            @endphp
 
-                    @php
-                    $pivottable = $storeunit->Products()->where("product_id", $product->id)->withPivot("quantity", "in_stock")->first();
-                    $pivottable = $pivottable->pivot ?? null;
-                    @endphp
+                    	   {{ Form::number('quantity[]', $store->name."/<br>".$storeUnit->name, $errors, $unitProduct,  ['required' => true, 'value' => ($unitProduct && $unitProduct->quantity) ? $unitProduct->quantity : 0] ) }}
 
-            	{{ Form::number('quantity[]', $store->name."/".$storeunit->name, $errors, $pivottable, ['required' => true] ) }}
+                    	<input type="hidden" name="unit[]" value="{{$storeUnit->id}}">
+                        </div>
 
-            	<input type="hidden" name="unit[]" value="{{$storeunit->id}}">
-                </div>
+                        <div class="col-md-5">
 
-                <div class="col-sm-5">
+                            {{ Form::select('in_stock[]', 'Availability', $errors, $stock ,$unitProduct, trans('product::products.form.stock_availability_states')) }}
 
-                {{ Form::select('in_stock[]', 'Availability', $errors, ['In Stock' ,'Out Of Stock'] ,$pivottable, trans('product::products.form.stock_availability_states')) }}
-
-                </div>
+                        </div>
+                    </div>
                  </div>
             	
             	@endforeach

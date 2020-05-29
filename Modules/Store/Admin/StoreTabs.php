@@ -23,17 +23,8 @@ class StoreTabs extends Tabs
             $tab->active();
             $tab->weight(5);
             $tab->fields(['name']);
-            $tab->view('store::admin.stores.tabs.addstore', [
-                'stores' => $this->getStores(),
-            ]);
+            $tab->view('store::admin.stores.tabs.addStore');
         });
     }
-
-    private function getStores()
-    {
-        $attributeSets = Store::all()->sortBy('name')->pluck('name', 'id');
-        return $attributeSets->prepend(trans('admin::admin.form.please_select'), '');
-    } 
-
     
 }

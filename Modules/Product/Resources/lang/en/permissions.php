@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'index' => 'Index Products',
-    'create' => 'Create Products',
-    'edit' => 'Edit Products',
-    'destroy' => 'Delete Products',
+    'index' => 'Index Unit Product',
+    'create' => 'Create Unit Product',
+    'edit' => 'Edit Unit Product',
+    'destroy' => 'Delete Unit Product',
 ];

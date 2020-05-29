@@ -80,7 +80,7 @@ trait InputFields
 
     protected function field($name, $title, $errors, $entity, $options = [], callable $fieldCallback, ...$args)
     {
-        $value = $this->getValue($entity, trim($name, "[]"));
+        $value = $this->getValue($entity, is_array($name) ? $name : trim($name, '[]'));
 
         if (is_string($value)) {
             $value = e($value);

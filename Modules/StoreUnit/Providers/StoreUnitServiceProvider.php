@@ -20,7 +20,7 @@ class StoreUnitServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        TabManager::register('storeunits', StoreUnitTabs::class);
+        TabManager::register('store_units', StoreUnitTabs::class);
     }
 
     /**
