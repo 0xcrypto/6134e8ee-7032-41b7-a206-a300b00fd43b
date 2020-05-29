@@ -72,7 +72,7 @@ class ProductTabs extends Tabs
             $tab->fields(['manage_stock', 'qty', 'in_stock']);
             $tab->view('product::admin.products.tabs.inventory',[
                 'stores' => $this->store(),
-                'stock' => $this->availabilityStock(),
+                'availableStocks' => $this->getAvailableStocks(),
             ]);
         });
     }
@@ -82,9 +82,9 @@ class ProductTabs extends Tabs
         return $stores = Store::all() ?? [];
     }
 
-    private function availabilityStock()
+    private function getAvailableStocks()
     { 
-        return $stock = ['In Stock' ,'Out Of Stock'];
+        return $availableStocks = [trans('product::unit_products.in_stock') ,trans('product::unit_products.out_of_stock')];
     }
 
     private function images()

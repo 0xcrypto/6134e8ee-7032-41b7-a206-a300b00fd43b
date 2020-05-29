@@ -2,6 +2,7 @@
 
 namespace Modules\StoreUnit\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Modules\Core\Http\Requests\Request;
 
 class SaveStoreUnitRequest extends Request
@@ -24,9 +25,9 @@ class SaveStoreUnitRequest extends Request
     public function rules()
     {
         return [
+            'store_id' => ['required', Rule::exists('stores', 'id')],
             'name' => 'required',
-            'store' => 'required',
-            'availability' => 'required',
+            'availability' => 'required|boolean',
         ];
     }
 }

@@ -49,6 +49,6 @@ class Store extends Model
 
     public function storeUnits()
     {
-        return $this->hasMany(StoreUnit::class, 'store');
+        return $this->hasMany(StoreUnit::class, 'store_id');
     }
 }

@@ -15,11 +15,11 @@ class CreateStoreUnitsTable extends Migration
         Schema::create('store_units', function (Blueprint $table) {
             $table->increments('id');
             $table->string("name");
-            $table->string("store");
-            $table->string("product")->nullable();
-            $table->string("quantity")->nullable();
-            $table->string("availability");
+            $table->integer("store_id")->unsigned()->index();
+            $table->tinyInteger("availability")->default(0);
             $table->timestamps();
+
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
         });
     }
 

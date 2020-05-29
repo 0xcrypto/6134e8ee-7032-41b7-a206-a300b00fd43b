@@ -1,9 +1,9 @@
 @extends('admin::layout')
 
 @component('admin::components.page.header')
-    @slot('title', trans('storeunit::storeunits.storeunits'))
+    @slot('title', trans('storeunit::store_units.store_units'))
 
-    <li class="active">{{ trans('storeunit::storeunits.storeunits') }}</li>
+    <li class="active">{{ trans('storeunit::store_units.store_units') }}</li>
 @endcomponent
 
 @component('admin::components.page.index_table')
@@ -17,8 +17,6 @@
                 @include('admin::partials.table.select_all')
                 <th>{{ trans('storeunit::attributes.form.name') }}</th>
                 <th>{{ trans('storeunit::attributes.form.store') }}</th>
-                <!-- <th>{{ trans('storeunit::attributes.form.product') }}</th>
-                <th>{{ trans('storeunit::attributes.form.quantity') }}</th> -->
                 <th>{{ trans('storeunit::attributes.form.availability') }}</th>
             </tr>
         @endslot
@@ -30,14 +28,9 @@
         new DataTable('#store_units-table .table', {
             columns: [
                 { data: 'checkbox', orderable: false, searchable: false, width: '3%' },
-                { data: 'name', orderable: false, searchable: false, width: '3%' },
-                { data: 'store', orderable: false, searchable: false, width: '3%' },
-
-                //{ data: 'product', orderable: false, searchable: false, width: '3%' },
-                //{ data: 'quantity', orderable: false, searchable: false, width: '3%' },
-                
-                { data: 'availability', orderable: false, searchable: false, width: '3%' },
-                //
+                { data: 'name', name: 'storeUnit.name', orderable: false },
+                { data: 'store', name: 'store.name', orderable: false, searchable: false, defaultContent: '' },
+                { data: 'availability', name: 'availability', orderable: false, searchable: false }
             ],
         });
     </script>

@@ -9,9 +9,6 @@ use Modules\StoreUnit\Entities\StoreUnit;
 
 class StoreUnitTabs extends Tabs
 {
-
-
-
     public function make()
     {
         $this->group('store_set_information', trans('storeunit::admin.tabs.group.storeunit_information'))
@@ -19,30 +16,24 @@ class StoreUnitTabs extends Tabs
             ->add($this->general());
     }
 
-
-
     private function general()
     {
         return tap(new Tab('Add Store Unit', trans('storeunit::admin.tabs.general')), function (Tab $tab) {
             $tab->active();
             $tab->weight(5);
             $tab->fields(['name']);
-            $tab->view('storeunit::admin.store_units.tabs.addStoreUnitData', [
+            $tab->view('storeunit::admin.store_units.tabs.addStoreUnit', [
                 'availability' => $this->getAvailability(),
                 'stores' => $this->getStores(),
             ]);
         });
     }
 
-
-
     private function getStores()
     {
         $stores = Store::all()->sortBy('name')->pluck('name', 'id');
         return $stores->prepend(trans('admin::admin.form.please_select'), '');
     }
-
-
 
     private function getAvailability()
     {
@@ -51,5 +42,4 @@ class StoreUnitTabs extends Tabs
 
         return $availability->prepend(trans('admin::admin.form.please_select'), '');
     }
-   
 }

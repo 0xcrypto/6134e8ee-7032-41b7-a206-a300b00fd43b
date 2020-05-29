@@ -16,3 +16,4 @@ tags
 *.map
 .env
 /admin-template
+/storage/framework/*

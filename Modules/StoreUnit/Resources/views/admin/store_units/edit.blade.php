@@ -1,7 +1,7 @@
 @extends('admin::layout')
 
 @component('admin::components.page.header')
-    @slot('title', trans('admin::resource.edit', ['resource' => trans('storeunit::storeunits.storeunit')]))
+    @slot('title', trans('admin::resource.edit', ['resource' => trans('storeunit::store_units.store_unit')]))
     @slot('subtitle', '')
 
     <li><a href="{{ route('admin.store_units.index') }}">{{ trans('storeunit::store_units.store_units') }}</a></li>
