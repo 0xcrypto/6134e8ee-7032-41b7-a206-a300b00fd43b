@@ -21,7 +21,11 @@ class UnitProduct extends Model
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'product_id',
+        'store_unit_id',
+        'quantity'
+    ];
 
     /**
      * The attributes that should be cast to native types.

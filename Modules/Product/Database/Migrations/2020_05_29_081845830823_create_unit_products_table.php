@@ -17,9 +17,9 @@ class CreateUnitProductsTable extends Migration
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->integer('store_unit_id')->unsigned();
-            $table->double('quantity')->default(0);
-            $table->integer('in_stock')->default(0);
+            $table->integer('quantity')->unsigned()->default(0);
             $table->timestamps();
+
             $table->foreign('store_unit_id')
                   ->references('id')->on('store_units')->onDelete('cascade');
             $table->foreign('product_id')
