@@ -12,10 +12,16 @@ return [
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
         'captcha' => 'Captcha',
-        'roles' => 'Roles',
+        'roles' => 'Role',
+        'stores' => 'Stores',
         'activated' => 'Status',
         'new_password' => 'New Password',
         'new_password_confirmation' => 'Confirm New Password',
+        'user_id' => 'User ID',
+        'mobile' => 'Mobile Number',
+        'senior_id' => 'Senior',
+        'address' => 'Address',
+        'is_direct_commission_user'=> 'Commission receiving (Direct / Overriding)'
     ],
 
     'roles' => [

@@ -2,6 +2,7 @@
 
 namespace Modules\User\Entities;
 
+use Modules\Store\Entities\Store;
 use Modules\Order\Entities\Order;
 use Modules\User\Admin\UserTable;
 use Modules\Review\Entities\Review;
@@ -10,11 +11,15 @@ use Modules\Product\Entities\Product;
 use Modules\User\Repositories\Permission;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
 class User extends EloquentUser implements AuthenticatableContract
 {
     use Authenticatable;
+
+    protected $fillable = [ 'first_name', 'last_name', 'email', 'password', 'permissions', 'last_login', 
+    'user_id', 'mobile', 'created_by', 'senior_id', 'reward_points', 'is_direct_commission_user'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -36,6 +41,21 @@ class User extends EloquentUser implements AuthenticatableContract
     public static function totalCustomers()
     {
         return Role::findOrNew(setting('customer_role'))->users()->count();
+    }
+
+    public static function getUniqueId($length){
+        $code =  static::random($length);
+        if(static::where('user_id', $code)->exists()){
+            $this->getUniqueId($length);
+        }
+
+        return $code;
+    }
+
+    public static function random($length = 10)
+    {
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
     }
 
     /**
@@ -62,6 +82,51 @@ class User extends EloquentUser implements AuthenticatableContract
         return $this->hasRoleId(setting('customer_role'));
     }
 
+    public static function getAllRoles(){
+        return array(
+            'Admin' => static::getRoleId('admin'),
+            'MIS' => static::getRoleId('mis'),
+            'SeniorSalesManager' => static::getRoleId('senior sales manager'),
+            'SeniorSupportManager' => static::getRoleId('senior service manager'),
+            'OnlineManager' => static::getRoleId('online manager'),
+            'StoreManager' => static::getRoleId('store manager'),
+            'SalesExecutive' => static::getRoleId('sales executive'),
+            'ServiceExecutive' => static::getRoleId('service executive'),
+            'Customer' => static::getRoleId('customer')
+        );
+    }
+
+    public static function hasAccessOfRoles($roleId){
+        $role = static::getAllRoles();
+        $result = null ;
+        switch($roleId){
+            case $role['Admin']:
+                    $result = [  $role['Admin'], $role['MIS'], $role['SeniorSalesManager'], $role['OnlineManager'], $role['StoreManager'], 
+                            $role['SalesExecutive'],  $role['ServiceExecutive'], $role['Customer'] ]; 
+                    break;
+            case $role['SeniorSalesManager']:
+                    $result = [ $role['StoreManager'], $role['SalesExecutive']]; 
+                    break;
+            case $role['SeniorSupportManager']:
+                    $result = [ $role['ServiceExecutive'] ]; 
+                    break;
+            case $role['StoreManager']:
+                    $result = [ $role['SalesExecutive'], $role['SalesExecutive'], $role['isCustomer'] ]; 
+                    break;
+            case $role['SalesExecutive']:
+                    $result = [ $role['isCustomer'] ]; 
+                    break;
+            case $role['MIS']:
+            case $role['OnlineManager']:
+            case $role['ServiceExecutive']:
+            case $role['Customer']:
+                    $result = [];
+                break;
+        }
+
+        return $result;
+    }
+
     /**
      * Checks if a user belongs to the given Role ID.
      *
@@ -82,6 +147,25 @@ class User extends EloquentUser implements AuthenticatableContract
     public function hasRoleSlug($slug)
     {
         return $this->roles()->whereSlug($slug)->count() !== 0;
+    }
+
+    public static function getRolesByIds($ids)
+    {
+        return DB::table('roles')
+        ->join('role_translations', 'roles.id', '=', 'role_translations.role_id')
+        ->whereIn('roles.id', $ids)
+        ->pluck('role_translations.name', 'roles.id');
+    }
+
+    /**
+     * Checks if a user belongs to the given Role Name.
+     *
+     * @param string $name
+     * @return bool
+     */
+    public static function getRoleId($name)
+    {
+        return Role::whereTranslation('name', $name)->first()->id;
     }
 
     /**
@@ -124,6 +208,16 @@ class User extends EloquentUser implements AuthenticatableContract
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_roles')->withTimestamps();
+    }
+
+    /**
+     * Get the roles of the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function stores()
+    {
+        return $this->belongsToMany(Store::class, 'user_stores')->withTimestamps();
     }
 
     /**
@@ -210,6 +304,13 @@ class User extends EloquentUser implements AuthenticatableContract
      */
     public function table()
     {
-        return new UserTable($this->newQuery());
+        $currentUserRole = auth()->user()->roles()->first()->id;
+        $accessibleRoles = static::hasAccessOfRoles($currentUserRole);
+        $query = User::with('roles')
+                        ->whereHas('roles', function ($query) use ($accessibleRoles) {
+                            $query->whereIn('id', $accessibleRoles);
+                        });
+
+        return new UserTable($query);
     }
 }

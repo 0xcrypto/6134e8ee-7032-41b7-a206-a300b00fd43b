@@ -37,6 +37,12 @@ class MigrationCartalystSentinel extends Migration
             $table->string('password');
             $table->text('permissions')->nullable();
             $table->datetime('last_login')->nullable();
+            $table->string('user_id')->index();
+            $table->string('mobile')->nullable();
+            $table->integer('created_by');
+            $table->integer('senior_id')->nullable();
+            $table->integer('reward_points')->default(0);
+            $table->boolean('is_direct_commission_user')->default(0);
             $table->timestamps();
         });
 
@@ -64,6 +70,16 @@ class MigrationCartalystSentinel extends Migration
             $table->primary(['user_id', 'role_id']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+        });
+    
+        Schema::create('user_stores', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
+            $table->integer('store_id')->unsigned();
+            $table->timestamps();
+
+            $table->primary(['user_id', 'store_id']);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
         });
 
         Schema::create('activations', function (Blueprint $table) {
@@ -120,6 +136,7 @@ class MigrationCartalystSentinel extends Migration
         Schema::dropIfExists('persistences');
         Schema::dropIfExists('activations');
         Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('user_stores');
         Schema::dropIfExists('role_translations');
         Schema::dropIfExists('roles');
         Schema::dropIfExists('users');
