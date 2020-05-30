@@ -9,6 +9,7 @@ use Modules\Category\Entities\Category;
 use Modules\Product\Entities\UnitProduct;
 use Modules\Store\Entities\Store;
 use Modules\StoreUnit\Entities\StoreUnit;
+use Modules\Product\Entities\Product;
 
 class ProductTabs extends Tabs
 {

@@ -24,6 +24,8 @@ class ProductController extends Controller
         $product->special_price_end = request()->special_price_end;
         $product->sku = request()->sku;
         $product->manage_stock = request()->manage_stock;
+        $product->qty = request()->qty;
+        $product->in_stock = request()->in_stock;
         $product->is_active = request()->is_active;
         $product->new_from = request()->new_from;
         $product->new_to = request()->new_to;
@@ -35,16 +37,12 @@ class ProductController extends Controller
         $unit = request()->unit;
         $storeData = array_combine($unit, $quantity);
 
-        $in_stock = request()->in_stock;
-        $storeStock = array_combine($unit, $in_stock);
-
         foreach ($storeData as $key => $value) {
 
             $unitProduct = new UnitProduct();
             $unitProduct->product_id = $product->id;
             $unitProduct->store_unit_id = $key;
             $unitProduct->quantity = $value;
-            $unitProduct->in_stock = $storeStock[$key];
             $unitProduct->save(); 
         }
         return redirect()->route("admin.products.index")
@@ -62,17 +60,18 @@ class ProductController extends Controller
         $product->special_price_end = request()->special_price_end;
         $product->sku = request()->sku;
         $product->manage_stock = request()->manage_stock;
+        $product->qty = request()->qty;
+        $product->in_stock = request()->in_stock;
         $product->is_active = request()->is_active;
         $product->new_from = request()->new_from;
         $product->new_to = request()->new_to;
         $product->description = request()->description;
         $product->short_description = request()->short_description;
         $product->save();
+
         $quantity = request()->quantity;
         $unit = request()->unit;
         $storeData = array_combine($unit, $quantity);
-        $in_stock = request()->in_stock;
-        $storeStock = array_combine($unit, $in_stock);
         
         UnitProduct::whereIn("store_unit_id", $unit)->where("product_id", $product->id)->delete();
 
@@ -81,7 +80,6 @@ class ProductController extends Controller
             $unitProduct->product_id = $product->id;
             $unitProduct->store_unit_id = $key;
             $unitProduct->quantity = $value;
-            $unitProduct->in_stock = $storeStock[$key];
             $unitProduct->save(); 
         }
         return redirect()->route("admin.products.index")

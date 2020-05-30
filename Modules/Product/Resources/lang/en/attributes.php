@@ -19,4 +19,5 @@ return [
     'new_from' => 'Product New From',
     'new_to' => 'Product New To',
     'is_reviewable' => 'Reviewable',
+    'total_quantity' => 'Total Quantity',
 ];
