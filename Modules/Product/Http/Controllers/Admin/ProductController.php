@@ -13,18 +13,14 @@ use Modules\Category\Entities\Category;
 
 class ProductController extends Controller
 {
-    public function store() {
-
+    public function store() 
+    {
         $product = Product::create(request()->all());
-
         $unitProductData = array_combine(request()->unit, request()->quantity);
-        
+
         foreach ($unitProductData as $unit => $productQuantity) {
-
-            $product->storeUnits()->attach($unit, ['quantity' => $productQuantity,]);
-
+            $product->storeUnits()->attach($unit, ['quantity' => $productQuantity]);
         }
-        
         return redirect()->route("admin.products.index")
         ->withSuccess(trans('admin::messages.resource_saved', ['resource' => 'Product']));
     }
@@ -32,17 +28,12 @@ class ProductController extends Controller
     public function update($id)
     {
         $product = Product::findOrFail($id);  
-
         $product->update(request()->all());
-
         $unitProductData = array_combine(request()->unit, request()->quantity);
-        
+
         foreach ($unitProductData as $unit => $productQuantity) {
-
             $product->storeUnits()->updateExistingPivot([$unit], ['quantity' => $productQuantity]);
-
         }
-
         return redirect()->route("admin.products.index")
         ->withSuccess(trans('admin::messages.resource_saved', ['resource' => 'Product']));
     }
