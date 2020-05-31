@@ -72,16 +72,21 @@ class ProductController extends Controller
         $quantity = request()->quantity;
         $unit = request()->unit;
         $storeData = array_combine($unit, $quantity);
-        
-        UnitProduct::whereIn("store_unit_id", $unit)->where("product_id", $product->id)->delete();
 
         foreach ($storeData as $key => $value) {
-            $unitProduct = new UnitProduct();
-            $unitProduct->product_id = $product->id;
-            $unitProduct->store_unit_id = $key;
+            $unitProduct = UnitProduct::where("store_unit_id", $key)->where("product_id", $product->id)->first();
+
+            if(!$unitProduct) {
+                $unitProduct = new UnitProduct();
+                $unitProduct->product_id = $product->id;
+                $unitProduct->store_unit_id = $key;
+            } 
+            
             $unitProduct->quantity = $value;
-            $unitProduct->save(); 
+            $unitProduct->save();
+           
         }
+
         return redirect()->route("admin.products.index")
         ->withSuccess(trans('admin::messages.resource_saved', ['resource' => 'Product']));
     }

@@ -25,7 +25,5 @@
         "vue-template-compiler": "^2.6.11",
         "webpack-shell-plugin": "^0.5.0"
     },
-    "dependencies": {
-        "node-sass": "^4.14.1"
-    }
+    "dependencies": {}
 }
