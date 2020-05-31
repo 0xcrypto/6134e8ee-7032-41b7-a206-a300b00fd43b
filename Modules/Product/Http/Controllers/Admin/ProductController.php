@@ -70,19 +70,19 @@ class ProductController extends Controller
         $product->save();
 
         $quantity = request()->quantity;
-        $unit = request()->unit;
-        $storeData = array_combine($unit, $quantity);
+        $units = request()->unit;
+        $unitProductData = array_combine($units, $quantity);
 
-        foreach ($storeData as $key => $value) {
-            $unitProduct = UnitProduct::where("store_unit_id", $key)->where("product_id", $product->id)->first();
+        foreach ($unitProductData as $unit => $productQuantity) {
+            $unitProduct = UnitProduct::where("store_unit_id", $unit)->where("product_id", $product->id)->first();
 
             if(!$unitProduct) {
                 $unitProduct = new UnitProduct();
                 $unitProduct->product_id = $product->id;
-                $unitProduct->store_unit_id = $key;
+                $unitProduct->store_unit_id = $unit;
             } 
             
-            $unitProduct->quantity = $value;
+            $unitProduct->quantity = $productQuantity;
             $unitProduct->save();
            
         }
