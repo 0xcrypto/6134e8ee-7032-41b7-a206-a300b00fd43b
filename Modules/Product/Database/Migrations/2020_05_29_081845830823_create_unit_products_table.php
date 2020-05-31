@@ -13,7 +13,7 @@ class CreateUnitProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('unit_products', function (Blueprint $table) {
+        /*Schema::create('unit_products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->integer('store_unit_id')->unsigned();
@@ -24,7 +24,7 @@ class CreateUnitProductsTable extends Migration
                   ->references('id')->on('store_units')->onDelete('cascade');
             $table->foreign('product_id')
                   ->references('id')->on('products')->onDelete('cascade');
-        });
+        });*/
     }
 
     /**

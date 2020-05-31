@@ -13,38 +13,18 @@ use Modules\Category\Entities\Category;
 
 class ProductController extends Controller
 {
-    public function store(){
+    public function store() {
 
-        $product = new Product();  
-        $product->name = request()->name;
-        $product->tax_class_id = request()->tax_class_id;
-        $product->price = request()->price;
-        $product->special_price = request()->special_price;
-        $product->special_price_start = request()->special_price_start;
-        $product->special_price_end = request()->special_price_end;
-        $product->sku = request()->sku;
-        $product->manage_stock = request()->manage_stock;
-        $product->qty = request()->qty;
-        $product->in_stock = request()->in_stock;
-        $product->is_active = request()->is_active;
-        $product->new_from = request()->new_from;
-        $product->new_to = request()->new_to;
-        $product->description = request()->description;
-        $product->short_description = request()->short_description;
-        $product->save();
+        $product = Product::create(request()->all());
 
-        $quantity = request()->quantity;
-        $unit = request()->unit;
-        $storeData = array_combine($unit, $quantity);
+        $unitProductData = array_combine(request()->unit, request()->quantity);
+        
+        foreach ($unitProductData as $unit => $productQuantity) {
 
-        foreach ($storeData as $key => $value) {
+            $product->storeUnits()->attach($unit, ['quantity' => $productQuantity,]);
 
-            $unitProduct = new UnitProduct();
-            $unitProduct->product_id = $product->id;
-            $unitProduct->store_unit_id = $key;
-            $unitProduct->quantity = $value;
-            $unitProduct->save(); 
         }
+        
         return redirect()->route("admin.products.index")
         ->withSuccess(trans('admin::messages.resource_saved', ['resource' => 'Product']));
     }
@@ -52,39 +32,15 @@ class ProductController extends Controller
     public function update($id)
     {
         $product = Product::findOrFail($id);  
-        $product->name = request()->name;
-        $product->tax_class_id = request()->tax_class_id;
-        $product->price = request()->price;
-        $product->special_price = request()->special_price;
-        $product->special_price_start = request()->special_price_start;
-        $product->special_price_end = request()->special_price_end;
-        $product->sku = request()->sku;
-        $product->manage_stock = request()->manage_stock;
-        $product->qty = request()->qty;
-        $product->in_stock = request()->in_stock;
-        $product->is_active = request()->is_active;
-        $product->new_from = request()->new_from;
-        $product->new_to = request()->new_to;
-        $product->description = request()->description;
-        $product->short_description = request()->short_description;
-        $product->save();
 
-        $quantity = request()->quantity;
-        $units = request()->unit;
-        $unitProductData = array_combine($units, $quantity);
+        $product->update(request()->all());
 
+        $unitProductData = array_combine(request()->unit, request()->quantity);
+        
         foreach ($unitProductData as $unit => $productQuantity) {
-            $unitProduct = UnitProduct::where("store_unit_id", $unit)->where("product_id", $product->id)->first();
 
-            if(!$unitProduct) {
-                $unitProduct = new UnitProduct();
-                $unitProduct->product_id = $product->id;
-                $unitProduct->store_unit_id = $unit;
-            } 
-            
-            $unitProduct->quantity = $productQuantity;
-            $unitProduct->save();
-           
+            $product->storeUnits()->updateExistingPivot([$unit], ['quantity' => $productQuantity]);
+
         }
 
         return redirect()->route("admin.products.index")
