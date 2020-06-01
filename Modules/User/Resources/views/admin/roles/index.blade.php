@@ -28,7 +28,8 @@
                 { data: 'checkbox', orderable: false, searchable: false, width: '3%' },
                 { data: 'name', name: 'name' },
                 { data: 'created', name: 'created_at' },
-            ]
+            ],
+            searching: false
         });
     </script>
 @endpush

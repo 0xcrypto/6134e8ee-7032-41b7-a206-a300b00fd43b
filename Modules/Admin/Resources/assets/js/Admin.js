@@ -45,6 +45,7 @@ export default class {
             select = $(select);
 
             let create = true;
+            let maxItems = 1000;
             let plugins = ['remove_button', 'restore_on_backspace'];
 
             if (select.hasClass('prevent-creation')) {
@@ -53,7 +54,11 @@ export default class {
                 plugins.remove('restore_on_backspace');
             }
 
-            select.selectize(_.merge(options, { create, plugins }));
+            if (select.hasClass('max-items-one')) {
+                maxItems = 1;
+            }
+
+            select.selectize(_.merge(options, { create, maxItems, plugins }));
         }
     }
 

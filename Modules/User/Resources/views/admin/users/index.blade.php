@@ -15,8 +15,8 @@
         <tr>
             @include('admin::partials.table.select_all')
 
-            <th>{{ trans('user::users.table.first_name') }}</th>
-            <th>{{ trans('user::users.table.last_name') }}</th>
+            <th>{{ trans('user::users.table.full_name') }}</th>
+            <th>{{ trans('user::users.table.role') }}</th>
             <th>{{ trans('user::users.table.email') }}</th>
             <th>{{ trans('user::users.table.last_login') }}</th>
             <th data-sort>{{ trans('admin::admin.table.created') }}</th>
@@ -29,8 +29,8 @@
         new DataTable('#users-table .table', {
             columns: [
                 { data: 'checkbox', orderable: false, searchable: false, width: '3%' },
-                { data: 'first_name', name: 'first_name' },
-                { data: 'last_name', name: 'last_name' },
+                { data: 'full_name', name: 'full_name' },
+                { data: 'role', name: 'role' },
                 { data: 'email', name: 'email' },
                 { data: 'last_login', name: 'last_login', searchable: false },
                 { data: 'created', name: 'created_at' },

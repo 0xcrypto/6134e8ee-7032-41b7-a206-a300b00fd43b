@@ -2,10 +2,12 @@
 
 namespace Modules\User\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use Modules\User\Entities\User;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Traits\HasCrudActions;
 use Modules\User\Http\Requests\SaveUserRequest;
+use Illuminate\Support\Facades\Auth;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 
 class UserController extends Controller
@@ -41,6 +43,23 @@ class UserController extends Controller
     protected $validation = SaveUserRequest::class;
 
     /**
+     * Display a listing of the users.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    
+    public function index(Request $request)
+    { 
+        if ($request->has('table')) {
+            $users = new User;
+            return $users->table($request);
+        }
+
+        return view("{$this->viewPath}.index");
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param \Modules\User\Http\Requests\SaveUserRequest $request
@@ -48,11 +67,15 @@ class UserController extends Controller
      */
     public function store(SaveUserRequest $request)
     {
-        $request->merge(['password' => bcrypt($request->password)]);
-
+        $request->merge(['password' => bcrypt($request->password), 
+            'user_id' => User::getUniqueId(6),
+            'created_by' => auth()->user()->id
+        ]);
+        
         $user = User::create($request->all());
 
         $user->roles()->attach($request->roles);
+        $user->stores()->attach($request->stores);
 
         Activation::complete($user, Activation::create($user)->code);
 
@@ -80,6 +103,7 @@ class UserController extends Controller
         $user->update($request->all());
 
         $user->roles()->sync($request->roles);
+        $user->stores()->sync($request->stores);
 
         if (! Activation::completed($user) && $request->activated === '1') {
             Activation::complete($user, Activation::create($user)->code);

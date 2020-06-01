@@ -51,4 +51,14 @@ class Store extends Model
     {
         return $this->hasMany(StoreUnit::class, 'store_id');
     }
+
+    /**
+     * The Users relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_stores', 'store_id', 'user_id')->withTimestamps();
+    }
 }

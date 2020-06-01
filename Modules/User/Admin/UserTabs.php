@@ -4,7 +4,9 @@ namespace Modules\User\Admin;
 
 use Modules\Admin\Ui\Tab;
 use Modules\Admin\Ui\Tabs;
+use Modules\User\Entities\User;
 use Modules\User\Entities\Role;
+use Modules\Store\Entities\Store;
 use Modules\User\Repositories\Permission;
 
 class UserTabs extends Tabs
@@ -14,8 +16,9 @@ class UserTabs extends Tabs
         $this->group('user_information', trans('user::users.tabs.group.user_information'))
             ->active()
             ->add($this->account())
-            ->add($this->permissions())
             ->add($this->newPassword());
+
+            //->add($this->permissions())   TODO: Uncomment if you want to assign permission sepecific to this user
     }
 
     private function account()
@@ -33,10 +36,31 @@ class UserTabs extends Tabs
             ]);
 
             $tab->view('user::admin.users.tabs.account', [
-                'roles' => Role::list(),
+                'roles' => $this->getRoles(),
+                'stores' => $this->getStores(),
+                'seniors' => $this->getSeniors()
             ]);
         });
     }
+
+    private function getRoles()
+    {
+        $currentUserRole = auth()->user()->roles()->first()->id;
+        $accessibleRoles = User::hasAccessOfRoles($currentUserRole);
+        return User::getRolesByIds($accessibleRoles);
+    } 
+
+    private function getStores()
+    {
+        $stores = Store::all()->sortBy('name')->pluck('name', 'id');
+        return $stores;
+    } 
+
+    private function getSeniors()
+    {
+        $seniors = User::all()->sortBy('name')->pluck('full_name', 'id');
+        return $seniors->prepend(trans('admin::admin.form.please_select'), '');
+    } 
 
     private function permissions()
     {
