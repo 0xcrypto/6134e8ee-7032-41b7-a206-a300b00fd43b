@@ -32,6 +32,20 @@ class CreateProductsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Schema::create('unit_products', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('product_id')->unsigned();
+            $table->integer('store_unit_id')->unsigned();
+            $table->integer('quantity')->unsigned()->default(0);
+            $table->timestamps();
+
+            $table->foreign('store_unit_id')
+                  ->references('id')->on('store_units')->onDelete('cascade');
+            $table->foreign('product_id')
+                  ->references('id')->on('products')->onDelete('cascade');
+        });
+
     }
 
     /**
@@ -43,5 +57,6 @@ class CreateProductsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('products');
+        Schema::dropIfExists('unit_products');
     }
 }
