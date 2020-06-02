@@ -26,5 +26,6 @@ return [
 
     'roles' => [
         'name' => 'Name',
+        'accessible_roles' => 'Access to Roles',
     ],
 ];

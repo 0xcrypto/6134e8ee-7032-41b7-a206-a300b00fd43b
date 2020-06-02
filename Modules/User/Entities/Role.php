@@ -46,6 +46,16 @@ class Role extends EloquentRole
     }
 
     /**
+     * The Accessible Roles relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function accessible_roles()
+    {
+        return $this->belongsToMany(User::class, 'role_accessibilites', 'role_id', 'accessible_role_id')->withTimestamps();
+    }
+
+    /**
      * Set role's permissions.
      *
      * @param array $permissions

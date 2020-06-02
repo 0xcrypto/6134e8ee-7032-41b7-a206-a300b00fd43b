@@ -4,6 +4,7 @@ namespace Modules\User\Admin;
 
 use Modules\Admin\Ui\Tab;
 use Modules\Admin\Ui\Tabs;
+use Modules\User\Entities\Role;
 use Modules\User\Repositories\Permission;
 
 class RoleTabs extends Tabs
@@ -21,8 +22,10 @@ class RoleTabs extends Tabs
         return tap(new Tab('general', trans('user::roles.tabs.general')), function (Tab $tab) {
             $tab->active();
             $tab->weight(10);
-            $tab->fields('name');
-            $tab->view('user::admin.roles.tabs.general');
+            $tab->fields(['name', 'accessible_roles']);
+            $tab->view('user::admin.roles.tabs.general', [
+                'roles' => Role::list()
+            ]);
         });
     }
 

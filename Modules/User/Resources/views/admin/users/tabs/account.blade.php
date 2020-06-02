@@ -1,19 +1,12 @@
 @push('scripts')
     <script>
-        var Role = JSON.parse('{!!json_encode($user::getAllRoles())!!}'),
-            isCreatingUser = {{ request()->routeIs('admin.users.create') ? 1 : 0 }};
-
-        if(!isCreatingUser){
-            var currentRole = {{ $user->roles()->first()->id }};
-            if(currentRole == Role.Customer){
-                $('.staff-fields').hide();
-            }
-        }
+        var customerRole = {{ setting('customer_role')}},
+            isEditingUser = {{ request()->routeIs('admin.users.edit') ? 1 : 0 }};
 
         $(document).ready(function(){
-            $(".role-select").on('change', function(){ debugger;
+            $(".role-select").on('change', function(){ 
                 var selectedRole = parseInt($(this).val());
-                if((selectedRole == Role.Customer)) {
+                if((selectedRole == customerRole)) {
                     $('.staff-fields').hide()
                 }
                 else{
@@ -21,6 +14,15 @@
                 }
             });
         });
+
+        
+        if(!isEditingUser){
+            var currentRole = {{ isset($user) ?? $user->roles()->first()->id }};
+            if(currentRole == customerRole){
+                $('.staff-fields').hide();
+            }
+        }
+
     </script>
 @endpush
 
