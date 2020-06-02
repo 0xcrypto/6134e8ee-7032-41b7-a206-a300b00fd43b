@@ -8,6 +8,7 @@ use Modules\User\Entities\User;
 use Modules\User\Entities\Role;
 use Modules\Store\Entities\Store;
 use Modules\User\Repositories\Permission;
+use Illuminate\Support\Facades\DB;
 
 class UserTabs extends Tabs
 {
@@ -45,8 +46,11 @@ class UserTabs extends Tabs
 
     private function getRoles()
     {
-        $currentUserRole = auth()->user()->roles()->first()->id;
-        $accessibleRoles = User::hasAccessOfRoles($currentUserRole);
+        $accessibleRoles = DB::table('role_accessibilites')
+                            ->where('role_id', '=', auth()->user()->roles()->first()->id)
+                            ->pluck('accessible_role_id')
+                            ->toArray();
+
         return User::getRolesByIds($accessibleRoles);
     } 
 

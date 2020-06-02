@@ -62,6 +62,17 @@ class MigrationCartalystSentinel extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
 
+        Schema::create('role_accessibilites', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('role_id')->unsigned();
+            $table->integer('accessible_role_id')->unsigned();
+            $table->timestamps();
+
+            $table->unique(['role_id', 'accessible_role_id']);
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('accessible_role_id')->references('id')->on('roles')->onDelete('cascade');
+        });
+
         Schema::create('user_roles', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
@@ -138,6 +149,7 @@ class MigrationCartalystSentinel extends Migration
         Schema::dropIfExists('user_roles');
         Schema::dropIfExists('user_stores');
         Schema::dropIfExists('role_translations');
+        Schema::dropIfExists('role_accessibilites');
         Schema::dropIfExists('roles');
         Schema::dropIfExists('users');
     }

@@ -82,51 +82,6 @@ class User extends EloquentUser implements AuthenticatableContract
         return $this->hasRoleId(setting('customer_role'));
     }
 
-    public static function getAllRoles(){
-        return array(
-            'Admin' => static::getRoleId('admin'),
-            'MIS' => static::getRoleId('mis'),
-            'SeniorSalesManager' => static::getRoleId('senior sales manager'),
-            'SeniorSupportManager' => static::getRoleId('senior service manager'),
-            'OnlineManager' => static::getRoleId('online manager'),
-            'StoreManager' => static::getRoleId('store manager'),
-            'SalesExecutive' => static::getRoleId('sales executive'),
-            'ServiceExecutive' => static::getRoleId('service executive'),
-            'Customer' => static::getRoleId('customer')
-        );
-    }
-
-    public static function hasAccessOfRoles($roleId){
-        $role = static::getAllRoles();
-        $result = null ;
-        switch($roleId){
-            case $role['Admin']:
-                    $result = [  $role['Admin'], $role['MIS'], $role['SeniorSalesManager'], $role['OnlineManager'], $role['StoreManager'], 
-                            $role['SalesExecutive'],  $role['ServiceExecutive'], $role['Customer'] ]; 
-                    break;
-            case $role['SeniorSalesManager']:
-                    $result = [ $role['StoreManager'], $role['SalesExecutive']]; 
-                    break;
-            case $role['SeniorSupportManager']:
-                    $result = [ $role['ServiceExecutive'] ]; 
-                    break;
-            case $role['StoreManager']:
-                    $result = [ $role['SalesExecutive'], $role['SalesExecutive'], $role['isCustomer'] ]; 
-                    break;
-            case $role['SalesExecutive']:
-                    $result = [ $role['isCustomer'] ]; 
-                    break;
-            case $role['MIS']:
-            case $role['OnlineManager']:
-            case $role['ServiceExecutive']:
-            case $role['Customer']:
-                    $result = [];
-                break;
-        }
-
-        return $result;
-    }
-
     /**
      * Checks if a user belongs to the given Role ID.
      *
@@ -305,7 +260,11 @@ class User extends EloquentUser implements AuthenticatableContract
     public function table()
     {
         $currentUserRole = auth()->user()->roles()->first()->id;
-        $accessibleRoles = static::hasAccessOfRoles($currentUserRole);
+        $accessibleRoles = DB::table('role_accessibilites')
+                            ->where('role_id', '=', $currentUserRole)
+                            ->pluck('accessible_role_id')
+                            ->toArray();
+
         $query = User::with('roles')
                         ->whereHas('roles', function ($query) use ($accessibleRoles) {
                             $query->whereIn('id', $accessibleRoles);

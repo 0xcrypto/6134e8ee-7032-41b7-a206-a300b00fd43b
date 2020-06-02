@@ -38,4 +38,37 @@ class RoleController extends Controller
      * @var array|string
      */
     protected $validation = SaveRoleRequest::class;
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Modules\User\Http\Requests\SaveRoleRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(SaveRoleRequest $request)
+    {
+        $role = Role::create($request->all());  
+        $role->accessible_roles()->attach($request->accessible_roles);
+
+        return redirect()->route('admin.roles.index')
+            ->withSuccess(trans('admin::messages.resource_saved', ['resource' => trans('user::roles.role')]));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     * @param \Modules\User\Http\Requests\SaveRoleRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id, SaveRoleRequest $request)
+    {
+        $role = Role::findOrFail($id);
+
+        $role->update($request->all());
+        $role->accessible_roles()->sync($request->accessible_roles);
+
+        return redirect()->route('admin.roles.index')
+            ->withSuccess(trans('admin::messages.resource_saved', ['resource' => trans('user::roles.role')]));
+    }
 }
