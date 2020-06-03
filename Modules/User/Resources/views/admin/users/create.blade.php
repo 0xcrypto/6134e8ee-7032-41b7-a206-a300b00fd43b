@@ -8,7 +8,7 @@
 @endcomponent
 
 @section('content')
-    <form method="POST" action="{{ route('admin.users.store') }}" class="form-horizontal" id="user-create-form" novalidate>
+    <form method="POST" action="{{ route('admin.users.store') }}" class="form-horizontal" id="user-create-form" enctype="multipart/form-data"  novalidate>
         {{ csrf_field() }}
 
         {!! $tabs->render(compact('user')) !!}

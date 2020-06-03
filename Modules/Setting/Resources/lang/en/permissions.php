@@ -1,5 +1,8 @@
 <?php
 
 return [
-    'edit' => 'Edit Settings',
+    'index' => 'Index Department',
+    'create' => 'Create Department',
+    'edit' => 'Edit Department',
+    'destroy' => 'Delete Department',
 ];

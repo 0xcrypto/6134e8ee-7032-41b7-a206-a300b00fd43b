@@ -6,6 +6,12 @@
         {{ Form::select('default_locale', trans('setting::attributes.default_locale'), $errors, $locales, $settings, ['required' => true]) }}
         {{ Form::select('default_timezone', trans('setting::attributes.default_timezone'), $errors, $timeZones, $settings, ['required' => true]) }}
         {{ Form::select('customer_role', trans('setting::attributes.customer_role'), $errors, $roles, $settings, ['required' => true]) }}
+
+        {{ Form::number('user_registration_reward_points', trans('setting::attributes.user_registration_reward_points'), $errors, $settings, ['required' => true, 'min' => 0]) }}
+        {{ Form::number('user_order_reward_points', trans('setting::attributes.user_order_reward_points'), $errors, $settings, ['required' => true, 'min' => 0]) }}
+        {{ Form::number('order_feedback_reward_points', trans('setting::attributes.order_feedback_reward_points'), $errors, $settings, ['required' => true, 'min' => 0]) }}
+        {{ Form::number('reward_point_conversion_rate', trans('setting::attributes.reward_point_conversion_rate'), $errors, $settings, ['required' => true, 'min' => 0]) }}
+        
         {{ Form::checkbox('reviews_enabled', trans('setting::attributes.reviews_enabled'), trans('setting::settings.form.allow_reviews'), $errors, $settings) }}
         {{ Form::checkbox('auto_approve_reviews', trans('setting::attributes.auto_approve_reviews'), trans('setting::settings.form.approve_reviews_automatically'), $errors, $settings) }}
         {{ Form::checkbox('welcome_email', trans('setting::attributes.welcome_email'), trans('setting::settings.form.send_welcome_email_after_registration'), $errors, $settings) }}
