@@ -7,6 +7,7 @@ use Modules\Admin\Ui\Tabs;
 use Modules\User\Entities\User;
 use Modules\User\Entities\Role;
 use Modules\Store\Entities\Store;
+use Modules\Setting\Entities\Department;
 use Modules\User\Repositories\Permission;
 use Illuminate\Support\Facades\DB;
 
@@ -39,7 +40,10 @@ class UserTabs extends Tabs
             $tab->view('user::admin.users.tabs.account', [
                 'roles' => $this->getRoles(),
                 'stores' => $this->getStores(),
-                'seniors' => $this->getSeniors()
+                'seniors' => $this->getSeniors(),
+                'departments' => $this->getDepartments(),
+                'job_types' => $this->getJobTypes(),
+                'genders' => $this->getGenders()
             ]);
         });
     }
@@ -64,6 +68,25 @@ class UserTabs extends Tabs
     {
         $seniors = User::all()->sortBy('name')->pluck('full_name', 'id');
         return $seniors->prepend(trans('admin::admin.form.please_select'), '');
+    } 
+
+    private function getDepartments()
+    {
+        $departments = Department::all()->sortBy('name')->pluck('name', 'id');
+        return $departments->prepend(trans('admin::admin.form.please_select'), '');
+    } 
+
+    private function getJobTypes()
+    {
+        return [ trans('user::staff.job_types.in_store'),
+                trans('user::staff.job_types.out_store')
+            ];
+    } 
+
+    private function getGenders()
+    {
+        return [ trans('user::attributes.users.gender.male'),
+                trans('user::attributes.users.gender.female')];
     } 
 
     private function permissions()

@@ -9,7 +9,7 @@
 @endcomponent
 
 @section('content')
-    <form method="POST" action="{{ route('admin.users.update', $user) }}" class="form-horizontal" id="user-edit-form" novalidate>
+    <form method="POST" action="{{ route('admin.users.update', $user) }}" class="form-horizontal" enctype="multipart/form-data" id="user-edit-form" novalidate>
         {{ csrf_field() }}
         {{ method_field('put') }}
 
