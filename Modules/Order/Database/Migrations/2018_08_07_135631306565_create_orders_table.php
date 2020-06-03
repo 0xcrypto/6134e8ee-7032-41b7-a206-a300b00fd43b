@@ -46,6 +46,9 @@ class CreateOrdersTable extends Migration
             $table->decimal('currency_rate', 18, 4);
             $table->string('locale');
             $table->string('status');
+            $table->integer('reward_point_id')->nullable();
+            $table->decimal('reward_point_discount', 18, 4)->unsigned();
+            
             $table->softDeletes();
             $table->timestamps();
         });

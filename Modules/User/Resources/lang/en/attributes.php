@@ -6,8 +6,14 @@ return [
     ],
 
     'users' => [
+        'customer_id' => 'Customer ID',
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
+        'gender' => [
+            'gender' => 'Gender',
+            'male' => 'Male',
+            'female' => 'Female'
+        ],
         'email' => 'Email',
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
@@ -17,15 +23,24 @@ return [
         'activated' => 'Status',
         'new_password' => 'New Password',
         'new_password_confirmation' => 'Confirm New Password',
-        'user_id' => 'User ID',
-        'mobile' => 'Mobile Number',
+        'mobile' => 'Mobile Number'
+    ],
+
+    'staffs' => [
+        'staff_id' => 'Staff ID',
+        'department_id' => 'Department',
+        'job_type' => 'Job Type',
+        'joining_date' => 'Joining Date',
+        'image' => 'Image',
         'senior_id' => 'Senior',
-        'address' => 'Address',
-        'is_direct_commission_user'=> 'Commission receiving (Direct / Overriding)'
+        'device_id' => 'Device ID',
+        'address' => 'Address'
     ],
 
     'roles' => [
         'name' => 'Name',
         'accessible_roles' => 'Access to Roles',
+        'is_direct_commission_applicable'=> 'Direct commission applicable',
+        'check_this_if_role_recieve_direct_commission' => ' Check this, if this role receive direct commission for product'
     ],
 ];

@@ -19,6 +19,30 @@ class CreateSettingsTable extends Migration
             $table->text('plain_value')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('departments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('ticket_statuses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('ticket_priorities', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('ticket_services', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -28,6 +52,10 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('departments');
+        Schema::dropIfExists('ticket_statuses');
+        Schema::dropIfExists('ticket_priorities');
+        Schema::dropIfExists('ticket_services');
         Schema::dropIfExists('settings');
     }
 }

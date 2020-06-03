@@ -4,6 +4,7 @@ namespace Modules\User\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Modules\User\Entities\User;
+use Modules\User\Entities\Staffs;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Traits\HasCrudActions;
 use Modules\User\Http\Requests\SaveUserRequest;
@@ -68,14 +69,14 @@ class UserController extends Controller
     public function store(SaveUserRequest $request)
     {
         $request->merge(['password' => bcrypt($request->password), 
-            'user_id' => User::getUniqueId(6),
-            'created_by' => auth()->user()->id
-        ]);
-        
-        $user = User::create($request->all());
+        'created_by' => auth()->user()->id ]);
 
+        $user = User::create($request->all());
+        
         $user->roles()->attach($request->roles);
         $user->stores()->attach($request->stores);
+
+        Staffs::create(array_merge($request->get('staff'), ['user_id'=>$user->id]));
 
         Activation::complete($user, Activation::create($user)->code);
 

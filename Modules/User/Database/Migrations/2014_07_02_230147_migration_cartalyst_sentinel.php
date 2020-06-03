@@ -31,24 +31,40 @@ class MigrationCartalystSentinel extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('customer_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('gender');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('mobile')->nullable();
             $table->text('permissions')->nullable();
             $table->datetime('last_login')->nullable();
-            $table->string('user_id')->index();
-            $table->string('mobile')->nullable();
             $table->integer('created_by');
-            $table->integer('senior_id')->nullable();
             $table->integer('reward_points')->default(0);
-            $table->boolean('is_direct_commission_user')->default(0);
             $table->timestamps();
+        });
+
+        Schema::create('staffs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->string('employee_id');
+            $table->integer('department_id');
+            $table->text('address')->nullable();
+            $table->date('joining_date');
+            $table->string('image')->nullable();
+            $table->boolean('job_type')->default(0);
+            $table->integer('senior_id')->nullable();
+            $table->string('device_id');
+            $table->timestamps();
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->text('permissions')->nullable();
+            $table->boolean('is_direct_commission_applicable')->default(0);
             $table->timestamps();
         });
 
@@ -151,6 +167,7 @@ class MigrationCartalystSentinel extends Migration
         Schema::dropIfExists('role_translations');
         Schema::dropIfExists('role_accessibilites');
         Schema::dropIfExists('roles');
+        Schema::dropIfExists('staffs');
         Schema::dropIfExists('users');
     }
 }
