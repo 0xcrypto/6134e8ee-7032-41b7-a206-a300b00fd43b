@@ -10,6 +10,8 @@ use Modules\Admin\Traits\HasCrudActions;
 use Modules\User\Http\Requests\SaveUserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 
 class UserController extends Controller
@@ -68,7 +70,25 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(SaveUserRequest $request)
-    {//dd($request->all());
+    {
+        if((int)$request->validate_staff_information == 1){ 
+            $validator = Validator::make($request->all(), [
+                'stores' => 'required',
+                'staff_joining_date' => 'required|date_format:Y-m-d|before:today',
+                'staff_senior_id' => ['nullable', Rule::exists('users', 'id')],
+                'staff_department_id' => ['required', Rule::exists('departments', 'id')]
+            ], [
+                'stores.required' => 'The stores field is required.',
+                'staff_joining_date.required' => 'The Joining Date field is required.',
+                'staff_joining_date.date_format' => 'The Job Type field should be valid date.',
+                'staff_joining_date.before' => 'The Job Type field should be date before today.',
+                'staff_senior_id.required' => 'The Senior field is required.',
+                'staff_department_id.required' => 'The Department field is required.'
+            ]);
+
+            $validator->validate();
+        }
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $path = Storage::putFile('media', $file);
@@ -83,11 +103,22 @@ class UserController extends Controller
         $request->merge([ 'password' => bcrypt($request->password), 'created_by' => auth()->user()->id ]);
 
         $user = User::create($request->all());
-        
+
         $user->roles()->attach($request->roles);
         $user->stores()->attach($request->stores);
 
-        Staff::create(array_merge($request->get('staff'), ['user_id'=>$user->id]));
+        if($request->get('staff')){
+            Staff::create([
+                'user_id'=>$user->id,
+                'employee_id'=>$request->input('staff_employee_id'),
+                'department_id'=>$request->input('staff_department_id'),
+                'job_type'=>$request->input('staff_job_type'),
+                'joining_date'=>$request->input('staff_joining_date'),
+                'senior_id'=>$request->input('staff_senior_id'),
+                'device_id'=>$request->input('staff_device_id'),
+                'address'=>$request->input('staff_address')
+            ]);
+        }
 
         Activation::complete($user, Activation::create($user)->code);
 
@@ -106,6 +137,24 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        if((int)$request->validate_staff_information == 1){ 
+            $validator = Validator::make($request->all(), [
+                'stores' => 'required',
+                'staff_joining_date' => 'required|date_format:Y-m-d|before:today',
+                'staff_senior_id' => ['nullable', Rule::exists('users', 'id')],
+                'staff_department_id' => ['required', Rule::exists('departments', 'id')]
+            ], [
+                'stores.required' => 'The stores field is required.',
+                'staff_joining_date.required' => 'The Joining Date field is required.',
+                'staff_joining_date.date_format' => 'The Job Type field should be valid date.',
+                'staff_joining_date.before' => 'The Job Type field should be date before today.',
+                'staff_senior_id.required' => 'The Senior field is required.',
+                'staff_department_id.required' => 'The Department field is required.'
+            ]);
+
+            $validator->validate();
+        }
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $path = Storage::putFile('media', $file);
@@ -122,8 +171,30 @@ class UserController extends Controller
         $user->roles()->sync($request->roles);
         $user->stores()->sync($request->stores);
 
-        $staff = Staff::where('user_id', '=', $user->id);
-        $staff->update($request->get('staff'));
+        if (Staff::where('user_id', $user->id)->exists()) {
+            $staff = Staff::where('user_id', '=', $user->id);
+            $staff->update([
+                'employee_id'=>$request->input('staff_employee_id'),
+                'department_id'=>$request->input('staff_department_id'),
+                'job_type'=>$request->input('staff_job_type'),
+                'joining_date'=>$request->input('staff_joining_date'),
+                'senior_id'=>$request->input('staff_senior_id'),
+                'device_id'=>$request->input('staff_device_id'),
+                'address'=>$request->input('staff_address')
+            ]);
+        }
+        else{
+            Staff::create([
+                'user_id'=>$user->id,
+                'employee_id'=>$request->input('staff_employee_id'),
+                'department_id'=>$request->input('staff_department_id'),
+                'job_type'=>$request->input('staff_job_type'),
+                'joining_date'=>$request->input('staff_joining_date'),
+                'senior_id'=>$request->input('staff_senior_id'),
+                'device_id'=>$request->input('staff_device_id'),
+                'address'=>$request->input('staff_address')
+            ]);
+        }
 
         if (! Activation::completed($user) && $request->activated === '1') {
             Activation::complete($user, Activation::create($user)->code);

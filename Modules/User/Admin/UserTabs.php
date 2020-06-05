@@ -73,7 +73,7 @@ class UserTabs extends Tabs
     private function getDepartments()
     {
         $departments = Department::all()->sortBy('name')->pluck('name', 'id');
-        return $departments;
+        return $departments->prepend(trans('admin::admin.form.please_select'), '');
     } 
 
     private function getJobTypes()
