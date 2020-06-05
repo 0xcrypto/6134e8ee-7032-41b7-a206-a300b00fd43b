@@ -32,6 +32,31 @@ class User extends EloquentUser implements AuthenticatableContract
         return static::where('email', $email)->exists();
     }
 
+    public static function formattedList()
+    {
+        $list = [];
+        $users = User::all();
+        foreach($users as $user) {
+            if((int)$user->roles()->first()->id == setting('customer_role')){
+                array_push($list, array('id' => $user->id, 'name'=> $user->full_name));
+            }
+            else if($user->stores()->count() == 1){
+                $store = $user->stores()->first()->name;
+                $role = $user->roles()->first()->name;
+                
+                array_push($list, array('id' => $user->id, 'name'=> $user->full_name." <Role:".$role.", Store: ".$store.">"));
+            }
+            else if($user->stores()->count() > 1){
+                $stores = $user->stores->map(function ($store){
+                                            return $store->name;
+                                        })->toArray();
+
+                array_push($list, array('id' => $user->id, 'name'=> $user->full_name." <Stores: ".implode(", ", $stores).">"));
+            }
+        }
+        return $list;
+    }
+
     public static function findByEmail($email)
     {
         return static::where('email', $email)->first();
@@ -66,6 +91,16 @@ class User extends EloquentUser implements AuthenticatableContract
     {
         return auth()->login($this);
     }
+    
+    /**
+     * Determine if the user is a customer.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return (int)$this->roles()->first()->id == setting('admin_role');
+    }
 
 
     /**
@@ -75,11 +110,7 @@ class User extends EloquentUser implements AuthenticatableContract
      */
     public function isCustomer()
     {
-        if ($this->hasRoleName('admin')) {
-            return false;
-        }
-
-        return $this->hasRoleId(setting('customer_role'));
+        return (int)$this->roles()->first()->id == setting('customer_role');
     }
 
     /**

@@ -54,7 +54,7 @@ class UserController extends Controller
      */
     
     public function index(Request $request)
-    { 
+    {
         if ($request->has('table')) {
             $users = new User;
             return $users->table($request);
@@ -71,6 +71,7 @@ class UserController extends Controller
      */
     public function store(SaveUserRequest $request)
     {
+        
         if((int)$request->validate_staff_information == 1){ 
             $validator = Validator::make($request->all(), [
                 'stores' => 'required',
@@ -96,8 +97,7 @@ class UserController extends Controller
         }
 
         if((int)$request->roles[0] == (int)setting('customer_role')){
-            //settings('user_registration_reward_points')
-            $request->merge([ 'reward_points' => (int)setting('customer_role')]);
+            $request->merge([ 'reward_points' => (int)setting('user_registration_reward_points')]);
         }
 
         $request->merge([ 'password' => bcrypt($request->password), 'created_by' => auth()->user()->id ]);
@@ -107,16 +107,16 @@ class UserController extends Controller
         $user->roles()->attach($request->roles);
         $user->stores()->attach($request->stores);
 
-        if($request->get('staff')){
+        if($request->get('staff_department_id')){
             Staff::create([
-                'user_id'=>$user->id,
-                'employee_id'=>$request->input('staff_employee_id'),
-                'department_id'=>$request->input('staff_department_id'),
-                'job_type'=>$request->input('staff_job_type'),
-                'joining_date'=>$request->input('staff_joining_date'),
-                'senior_id'=>$request->input('staff_senior_id'),
-                'device_id'=>$request->input('staff_device_id'),
-                'address'=>$request->input('staff_address')
+                'user_id' => $user->id,
+                'employee_id' => $request->input('staff_employee_id'),
+                'department_id' => $request->input('staff_department_id'),
+                'job_type' => $request->input('staff_job_type'),
+                'joining_date' => $request->input('staff_joining_date'),
+                'senior_id' => $request->input('staff_senior_id'),
+                'device_id' => $request->input('staff_device_id'),
+                'address' => $request->input('staff_address')
             ]);
         }
 

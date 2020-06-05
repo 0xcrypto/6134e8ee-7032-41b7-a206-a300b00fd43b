@@ -88,8 +88,7 @@
             </div>
         </div>
         @if(request()->routeIs('admin.users.edit'))
-
-        <div class="row">
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="staff_employee_id" class="col-md-3 control-label text-left">{{ trans('user::attributes.staffs.employee_id') }}</label>
@@ -139,6 +138,7 @@
                             </select>
                         </div>
                     </div>
+                    {{ Form::checkbox('activated', trans('user::attributes.users.activated'), trans('user::users.form.activated'), $errors, $user, ['disabled' => $user->id === $currentUser->id, 'checked' => old('activated', $user->isActivated())]) }}
                 </div>
                 <div class="col-md-6">
                     <div class="form-group  {{ $errors->has('staff_joining_date') ? 'has-error': ''}}">
@@ -163,8 +163,8 @@
         @if(request()->routeIs('admin.users.create'))
             <div class="row" id="staff-info">
                 <div class="col-md-6">
-                    {{ Form::text('staff_employee_id', trans('user::attributes.staffs.employee_id'), $errors, $user, ['required' => true, 'class'=> 'staff-info']) }}
-                    {{ Form::select('stores', trans('user::attributes.users.stores'), $errors, $stores, $user, ['multiple' => true, 'required' => true, 'class' => 'selectize prevent-creation', 'id'=> 'stores']) }}
+                    {{ Form::text('staff_employee_id', trans('user::attributes.staffs.employee_id'), $errors, $user, ['class'=> 'staff-info']) }}
+                    {{ Form::select('stores', trans('user::attributes.users.stores'), $errors, $stores, $user, ['multiple' => true, 'class' => 'selectize prevent-creation', 'id'=> 'stores']) }}
                     {{ Form::select('staff_department_id', trans('user::attributes.staffs.department_id'), $errors, $departments, $user, ['required' => true, 'class'=> 'staff-info']) }}
                     {{ Form::select('staff_senior_id', trans('user::attributes.staffs.senior_id'), $errors, $seniors, $user, ['required' => true, 'class'=> 'staff-info']) }}
                     {{ Form::select('staff_job_type', trans('user::attributes.staffs.job_type'), $errors, $job_types, $user, ['required' => true, 'class'=> 'staff-info']) }}
@@ -176,10 +176,5 @@
                 </div>
             </div>
         @endif
-        
     </div>
-
-    @if (request()->routeIs('admin.users.edit'))
-        {{ Form::checkbox('activated', trans('user::attributes.users.activated'), trans('user::users.form.activated'), $errors, $user, ['disabled' => $user->id === $currentUser->id, 'checked' => old('activated', $user->isActivated())]) }}
-    @endif
 </div>

@@ -16,7 +16,7 @@ class Role extends EloquentRole
      *
      * @var array
      */
-    protected $fillable = ['is_direct_commission_applicable'];
+    protected $fillable = ['is_direct_commission_applicable', 'name', 'permissions'];
 
     /**
      * The relations to eager load on every query.
