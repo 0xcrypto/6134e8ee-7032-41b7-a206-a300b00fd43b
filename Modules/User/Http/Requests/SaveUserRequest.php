@@ -14,6 +14,29 @@ class SaveUserRequest extends Request
      */
     protected $availableAttributes = 'user::attributes.users';
 
+    public function attributes()
+    {
+        return [
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'email' => 'Email',
+            'mobile' => 'Mobile',
+            'password' => 'Password',
+            'password_confirmation' => 'Password Confirmation',
+            'gender' => 'Gender',
+            'image' => 'Image',
+            'customer_id' => 'Customer ID',
+            'staff[department_id]' => 'Department',
+            'staff[senior_id]' => 'Senior',
+            'staff[employee_id]' => 'Employee ID',
+            'stores' => 'Stores',
+            'staff[job_type]' => 'Job Type',
+            'staff[joining_date]' => 'Joining Date',
+            'staff[device_id]' => 'Device ID',
+            'staff[address]' => 'Address',
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,8 +50,8 @@ class SaveUserRequest extends Request
             'email' => ['required', 'email', $this->emailUniqueRule()],
             'password' => 'nullable|confirmed|min:6',
             'mobile' => 'required|min:10',
-            'senior_id' => ['nullable', Rule::exists('users', 'id')],
             'roles' => ['required', Rule::exists('roles', 'id')],
+            'file' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 

@@ -18,8 +18,7 @@ class User extends EloquentUser implements AuthenticatableContract
 {
     use Authenticatable;
 
-    protected $fillable = [ 'first_name', 'last_name', 'email', 'password', 'permissions', 'last_login', 
-    'user_id', 'mobile', 'created_by', 'senior_id', 'reward_points', 'is_direct_commission_user'];
+    protected $fillable = [ 'customer_id', 'first_name', 'last_name', 'gender', 'email', 'password', 'permissions', 'created_by', 'mobile', 'image', 'last_login', 'reward_points'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -67,6 +66,7 @@ class User extends EloquentUser implements AuthenticatableContract
     {
         return auth()->login($this);
     }
+
 
     /**
      * Determine if the user is a customer.
@@ -153,6 +153,16 @@ class User extends EloquentUser implements AuthenticatableContract
     public function recentOrders($take)
     {
         return $this->orders()->latest()->take($take)->get();
+    }
+
+    /**
+     * Get the staff_info user.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function staff_info()
+    {
+        return $this->hasOne(Staff::class);
     }
 
     /**

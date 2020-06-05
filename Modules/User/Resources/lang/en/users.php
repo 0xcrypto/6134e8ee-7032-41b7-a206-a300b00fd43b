@@ -26,5 +26,4 @@ return [
     ],
     'or_reset_password' => 'or, Reset Password',
     'send_reset_password_email' => 'Send Reset Password Email',
-    'check_this_if_user_recieve_direct_commission' => ' Check this, if user receive direct commission for product'
 ];

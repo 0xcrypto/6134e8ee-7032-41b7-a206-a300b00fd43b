@@ -10,6 +10,13 @@ use Modules\Support\Eloquent\Translatable;
 class Role extends EloquentRole
 {
     use Translatable;
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['is_direct_commission_applicable'];
 
     /**
      * The relations to eager load on every query.
