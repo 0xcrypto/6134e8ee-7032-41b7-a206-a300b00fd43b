@@ -47,7 +47,7 @@ class RoleController extends Controller
      */
     public function store(SaveRoleRequest $request)
     {
-        $role = Role::create($request->all());  
+        $role = Role::create($request->all());
         $role->accessible_roles()->attach($request->accessible_roles);
 
         return redirect()->route('admin.roles.index')

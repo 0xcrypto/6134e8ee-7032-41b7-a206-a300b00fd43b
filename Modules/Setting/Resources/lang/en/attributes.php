@@ -7,6 +7,7 @@ return [
     'default_locale' => 'Default Locale',
     'default_timezone' => 'Default Timezone',
     'customer_role' => 'Customer Role',
+    'admin_role' => 'Admin Role',
     'user_registration_reward_points' => 'Reward Points for User Registration',
     'user_order_reward_points' => 'Reward Points for Order Booking',
     'order_feedback_reward_points' => 'Reward Points for feedback on Order',
