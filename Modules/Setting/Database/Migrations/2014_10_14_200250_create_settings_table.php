@@ -89,6 +89,51 @@ class CreateSettingsTable extends Migration
             $table->unique(['ticket_service_id', 'locale']);
             $table->foreign('ticket_service_id')->references('id')->on('ticket_services')->onDelete('cascade');
         });
+
+        Schema::create('task_statuses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+        });
+
+        Schema::create('task_status_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('task_status_id')->unsigned();
+            $table->string('locale');
+            $table->string('name');
+
+            $table->unique(['task_status_id', 'locale']);
+            $table->foreign('task_status_id')->references('id')->on('task_statuses')->onDelete('cascade');
+        });
+
+        Schema::create('task_priorities', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+        });
+
+        Schema::create('task_priority_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('task_priority_id')->unsigned();
+            $table->string('locale');
+            $table->string('name');
+
+            $table->unique(['task_priority_id', 'locale']);
+            $table->foreign('task_priority_id')->references('id')->on('task_priorities')->onDelete('cascade');
+        });
+
+        Schema::create('lead_statuses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+        });
+
+        Schema::create('lead_status_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('lead_status_id')->unsigned();
+            $table->string('locale');
+            $table->string('name');
+
+            $table->unique(['lead_status_id', 'locale']);
+            $table->foreign('lead_status_id')->references('id')->on('lead_statuses')->onDelete('cascade');
+        });
     }
 
     /**
@@ -98,6 +143,12 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('task_status_translations');
+        Schema::dropIfExists('task_statuses');
+        Schema::dropIfExists('task_priority_translations');
+        Schema::dropIfExists('task_priorities');
+        Schema::dropIfExists('lead_status_translations');
+        Schema::dropIfExists('lead_statuses');
         Schema::dropIfExists('department_translations');
         Schema::dropIfExists('departments');
         Schema::dropIfExists('ticket_status_translations');
