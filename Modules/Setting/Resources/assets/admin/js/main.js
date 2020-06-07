@@ -1,10 +1,15 @@
 import TicketStatus from './TicketStatus';
+import TicketPriority from './TicketPriority';
 import Department from './Department';
 
 window.admin.removeSubmitButtonOffsetOn(['#logo', '#courier']);
 
 if ($('#ticket-status-wrapper').length !== 0) {
     new TicketStatus();
+}
+
+if ($('#ticket-priority-wrapper').length !== 0) {
+    new TicketPriority();
 }
 
 if ($('#department-wrapper').length !== 0) {

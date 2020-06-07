@@ -29,6 +29,7 @@ return [
         'bank_transfer' => 'Bank Transfer',
         'check_payment' => 'Check / Money Order',
         'ticket_status' => 'Ticket Status',
+        'ticket_priority' => 'Ticket Priority',
         'department' => 'Department',
     ],
     'form' => [
