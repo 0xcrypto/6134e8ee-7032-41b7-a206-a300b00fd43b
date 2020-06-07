@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Modules\Admin\Ui\Facades\TabManager;
 use Modules\Setting\Entities\TicketStatus;
+use Modules\Setting\Entities\Department;
 use Modules\Setting\Http\Requests\UpdateSettingRequest;
 
 class SettingController extends Controller
@@ -31,6 +32,7 @@ class SettingController extends Controller
      */
     public function update(UpdateSettingRequest $request)
     {
+        //Update Ticket Statuses
         TicketStatus::whereIn('id', TicketStatus::all()->pluck('id')->toArray())->delete();
         $ticketStatuses = collect($request->get('ticketStatuses'))->map(function ($ticketStatus) {
             return $ticketStatus['name'];
@@ -38,6 +40,16 @@ class SettingController extends Controller
 
         foreach($ticketStatuses as $ticketStatus){
             TicketStatus::create(array('name'=>$ticketStatus));
+        }
+
+        //Update Departments
+        Department::whereIn('id', Department::all()->pluck('id')->toArray())->delete();
+        $departments = collect($request->get('departments'))->map(function ($department) {
+            return $department['name'];
+        });
+
+        foreach($departments as $department){
+            Department::create(array('name'=>$department));
         }
 
         setting($request->except('_token', '_method'));

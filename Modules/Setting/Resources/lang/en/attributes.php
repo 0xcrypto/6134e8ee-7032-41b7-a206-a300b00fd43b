@@ -114,4 +114,5 @@ return [
     'supported_currencies.*' => 'Supported Currencies',
 
     'ticketStatuses.*.name' => 'Ticket Status Name',
+    'departments.*.name' => 'Department Name',
 ];

@@ -29,6 +29,7 @@ return [
         'bank_transfer' => 'Bank Transfer',
         'check_payment' => 'Check / Money Order',
         'ticket_status' => 'Ticket Status',
+        'department' => 'Department',
     ],
     'form' => [
         'allow_reviews' => 'Allow customers to give reviews & ratings',

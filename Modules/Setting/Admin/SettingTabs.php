@@ -10,6 +10,7 @@ use Modules\Support\TimeZone;
 use Modules\Currency\Currency;
 use Modules\User\Entities\Role;
 use Modules\Setting\Entities\TicketStatus;
+use Modules\Setting\Entities\Department;
 
 class SettingTabs extends Tabs
 {
@@ -47,7 +48,8 @@ class SettingTabs extends Tabs
             ->add($this->checkPayment());
 
         $this->group('master_settings', trans('setting::settings.tabs.group.master_settings'))
-            ->add($this->ticketStatus());
+            ->add($this->ticketStatus())
+            ->add($this->department());
     }
 
     private function general()
@@ -345,4 +347,27 @@ class SettingTabs extends Tabs
         
         return $ticketStatuses;
     }
+
+    
+    private function department(){
+        return tap(new Tab('department', trans('setting::settings.tabs.department')), function (Tab $tab) {
+            $tab->weight(85);
+            $tab->fields(['departments.*.name']);
+            $tab->view('setting::admin.settings.tabs.department', [
+                'departments' => $this->getDepartments()
+            ]);
+        });
+    }
+
+    private function getDepartments()
+    {
+        $departments = [];
+        foreach(Department::all() as $department){
+            array_push($departments, array('id'=>$department->id, 'name'=>$department->name));
+        }
+        
+        return $departments;
+    }
+
+    
 }

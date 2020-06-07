@@ -44,7 +44,6 @@ class TicketStatus extends Model
      */
     public static function list()
     {
-        //return static::select('id')->get()->pluck('name', 'id');
-        return static::all()->pluck('name', 'id');
+        return static::select('id')->get()->pluck('name', 'id');
     }
 }

@@ -1,9 +1,14 @@
 import TicketStatus from './TicketStatus';
+import Department from './Department';
 
 window.admin.removeSubmitButtonOffsetOn(['#logo', '#courier']);
 
 if ($('#ticket-status-wrapper').length !== 0) {
     new TicketStatus();
+}
+
+if ($('#department-wrapper').length !== 0) {
+    new Department();
 }
 
 let currencyRateExchangeService = $('#currency_rate_exchange_service');
