@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 use Modules\Admin\Ui\Facades\TabManager;
 use Modules\Setting\Entities\TicketStatus;
 use Modules\Setting\Entities\TicketPriority;
+use Modules\Setting\Entities\TicketService;
 use Modules\Setting\Entities\Department;
 use Modules\Setting\Http\Requests\UpdateSettingRequest;
 
@@ -51,6 +52,16 @@ class SettingController extends Controller
 
         foreach($ticketPriorities as $ticketPriority){
             TicketPriority::create(array('name'=>$ticketPriority));
+        }
+
+        //Update Ticket Services
+        TicketService::whereIn('id', TicketService::all()->pluck('id')->toArray())->delete();
+        $ticketServices = collect($request->get('ticketServices'))->map(function ($ticketService) {
+            return $ticketService['name'];
+        });
+
+        foreach($ticketServices as $ticketService){
+            TicketService::create(array('name'=>$ticketService));
         }
 
         //Update Departments

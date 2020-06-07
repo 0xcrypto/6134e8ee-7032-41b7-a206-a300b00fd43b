@@ -98,6 +98,7 @@ class UpdateSettingRequest extends Request
 
             'ticketStatuses.*.name' => 'required',
             'ticketPriorities.*.name' => 'required',
+            'ticketServices.*.name' => 'required',
             'departments.*.name' => 'required',
         ];
     }

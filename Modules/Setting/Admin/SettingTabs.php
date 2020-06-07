@@ -11,6 +11,7 @@ use Modules\Currency\Currency;
 use Modules\User\Entities\Role;
 use Modules\Setting\Entities\TicketStatus;
 use Modules\Setting\Entities\TicketPriority;
+use Modules\Setting\Entities\TicketService;
 use Modules\Setting\Entities\Department;
 
 class SettingTabs extends Tabs
@@ -51,6 +52,7 @@ class SettingTabs extends Tabs
         $this->group('master_settings', trans('setting::settings.tabs.group.master_settings'))
             ->add($this->ticketStatus())
             ->add($this->ticketPriority())
+            ->add($this->ticketService())
             ->add($this->department());
     }
 
@@ -370,9 +372,29 @@ class SettingTabs extends Tabs
         return $ticketPriorities;
     }
     
+    private function ticketService(){
+        return tap(new Tab('ticketService', trans('setting::settings.tabs.ticket_service')), function (Tab $tab) {
+            $tab->weight(90);
+            $tab->fields(['ticketServices.*.name']);
+            $tab->view('setting::admin.settings.tabs.ticket_service', [
+                'ticketServices' => $this->getTicketServices()
+            ]);
+        });
+    }
+
+    private function getTicketServices()
+    {
+        $ticketServices = [];
+        foreach(TicketService::all() as $ticketService){
+            array_push($ticketServices, array('id'=>$ticketService->id, 'name'=>$ticketService->name));
+        }
+        
+        return $ticketServices;
+    }
+    
     private function department(){
         return tap(new Tab('department', trans('setting::settings.tabs.department')), function (Tab $tab) {
-            $tab->weight(90);
+            $tab->weight(95);
             $tab->fields(['departments.*.name']);
             $tab->view('setting::admin.settings.tabs.department', [
                 'departments' => $this->getDepartments()

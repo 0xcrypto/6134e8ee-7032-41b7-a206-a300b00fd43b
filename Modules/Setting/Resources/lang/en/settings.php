@@ -30,6 +30,7 @@ return [
         'check_payment' => 'Check / Money Order',
         'ticket_status' => 'Ticket Status',
         'ticket_priority' => 'Ticket Priority',
+        'ticket_service' => 'Ticket Service',
         'department' => 'Department',
     ],
     'form' => [
