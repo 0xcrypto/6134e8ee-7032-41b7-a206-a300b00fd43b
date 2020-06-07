@@ -20,28 +20,74 @@ class CreateSettingsTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('setting_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('setting_id')->unsigned();
+            $table->string('locale');
+            $table->text('value')->nullable();
+
+            $table->unique(['setting_id', 'locale']);
+            $table->foreign('setting_id')->references('id')->on('settings')->onDelete('cascade');
+        });
+
         Schema::create('departments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->timestamps();
+        });
+
+        Schema::create('department_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('department_id')->unsigned();
+            $table->string('locale');
+            $table->string('name');
+
+            $table->unique(['department_id', 'locale']);
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
         });
 
         Schema::create('ticket_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->timestamps();
+        });
+
+        Schema::create('ticket_status_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('ticket_status_id')->unsigned();
+            $table->string('locale');
+            $table->string('name');
+
+            $table->unique(['ticket_status_id', 'locale']);
+            $table->foreign('ticket_status_id')->references('id')->on('ticket_statuses')->onDelete('cascade');
         });
 
         Schema::create('ticket_priorities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->timestamps();
+        });
+
+        Schema::create('ticket_priority_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('ticket_priority_id')->unsigned();
+            $table->string('locale');
+            $table->string('name');
+
+            $table->unique(['ticket_priority_id', 'locale']);
+            $table->foreign('ticket_priority_id')->references('id')->on('ticket_priorities')->onDelete('cascade');
         });
 
         Schema::create('ticket_services', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->timestamps();
+        });
+
+        Schema::create('ticket_service_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('ticket_service_id')->unsigned();
+            $table->string('locale');
+            $table->string('name');
+
+            $table->unique(['ticket_service_id', 'locale']);
+            $table->foreign('ticket_service_id')->references('id')->on('ticket_services')->onDelete('cascade');
         });
     }
 
@@ -52,10 +98,15 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('department_translations');
         Schema::dropIfExists('departments');
+        Schema::dropIfExists('ticket_status_translations');
         Schema::dropIfExists('ticket_statuses');
+        Schema::dropIfExists('ticket_priority_translations');
         Schema::dropIfExists('ticket_priorities');
+        Schema::dropIfExists('ticket_service_translations');
         Schema::dropIfExists('ticket_services');
+        Schema::dropIfExists('setting_translations');
         Schema::dropIfExists('settings');
     }
 }

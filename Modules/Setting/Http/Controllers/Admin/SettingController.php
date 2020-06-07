@@ -5,6 +5,7 @@ namespace Modules\Setting\Http\Controllers\Admin;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Modules\Admin\Ui\Facades\TabManager;
+use Modules\Setting\Entities\TicketStatus;
 use Modules\Setting\Http\Requests\UpdateSettingRequest;
 
 class SettingController extends Controller
@@ -30,6 +31,15 @@ class SettingController extends Controller
      */
     public function update(UpdateSettingRequest $request)
     {
+        TicketStatus::whereIn('id', TicketStatus::all()->pluck('id')->toArray())->delete();
+        $ticketStatuses = collect($request->get('ticketStatuses'))->map(function ($ticketStatus) {
+            return $ticketStatus['name'];
+        });
+
+        foreach($ticketStatuses as $ticketStatus){
+            TicketStatus::create(array('name'=>$ticketStatus));
+        }
+
         setting($request->except('_token', '_method'));
 
         $this->handleMaintenanceMode($request);

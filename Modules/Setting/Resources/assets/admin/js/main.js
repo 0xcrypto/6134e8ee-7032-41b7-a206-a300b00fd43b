@@ -1,4 +1,10 @@
+import TicketStatus from './TicketStatus';
+
 window.admin.removeSubmitButtonOffsetOn(['#logo', '#courier']);
+
+if ($('#ticket-status-wrapper').length !== 0) {
+    new TicketStatus();
+}
 
 let currencyRateExchangeService = $('#currency_rate_exchange_service');
 

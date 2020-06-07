@@ -9,6 +9,7 @@ use Modules\Support\Country;
 use Modules\Support\TimeZone;
 use Modules\Currency\Currency;
 use Modules\User\Entities\Role;
+use Modules\Setting\Entities\TicketStatus;
 
 class SettingTabs extends Tabs
 {
@@ -44,6 +45,9 @@ class SettingTabs extends Tabs
             ->add($this->cod())
             ->add($this->bankTransfer())
             ->add($this->checkPayment());
+
+        $this->group('master_settings', trans('setting::settings.tabs.group.master_settings'))
+            ->add($this->ticketStatus());
     }
 
     private function general()
@@ -320,5 +324,25 @@ class SettingTabs extends Tabs
 
             $tab->view('setting::admin.settings.tabs.check_payment');
         });
+    }
+
+    private function ticketStatus(){
+        return tap(new Tab('ticket_status', trans('setting::settings.tabs.ticket_status')), function (Tab $tab) {
+            $tab->weight(80);
+            $tab->fields(['ticketStatuses.*.name']);
+            $tab->view('setting::admin.settings.tabs.ticket_status', [
+                'ticketStatuses' => $this->getTicketStatuses()
+            ]);
+        });
+    }
+
+    private function getTicketStatuses()
+    {
+        $ticketStatuses = [];
+        foreach(TicketStatus::all() as $ticket){
+            array_push($ticketStatuses, array('id'=>$ticket->id, 'name'=>$ticket->name));
+        }
+        
+        return $ticketStatuses;
     }
 }
