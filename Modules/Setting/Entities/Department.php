@@ -3,22 +3,25 @@
 namespace Modules\Setting\Entities;
 
 use Modules\Support\Eloquent\Model;
+use Modules\Support\Eloquent\Translatable;
 
 class Department extends Model
 {
+    use Translatable;
+
     /**
      * The relations to eager load on every query.
      *
      * @var array
      */
-    protected $with = [];
+    protected $with = ['translations'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = [];
 
     /**
      * The attributes that should be cast to native types.
@@ -27,4 +30,20 @@ class Department extends Model
      */
     protected $casts = [];
 
+    /**
+     * The attributes that are translatable.
+     *
+     * @var array
+     */
+    public $translatedAttributes = ['name'];
+
+    /**
+     * Get a list of all departments.
+     *
+     * @return array
+     */
+    public static function list()
+    {
+        return static::select('id')->get()->pluck('name', 'id');
+    }
 }

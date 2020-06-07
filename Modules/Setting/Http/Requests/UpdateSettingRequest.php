@@ -95,6 +95,11 @@ class UpdateSettingRequest extends Request
             'translatable.check_payment_label' => 'required_if:check_payment_enabled,1',
             'translatable.check_payment_description' => 'required_if:check_payment_enabled,1',
             'translatable.check_payment_instructions' => 'required_if:check_payment_enabled,1',
+
+            'ticketStatuses.*.name' => 'required',
+            'ticketPriorities.*.name' => 'required',
+            'ticketServices.*.name' => 'required',
+            'departments.*.name' => 'required',
         ];
     }
 

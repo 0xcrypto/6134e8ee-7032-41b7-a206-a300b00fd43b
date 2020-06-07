@@ -1,4 +1,25 @@
+import TicketStatus from './TicketStatus';
+import TicketPriority from './TicketPriority';
+import TicketService from './TicketService';
+import Department from './Department';
+
 window.admin.removeSubmitButtonOffsetOn(['#logo', '#courier']);
+
+if ($('#ticket-status-wrapper').length !== 0) {
+    new TicketStatus();
+}
+
+if ($('#ticket-priority-wrapper').length !== 0) {
+    new TicketPriority();
+}
+
+if ($('#ticket-service-wrapper').length !== 0) {
+    new TicketService();
+}
+
+if ($('#department-wrapper').length !== 0) {
+    new Department();
+}
 
 let currencyRateExchangeService = $('#currency_rate_exchange_service');
 

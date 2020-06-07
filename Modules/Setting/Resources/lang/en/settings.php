@@ -8,6 +8,7 @@ return [
             'social_logins' => 'Social Logins',
             'shipping_methods' => 'Shipping Methods',
             'payment_methods' => 'Payment Methods',
+            'master_settings' => 'Master Settings',
         ],
         'general' => 'General',
         'maintenance' => 'Maintenance',
@@ -27,6 +28,10 @@ return [
         'cod' => 'Cash On Delivery',
         'bank_transfer' => 'Bank Transfer',
         'check_payment' => 'Check / Money Order',
+        'ticket_status' => 'Ticket Status',
+        'ticket_priority' => 'Ticket Priority',
+        'ticket_service' => 'Ticket Service',
+        'department' => 'Department',
     ],
     'form' => [
         'allow_reviews' => 'Allow customers to give reviews & ratings',

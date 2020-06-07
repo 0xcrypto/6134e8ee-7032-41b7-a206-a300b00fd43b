@@ -112,4 +112,9 @@ return [
     'supported_countries.*' => 'Supported Countries',
     'supported_locales.*' => 'Supported Locales',
     'supported_currencies.*' => 'Supported Currencies',
+
+    'ticketStatuses.*.name' => 'Ticket Status Name',
+    'ticketPriorities.*.name' => 'Ticket Priority Name',
+    'ticketServices.*.name' => 'Ticket Service Name',
+    'departments.*.name' => 'Department Name',
 ];

@@ -9,6 +9,10 @@ use Modules\Support\Country;
 use Modules\Support\TimeZone;
 use Modules\Currency\Currency;
 use Modules\User\Entities\Role;
+use Modules\Setting\Entities\TicketStatus;
+use Modules\Setting\Entities\TicketPriority;
+use Modules\Setting\Entities\TicketService;
+use Modules\Setting\Entities\Department;
 
 class SettingTabs extends Tabs
 {
@@ -44,6 +48,12 @@ class SettingTabs extends Tabs
             ->add($this->cod())
             ->add($this->bankTransfer())
             ->add($this->checkPayment());
+
+        $this->group('master_settings', trans('setting::settings.tabs.group.master_settings'))
+            ->add($this->ticketStatus())
+            ->add($this->ticketPriority())
+            ->add($this->ticketService())
+            ->add($this->department());
     }
 
     private function general()
@@ -321,4 +331,86 @@ class SettingTabs extends Tabs
             $tab->view('setting::admin.settings.tabs.check_payment');
         });
     }
+
+    private function ticketStatus(){
+        return tap(new Tab('ticket_status', trans('setting::settings.tabs.ticket_status')), function (Tab $tab) {
+            $tab->weight(80);
+            $tab->fields(['ticketStatuses.*.name']);
+            $tab->view('setting::admin.settings.tabs.ticket_status', [
+                'ticketStatuses' => $this->getTicketStatuses()
+            ]);
+        });
+    }
+
+    private function getTicketStatuses()
+    {
+        $ticketStatuses = [];
+        foreach(TicketStatus::all() as $ticket){
+            array_push($ticketStatuses, array('id'=>$ticket->id, 'name'=>$ticket->name));
+        }
+        
+        return $ticketStatuses;
+    }
+    
+    private function ticketPriority(){
+        return tap(new Tab('ticketPriority', trans('setting::settings.tabs.ticket_priority')), function (Tab $tab) {
+            $tab->weight(85);
+            $tab->fields(['ticketPriorities.*.name']);
+            $tab->view('setting::admin.settings.tabs.ticket_priority', [
+                'ticketPriorities' => $this->getTicketPriorities()
+            ]);
+        });
+    }
+
+    private function getTicketPriorities()
+    {
+        $ticketPriorities = [];
+        foreach(TicketPriority::all() as $ticketPriority){
+            array_push($ticketPriorities, array('id'=>$ticketPriority->id, 'name'=>$ticketPriority->name));
+        }
+        
+        return $ticketPriorities;
+    }
+    
+    private function ticketService(){
+        return tap(new Tab('ticketService', trans('setting::settings.tabs.ticket_service')), function (Tab $tab) {
+            $tab->weight(90);
+            $tab->fields(['ticketServices.*.name']);
+            $tab->view('setting::admin.settings.tabs.ticket_service', [
+                'ticketServices' => $this->getTicketServices()
+            ]);
+        });
+    }
+
+    private function getTicketServices()
+    {
+        $ticketServices = [];
+        foreach(TicketService::all() as $ticketService){
+            array_push($ticketServices, array('id'=>$ticketService->id, 'name'=>$ticketService->name));
+        }
+        
+        return $ticketServices;
+    }
+    
+    private function department(){
+        return tap(new Tab('department', trans('setting::settings.tabs.department')), function (Tab $tab) {
+            $tab->weight(95);
+            $tab->fields(['departments.*.name']);
+            $tab->view('setting::admin.settings.tabs.department', [
+                'departments' => $this->getDepartments()
+            ]);
+        });
+    }
+
+    private function getDepartments()
+    {
+        $departments = [];
+        foreach(Department::all() as $department){
+            array_push($departments, array('id'=>$department->id, 'name'=>$department->name));
+        }
+        
+        return $departments;
+    }
+
+    
 }
