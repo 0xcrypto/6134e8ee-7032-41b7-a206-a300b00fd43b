@@ -1,0 +1,11 @@
+{
+    "name": "Ticket",
+    "alias": "ticket",
+    "description": "The FleetCart Ticket Module.",
+    "active": 1,
+    "order": 100,
+    "providers": [
+        "Modules\\Ticket\\Providers\\TicketServiceProvider",
+        "Modules\\Ticket\\Providers\\RouteServiceProvider"
+    ]
+}
