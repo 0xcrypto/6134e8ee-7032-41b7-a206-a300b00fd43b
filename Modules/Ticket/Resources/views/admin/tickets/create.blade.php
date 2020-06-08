@@ -10,6 +10,8 @@
 @section('content')
     <form method="POST" action="{{ route('admin.tickets.store') }}" class="form-horizontal" id="ticket-create-form" novalidate>
         {{ csrf_field() }}
+
+        {!! $tabs->render(compact('ticket')) !!}
     </form>
 @endsection
 

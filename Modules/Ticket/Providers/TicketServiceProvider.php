@@ -5,6 +5,8 @@ namespace Modules\Ticket\Providers;
 use Modules\Support\Traits\AddsAsset;
 use Illuminate\Support\ServiceProvider;
 use Modules\Support\Traits\LoadsConfig;
+use Modules\Admin\Ui\Facades\TabManager;
+use Modules\Ticket\Admin\TicketTabs;
 
 class TicketServiceProvider extends ServiceProvider
 {
@@ -17,7 +19,7 @@ class TicketServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        TabManager::register('tickets', TicketTabs::class);
     }
 
     /**
