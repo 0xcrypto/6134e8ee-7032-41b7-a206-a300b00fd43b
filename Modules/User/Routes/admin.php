@@ -34,6 +34,12 @@ Route::get('users/{id}/edit', [
     'middleware' => 'can:admin.users.edit',
 ]);
 
+Route::get('users/{id}/fetchCustomerDetail', [
+    'as' => 'admin.users.fetchDetail',
+    'uses' => 'UserController@getCustomerNameAndEmailFromId',
+    'middleware' => 'can:admin.users.index',
+]);
+
 Route::put('users/{id}/edit', [
     'as' => 'admin.users.update',
     'uses' => 'UserController@update',

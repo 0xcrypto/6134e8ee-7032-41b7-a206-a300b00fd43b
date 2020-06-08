@@ -20,6 +20,8 @@ class TicketServiceProvider extends ServiceProvider
     public function boot()
     {
         TabManager::register('tickets', TicketTabs::class);
+        
+        $this->addAdminAssets('admin.tickets.(create|edit)', ['admin.ticket.css', 'admin.ticket.js']);
     }
 
     /**

@@ -207,4 +207,19 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')
             ->withSuccess(trans('admin::messages.resource_saved', ['resource' => trans('user::users.user')]));
     }
+
+    public function getCustomerNameAndEmailFromId($id){
+        $user = User::where('customer_id', '=', $id);
+
+        if($user){
+            return response()->json([
+                'data' => ['name' => $user->full_name, 'email' => $user->email ],
+            ]);
+        }
+
+        return response()->json([
+            'data' => [],
+        ]);
+        
+    }
 }
