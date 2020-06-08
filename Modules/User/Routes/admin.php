@@ -35,8 +35,8 @@ Route::get('users/{id}/edit', [
 ]);
 
 Route::get('users/{id}/fetchCustomerDetail', [
-    'as' => 'admin.users.fetchDetail',
-    'uses' => 'UserController@getCustomerNameAndEmailFromId',
+    'as' => 'admin.users.fetchCustomerDetail',
+    'uses' => 'UserController@getCustomerNameAndEmail',
     'middleware' => 'can:admin.users.index',
 ]);
 

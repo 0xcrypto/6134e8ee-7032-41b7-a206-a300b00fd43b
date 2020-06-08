@@ -36,7 +36,7 @@ export default class {
             let parent = $(`#${id}`).parent();
 
             parent.addClass('has-error');
-            parent.append(`<span class="help-block">${errors[key][0]}</span>`);
+            parent.append(`<span class="help-block">${errors[id][0]}</span>`);
         }
     }
 

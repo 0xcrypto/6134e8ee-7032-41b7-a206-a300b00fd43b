@@ -2,6 +2,7 @@
 
 namespace Modules\Ticket\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Modules\Core\Http\Requests\Request;
 
 class SaveTicketRequest extends Request
@@ -20,6 +21,16 @@ class SaveTicketRequest extends Request
      */
     public function rules()
     {
-        return [];
+        return [
+            'subject' => 'required',
+            'customer_email' => 'required|email',
+            'customer_name' => 'required',
+            'customer_id' => ['required', Rule::exists('users', 'customer_id')],
+            'department_id' => ['required', Rule::exists('departments', 'id')],
+            'service_id' => ['required', Rule::exists('ticket_services', 'id')],
+            'status_id' => ['required', Rule::exists('ticket_statuses', 'id')],
+            'priority_id' => ['required', Rule::exists('ticket_priorities', 'id')],
+            'store_id' => ['required', Rule::exists('stores', 'id')],
+        ];
     }
 }

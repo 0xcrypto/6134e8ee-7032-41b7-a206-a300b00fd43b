@@ -38,4 +38,19 @@ class TicketController extends Controller
      * @var array
      */
     protected $validation = SaveTicketRequest::class;
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Modules\User\Http\Requests\SaveUserRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(SaveTicketRequest $request)
+    {
+        $request->merge(['created_by' => auth()->user()->id ]);
+        Ticket::create($request->except('_token'));
+
+        return redirect()->route('admin.tickets.index')
+            ->withSuccess(trans('admin::messages.resource_saved', ['resource' => trans('ticket::tickets.ticket')]));
+    }
 }

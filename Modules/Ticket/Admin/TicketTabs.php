@@ -42,8 +42,7 @@ class TicketTabs extends Tabs
 
     private function getStores()
     {
-        $stores = Store::all()->sortBy('name')->pluck('name', 'id');
-        return $stores->prepend(trans('admin::admin.form.please_select'), '');
+        return Store::all()->sortBy('name')->pluck('name', 'id');
     }
     
 }

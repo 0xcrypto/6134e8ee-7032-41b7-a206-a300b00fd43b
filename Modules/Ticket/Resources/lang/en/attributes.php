@@ -4,9 +4,9 @@ return [
     "form" => [
         "subject" => "Subject",
         "description" => "Description",
-        "customer_id" => "Customer",
-        "customer_name" => "Customer Name",
-        "customer_email" => "Customer Email",
+        "customer_id" => "Customer ID",
+        "customer_name" => "Name",
+        "customer_email" => "Email",
         "department_id" => "Department",
         "service_id" => "Service",
         "priority_id" => "Priority",
