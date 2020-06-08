@@ -3,6 +3,10 @@
 namespace Modules\Ticket\Entities;
 
 use Modules\Support\Eloquent\Model;
+use Modules\Setting\Entities\Department;
+use Modules\Setting\Entities\TicketPriority;
+use Modules\Setting\Entities\TicketService;
+use Modules\Setting\Entities\TicketStatus;
 use Modules\Support\Eloquent\Translatable;
 
 class Ticket extends Model
@@ -37,4 +41,44 @@ class Ticket extends Model
      * @var array
      */
     public $translatedAttributes = [];
+
+    /**
+     * Get the department .
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function department()
+    {
+        return $this->hasOne(Department::class, 'id');
+    }
+
+    /**
+     * Get the ticket service.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function ticketService()
+    {
+        return $this->hasOne(TicketService::class, 'id');
+    }
+
+    /**
+     * Get the ticket status.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function ticketStatus()
+    {
+        return $this->hasOne(TicketStatus::class, 'id');
+    }
+
+    /**
+     * Get the ticket priority.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function ticketPriority()
+    {
+        return $this->hasOne(TicketPriority::class, 'id');
+    }
 }

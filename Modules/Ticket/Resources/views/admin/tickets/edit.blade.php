@@ -12,6 +12,8 @@
     <form method="POST" action="{{ route('admin.tickets.update', $ticket) }}" class="form-horizontal" id="ticket-edit-form" novalidate>
         {{ csrf_field() }}
         {{ method_field('put') }}
+
+        {!! $tabs->render(compact('ticket')) !!}
     </form>
 @endsection
 

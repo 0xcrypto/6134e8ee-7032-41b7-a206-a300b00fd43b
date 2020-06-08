@@ -2,6 +2,7 @@
 
 return [
     "form" => [
+        "id" => "ID",
         "subject" => "Subject",
         "description" => "Description",
         "customer_id" => "Customer ID",

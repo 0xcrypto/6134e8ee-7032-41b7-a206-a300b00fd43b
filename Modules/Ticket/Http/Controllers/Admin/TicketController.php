@@ -53,4 +53,21 @@ class TicketController extends Controller
         return redirect()->route('admin.tickets.index')
             ->withSuccess(trans('admin::messages.resource_saved', ['resource' => trans('ticket::tickets.ticket')]));
     }
+
+    /**
+     * Display store wise tickets
+     *
+     */
+
+    public function index()
+    {
+        $currentUser = auth()->user();
+        $stores = $currentUser->stores->map(function ($store){
+            return array('name'=> $store->name, 'id'=> $store->id);
+        })->toArray();
+
+        $tickets = Ticket::all();
+
+        return view("{$this->viewPath}.index", compact(['stores', 'tickets']));
+    }
 }

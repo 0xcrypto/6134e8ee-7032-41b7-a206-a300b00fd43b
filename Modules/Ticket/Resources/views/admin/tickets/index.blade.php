@@ -6,27 +6,14 @@
     <li class="active">{{ trans('ticket::tickets.tickets') }}</li>
 @endcomponent
 
-@component('admin::components.page.index_table')
-    @slot('buttons', ['create'])
-    @slot('resource', 'tickets')
-    @slot('name', trans('ticket::tickets.ticket'))
+@section('content')
+    <div class="row">
+        <div class="btn-group pull-right">
+            <a href="{{ route("admin.tickets.create") }}" class="btn btn-primary btn-actions btn-create">
+                {{ trans("admin::resource.create", ['resource' => 'Ticket']) }}
+            </a>
+        </div>
+    </div>
 
-    @component('admin::components.table')
-        @slot('thead')
-            <tr>
-                @include('admin::partials.table.select_all')
-            </tr>
-        @endslot
-    @endcomponent
-@endcomponent
-
-@push('scripts')
-    <script>
-        new DataTable('#tickets-table .table', {
-            columns: [
-                { data: 'checkbox', orderable: false, searchable: false, width: '3%' },
-                //
-            ],
-        });
-    </script>
-@endpush
+    @include('ticket::admin.tickets.partials.tickets')
+@endsection
