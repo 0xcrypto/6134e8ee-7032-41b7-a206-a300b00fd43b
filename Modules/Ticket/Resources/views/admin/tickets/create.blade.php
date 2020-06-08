@@ -1,4 +1,4 @@
-@extends('admin::master')
+@extends('admin::layout')
 
 @component('admin::components.page.header')
     @slot('title', trans('admin::resource.create', ['resource' => trans('ticket::tickets.ticket')]))
