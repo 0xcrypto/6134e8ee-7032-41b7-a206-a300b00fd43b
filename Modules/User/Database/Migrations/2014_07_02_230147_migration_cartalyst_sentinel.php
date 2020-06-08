@@ -98,7 +98,7 @@ class MigrationCartalystSentinel extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
-    
+
         Schema::create('user_stores', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('store_id')->unsigned();

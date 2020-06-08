@@ -14,6 +14,7 @@ use Cartalyst\Sentinel\Users\EloquentUser;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Modules\User\Entities\RoleTranslation;
 
 class User extends EloquentUser implements AuthenticatableContract
 {
