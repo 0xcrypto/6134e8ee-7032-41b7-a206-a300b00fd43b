@@ -10,6 +10,8 @@ Route::middleware('auth')->group(function () {
     Route::get('account/orders/{id}', 'AccountOrderController@show')->name('account.orders.show');
 
     Route::get('account/tickets', 'AccountTicketController@index')->name('account.tickets.index');
+    Route::get('account/tickets/create', 'AccountTicketController@create')->name('account.tickets.create');
+    Route::post('account/tickets/store', 'AccountTicketController@store')->name('account.tickets.store');
     Route::get('account/tickets/{id}', 'AccountTicketController@show')->name('account.tickets.show');
 
     Route::get('account/wishlist', 'AccountWishlistController@index')->name('account.wishlist.index');

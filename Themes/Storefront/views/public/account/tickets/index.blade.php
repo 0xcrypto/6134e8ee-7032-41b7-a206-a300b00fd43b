@@ -7,6 +7,14 @@
 @endsection
 
 @section('content_right')
+    <div class="row">
+        <div class="btn-group" >
+            <a href="{{ route('account.tickets.create') }}" class="btn btn-primary btn-actions btn-create" style="margin-left: 15px;">
+                {{ trans("storefront::account.tickets.new_ticket") }}
+            </a>
+        </div>
+    </div>
+    <br/>
     <div class="index-table">
         @if ($tickets->isEmpty())
             <h3 class="text-center">{{ trans('storefront::account.tickets.no_tickets') }}</h3>

@@ -45,6 +45,7 @@ return [
         'total' => 'Total',
     ],
     'tickets' => [
+        'new_ticket' => 'New Ticket',
         'ticket_id' => 'Ticket ID',
         'subject' => 'Subject',
         'description' => 'Description',
