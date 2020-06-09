@@ -22,8 +22,8 @@ class CreateTicketsTable extends Migration
             $table->string('customer_email')->nullable();
             $table->integer('department_id')->nullable()->unsigned();
             $table->integer('service_id')->nullable()->unsigned();
-            $table->integer('priority_id')->nullable()->unsigned();
-            $table->integer('status_id')->nullable()->unsigned();
+            $table->integer('priority_id')->unsigned();
+            $table->integer('status_id')->unsigned();
             $table->integer('created_by')->unsigned();
             $table->integer('store_id')->nullable()->unsigned();
             $table->integer('assigned_to')->nullable()->unsigned();

@@ -7,6 +7,7 @@
         {{ Form::select('default_timezone', trans('setting::attributes.default_timezone'), $errors, $timeZones, $settings, ['required' => true]) }}
         {{ Form::select('customer_role', trans('setting::attributes.customer_role'), $errors, $roles, $settings, ['required' => true]) }}
         {{ Form::select('admin_role', trans('setting::attributes.admin_role'), $errors, $roles, $settings, ['required' => true]) }}
+        {{ Form::select('default_ticket_status', trans('setting::attributes.default_ticket_status'), $errors, $ticketStatuses, $settings) }}
 
         {{ Form::number('user_registration_reward_points', trans('setting::attributes.user_registration_reward_points'), $errors, $settings, ['required' => true, 'min' => 0]) }}
         {{ Form::number('user_order_reward_points', trans('setting::attributes.user_order_reward_points'), $errors, $settings, ['required' => true, 'min' => 0]) }}

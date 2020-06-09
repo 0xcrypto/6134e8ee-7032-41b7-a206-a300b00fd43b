@@ -12,6 +12,7 @@ return [
     'user_order_reward_points' => 'Reward Points for Order Booking',
     'order_feedback_reward_points' => 'Reward Points for feedback on Order',
     'reward_point_conversion_rate' => 'Reward Points Conversion Rate',
+    'default_ticket_status' => 'Default Ticket Status',
     'reviews_enabled' => 'Reviews & Ratings',
     'auto_approve_reviews' => 'Auto Approve Reviews',
     'welcome_email' => 'Welcome Email',

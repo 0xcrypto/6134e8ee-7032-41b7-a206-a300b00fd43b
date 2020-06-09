@@ -34,47 +34,84 @@ class SettingController extends Controller
      */
     public function update(UpdateSettingRequest $request)
     {
-        //Update Ticket Statuses
-        TicketStatus::whereIn('id', TicketStatus::all()->pluck('id')->toArray())->delete();
-        $ticketStatuses = collect($request->get('ticketStatuses'))->map(function ($ticketStatus) {
+        // Add & Update Ticket Statuses
+        $ticketStatusesDatabase = TicketStatus::get()->map(function ($ticketStatus) {
             return $ticketStatus['name'];
-        });
+        })->toArray();
+        $ticketStatusesForm = collect($request->get('ticketStatuses'))->map(function ($ticketStatus) {
+            return $ticketStatus['name'];
+        })->toArray();
 
-        foreach($ticketStatuses as $ticketStatus){
+        $ticketStatusesToDelete = array_diff($ticketStatusesDatabase, $ticketStatusesForm);
+        $ticketStatusesToAdd = array_diff($ticketStatusesForm, $ticketStatusesDatabase);
+        
+        foreach($ticketStatusesToDelete as $ticketStatus){
+            TicketStatus::whereTranslation('name', $ticketStatus)->delete();
+        }
+
+        foreach($ticketStatusesToAdd as $ticketStatus){
             TicketStatus::create(array('name'=>$ticketStatus));
         }
 
-        //Update Ticket Priorities
-        TicketPriority::whereIn('id', TicketPriority::all()->pluck('id')->toArray())->delete();
-        $ticketPriorities = collect($request->get('ticketPriorities'))->map(function ($ticketPriority) {
+        // Add & Update Ticket Priorities
+        $ticketPrioritiesDatabase = TicketPriority::get()->map(function ($ticketPriority) {
             return $ticketPriority['name'];
-        });
+        })->toArray();
+        $ticketPrioritiesForm = collect($request->get('ticketPriorities'))->map(function ($ticketPriority) {
+            return $ticketPriority['name'];
+        })->toArray();
 
-        foreach($ticketPriorities as $ticketPriority){
+        $ticketPrioritiesToDelete = array_diff($ticketPrioritiesDatabase, $ticketPrioritiesForm);
+        $ticketPrioritiesToAdd = array_diff($ticketPrioritiesForm, $ticketPrioritiesDatabase);
+        
+        foreach($ticketPrioritiesToDelete as $ticketPriority){
+            TicketPriority::whereTranslation('name', $ticketPriority)->delete();
+        }
+
+        foreach($ticketPrioritiesToAdd as $ticketPriority){
             TicketPriority::create(array('name'=>$ticketPriority));
         }
 
-        //Update Ticket Services
-        TicketService::whereIn('id', TicketService::all()->pluck('id')->toArray())->delete();
-        $ticketServices = collect($request->get('ticketServices'))->map(function ($ticketService) {
+        // Add & Update Ticket Services
+        $ticketServicesDatabase = TicketService::get()->map(function ($ticketService) {
             return $ticketService['name'];
-        });
+        })->toArray();
+        $ticketServicesForm = collect($request->get('ticketServices'))->map(function ($ticketService) {
+            return $ticketService['name'];
+        })->toArray();
 
-        foreach($ticketServices as $ticketService){
+        $ticketServicesToDelete = array_diff($ticketServicesDatabase, $ticketServicesForm);
+        $ticketServicesToAdd = array_diff($ticketServicesForm, $ticketServicesDatabase);
+        
+        foreach($ticketServicesToDelete as $ticketService){
+            TicketService::whereTranslation('name', $ticketService)->delete();
+        }
+
+        foreach($ticketServicesToAdd as $ticketService){
             TicketService::create(array('name'=>$ticketService));
         }
 
-        //Update Departments
-        Department::whereIn('id', Department::all()->pluck('id')->toArray())->delete();
-        $departments = collect($request->get('departments'))->map(function ($department) {
+        // Add & Update Departments
+        $departmentsDatabase = Department::get()->map(function ($department) {
             return $department['name'];
-        });
+        })->toArray();
+        $departmentsForm = collect($request->get('departments'))->map(function ($department) {
+            return $department['name'];
+        })->toArray();
 
-        foreach($departments as $department){
-            Department::create(array('name'=>$department));
+        $departmentsToDelete = array_diff($departmentsDatabase, $departmentsForm);
+        $departmentsToAdd = array_diff($departmentsForm, $departmentsDatabase);
+        
+        foreach($departmentsToDelete as $department){
+            Department::whereTranslation('name', $department)->delete();
         }
 
-        setting($request->except('_token', '_method'));
+        foreach($departmentsToAdd as $department){
+            Department::create(array('name'=>$department));
+        }
+        
+        setting($request->except('_token', '_method', 'ticketStatuses', 'ticketPriorities', 
+        'ticketServices', 'departments'));
 
         $this->handleMaintenanceMode($request);
 

@@ -76,6 +76,7 @@ class SettingTabs extends Tabs
                 'countries' => Country::all(),
                 'timeZones' => TimeZone::all(),
                 'roles' => Role::list(),
+                'ticketStatuses' => TicketStatus::list()
             ]);
         });
     }

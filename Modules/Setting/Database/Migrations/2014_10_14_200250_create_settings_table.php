@@ -92,7 +92,6 @@ class CreateSettingsTable extends Migration
 
         Schema::create('task_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->timestamps();
         });
 
@@ -108,7 +107,6 @@ class CreateSettingsTable extends Migration
 
         Schema::create('task_priorities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->timestamps();
         });
 
