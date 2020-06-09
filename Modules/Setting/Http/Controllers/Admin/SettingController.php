@@ -9,6 +9,7 @@ use Modules\Setting\Entities\TicketStatus;
 use Modules\Setting\Entities\TicketPriority;
 use Modules\Setting\Entities\TicketService;
 use Modules\Setting\Entities\TaskStatus;
+use Modules\Setting\Entities\TaskPriority;
 use Modules\Setting\Entities\Department;
 use Modules\Setting\Http\Requests\UpdateSettingRequest;
 
@@ -129,9 +130,28 @@ class SettingController extends Controller
         foreach($taskStatusesToAdd as $taskStatus){
             TaskStatus::create(array('name'=>$taskStatus));
         }
+
+        // Add & Update Task Priorities
+        $taskPrioritiesDatabase = TaskPriority::get()->map(function ($taskPriority) {
+            return $taskPriority['name'];
+        })->toArray();
+        $taskPrioritiesForm = collect($request->get('taskPriorities'))->map(function ($taskPriority) {
+            return $taskPriority['name'];
+        })->toArray();
+
+        $taskPrioritiesToDelete = array_diff($taskPrioritiesDatabase, $taskPrioritiesForm);
+        $taskPrioritiesToAdd = array_diff($taskPrioritiesForm, $taskPrioritiesDatabase);
+        
+        foreach($taskPrioritiesToDelete as $taskPriority){
+            TaskPriority::whereTranslation('name', $taskPriority)->delete();
+        }
+
+        foreach($taskPrioritiesToAdd as $taskPriority){
+            TaskPriority::create(array('name'=>$taskPriority));
+        }
         
         setting($request->except('_token', '_method', 'ticketStatuses', 'ticketPriorities', 
-        'ticketServices', 'departments', 'taskStatuses'));
+        'ticketServices', 'departments', 'taskStatuses', 'taskPriorities'));
 
         $this->handleMaintenanceMode($request);
 

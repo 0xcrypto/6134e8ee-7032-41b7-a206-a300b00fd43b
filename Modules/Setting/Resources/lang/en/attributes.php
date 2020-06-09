@@ -118,5 +118,6 @@ return [
     'ticketPriorities.*.name' => 'Ticket Priority Name',
     'ticketServices.*.name' => 'Ticket Service Name',
     'taskStatuses.*.name' => 'Task Status Name',
+    'taskPriorities.*.name' => 'Task Priority Name',
     'departments.*.name' => 'Department Name',
 ];
