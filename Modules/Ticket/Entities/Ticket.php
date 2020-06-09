@@ -7,6 +7,7 @@ use Modules\Setting\Entities\Department;
 use Modules\Setting\Entities\TicketPriority;
 use Modules\Setting\Entities\TicketService;
 use Modules\Setting\Entities\TicketStatus;
+use Modules\Store\Entities\Store;
 use Modules\User\Entities\User;
 use Modules\Support\Eloquent\Translatable;
 
@@ -91,5 +92,15 @@ class Ticket extends Model
     public function assignee()
     {
         return $this->hasOne(User::class, 'id');
+    }
+
+    /**
+     * Get the department .
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function store()
+    {
+        return $this->hasOne(Store::class, 'id');
     }
 }
