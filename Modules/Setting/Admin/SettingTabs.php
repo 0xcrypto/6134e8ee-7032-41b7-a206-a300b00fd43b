@@ -12,6 +12,7 @@ use Modules\User\Entities\Role;
 use Modules\Setting\Entities\TicketStatus;
 use Modules\Setting\Entities\TicketPriority;
 use Modules\Setting\Entities\TicketService;
+use Modules\Setting\Entities\TaskStatus;
 use Modules\Setting\Entities\Department;
 
 class SettingTabs extends Tabs
@@ -53,6 +54,7 @@ class SettingTabs extends Tabs
             ->add($this->ticketStatus())
             ->add($this->ticketPriority())
             ->add($this->ticketService())
+            ->add($this->taskStatus())
             ->add($this->department());
     }
 
@@ -393,9 +395,29 @@ class SettingTabs extends Tabs
         return $ticketServices;
     }
     
+    private function taskStatus(){
+        return tap(new Tab('taskStatus', trans('setting::settings.tabs.task_status')), function (Tab $tab) {
+            $tab->weight(95);
+            $tab->fields(['taskStatuses.*.name']);
+            $tab->view('setting::admin.settings.tabs.task_status', [
+                'taskStatuses' => $this->getTaskStatuses()
+            ]);
+        });
+    }
+
+    private function getTaskStatuses()
+    {
+        $taskStatuses = [];
+        foreach(TaskStatus::all() as $taskStatus){
+            array_push($taskStatuses, array('id'=>$taskStatus->id, 'name'=>$taskStatus->name));
+        }
+        
+        return $taskStatuses;
+    }
+    
     private function department(){
         return tap(new Tab('department', trans('setting::settings.tabs.department')), function (Tab $tab) {
-            $tab->weight(95);
+            $tab->weight(100);
             $tab->fields(['departments.*.name']);
             $tab->view('setting::admin.settings.tabs.department', [
                 'departments' => $this->getDepartments()

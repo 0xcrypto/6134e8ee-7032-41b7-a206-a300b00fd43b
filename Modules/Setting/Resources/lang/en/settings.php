@@ -31,6 +31,7 @@ return [
         'ticket_status' => 'Ticket Status',
         'ticket_priority' => 'Ticket Priority',
         'ticket_service' => 'Ticket Service',
+        'task_status' => 'Task Status',
         'department' => 'Department',
     ],
     'form' => [

@@ -1,6 +1,7 @@
 import TicketStatus from './TicketStatus';
 import TicketPriority from './TicketPriority';
 import TicketService from './TicketService';
+import TaskStatus from './TaskStatus';
 import Department from './Department';
 
 window.admin.removeSubmitButtonOffsetOn(['#logo', '#courier']);
@@ -19,6 +20,10 @@ if ($('#ticket-service-wrapper').length !== 0) {
 
 if ($('#department-wrapper').length !== 0) {
     new Department();
+}
+
+if ($('#task-status-wrapper').length !== 0) {
+    new TaskStatus();
 }
 
 let currencyRateExchangeService = $('#currency_rate_exchange_service');

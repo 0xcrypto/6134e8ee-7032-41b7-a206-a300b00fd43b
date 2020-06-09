@@ -8,6 +8,7 @@ use Modules\Admin\Ui\Facades\TabManager;
 use Modules\Setting\Entities\TicketStatus;
 use Modules\Setting\Entities\TicketPriority;
 use Modules\Setting\Entities\TicketService;
+use Modules\Setting\Entities\TaskStatus;
 use Modules\Setting\Entities\Department;
 use Modules\Setting\Http\Requests\UpdateSettingRequest;
 
@@ -110,8 +111,27 @@ class SettingController extends Controller
             Department::create(array('name'=>$department));
         }
         
+        // Add & Update Task Statuses
+        $taskStatusesDatabase = TaskStatus::get()->map(function ($taskStatus) {
+            return $taskStatus['name'];
+        })->toArray();
+        $taskStatusesForm = collect($request->get('taskStatuses'))->map(function ($taskStatus) {
+            return $taskStatus['name'];
+        })->toArray();
+
+        $taskStatusesToDelete = array_diff($taskStatusesDatabase, $taskStatusesForm);
+        $taskStatusesToAdd = array_diff($taskStatusesForm, $taskStatusesDatabase);
+        
+        foreach($taskStatusesToDelete as $taskStatus){
+            TaskStatus::whereTranslation('name', $taskStatus)->delete();
+        }
+
+        foreach($taskStatusesToAdd as $taskStatus){
+            TaskStatus::create(array('name'=>$taskStatus));
+        }
+        
         setting($request->except('_token', '_method', 'ticketStatuses', 'ticketPriorities', 
-        'ticketServices', 'departments'));
+        'ticketServices', 'departments', 'taskStatuses'));
 
         $this->handleMaintenanceMode($request);
 
