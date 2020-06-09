@@ -119,5 +119,6 @@ return [
     'ticketServices.*.name' => 'Ticket Service Name',
     'taskStatuses.*.name' => 'Task Status Name',
     'taskPriorities.*.name' => 'Task Priority Name',
+    'leadStatuses.*.name' => 'Lead Status Name',
     'departments.*.name' => 'Department Name',
 ];

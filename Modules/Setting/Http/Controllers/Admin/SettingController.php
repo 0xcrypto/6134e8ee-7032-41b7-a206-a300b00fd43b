@@ -10,6 +10,7 @@ use Modules\Setting\Entities\TicketPriority;
 use Modules\Setting\Entities\TicketService;
 use Modules\Setting\Entities\TaskStatus;
 use Modules\Setting\Entities\TaskPriority;
+use Modules\Setting\Entities\LeadStatus;
 use Modules\Setting\Entities\Department;
 use Modules\Setting\Http\Requests\UpdateSettingRequest;
 
@@ -150,8 +151,27 @@ class SettingController extends Controller
             TaskPriority::create(array('name'=>$taskPriority));
         }
         
+        // Add & Update Task Statuses
+        $leadStatusesDatabase = LeadStatus::get()->map(function ($leadStatus) {
+            return $leadStatus['name'];
+        })->toArray();
+        $leadStatusesForm = collect($request->get('leadStatuses'))->map(function ($leadStatus) {
+            return $leadStatus['name'];
+        })->toArray();
+
+        $leadStatusesToDelete = array_diff($leadStatusesDatabase, $leadStatusesForm);
+        $leadStatusesToAdd = array_diff($leadStatusesForm, $leadStatusesDatabase);
+        
+        foreach($leadStatusesToDelete as $leadStatus){
+            LeadStatus::whereTranslation('name', $leadStatus)->delete();
+        }
+
+        foreach($leadStatusesToAdd as $leadStatus){
+            LeadStatus::create(array('name'=>$leadStatus));
+        }
+        
         setting($request->except('_token', '_method', 'ticketStatuses', 'ticketPriorities', 
-        'ticketServices', 'departments', 'taskStatuses', 'taskPriorities'));
+        'ticketServices', 'departments', 'taskStatuses', 'taskPriorities', 'leadStatuses'));
 
         $this->handleMaintenanceMode($request);
 

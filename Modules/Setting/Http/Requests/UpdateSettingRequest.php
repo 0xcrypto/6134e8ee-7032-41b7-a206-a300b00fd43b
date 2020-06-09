@@ -102,6 +102,7 @@ class UpdateSettingRequest extends Request
             'departments.*.name' => 'required',
             'taskStatuses.*.name' => 'required',
             'taskPriorities.*.name' => 'required',
+            'leadStatuses.*.name' => 'required',
         ];
     }
 

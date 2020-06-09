@@ -3,6 +3,7 @@ import TicketPriority from './TicketPriority';
 import TicketService from './TicketService';
 import TaskStatus from './TaskStatus';
 import TaskPriority from './TaskPriority';
+import LeadStatus from './LeadStatus';
 import Department from './Department';
 
 window.admin.removeSubmitButtonOffsetOn(['#logo', '#courier']);
@@ -29,6 +30,10 @@ if ($('#task-status-wrapper').length !== 0) {
 
 if ($('#task-priority-wrapper').length !== 0) {
     new TaskPriority();
+}
+
+if ($('#lead-status-wrapper').length !== 0) {
+    new LeadStatus();
 }
 
 let currencyRateExchangeService = $('#currency_rate_exchange_service');
