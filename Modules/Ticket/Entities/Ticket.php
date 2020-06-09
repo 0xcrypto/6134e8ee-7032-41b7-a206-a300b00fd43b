@@ -7,6 +7,7 @@ use Modules\Setting\Entities\Department;
 use Modules\Setting\Entities\TicketPriority;
 use Modules\Setting\Entities\TicketService;
 use Modules\Setting\Entities\TicketStatus;
+use Modules\User\Entities\User;
 use Modules\Support\Eloquent\Translatable;
 
 class Ticket extends Model
@@ -80,5 +81,15 @@ class Ticket extends Model
     public function ticketPriority()
     {
         return $this->hasOne(TicketPriority::class, 'id');
+    }
+
+    /**
+     * Get the assignee.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function assignee()
+    {
+        return $this->hasOne(User::class, 'id');
     }
 }

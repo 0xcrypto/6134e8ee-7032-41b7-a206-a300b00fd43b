@@ -5,6 +5,7 @@ namespace Modules\Ticket\Http\Controllers\Admin;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Traits\HasCrudActions;
 use Modules\Ticket\Entities\Ticket;
+use Modules\Setting\Entities\TicketStatus;
 use Modules\Ticket\Http\Requests\SaveTicketRequest;
 
 class TicketController extends Controller
@@ -67,7 +68,8 @@ class TicketController extends Controller
         })->toArray();
 
         $tickets = Ticket::all();
+        $ticketStatuses = TicketStatus::all();
 
-        return view("{$this->viewPath}.index", compact(['stores', 'tickets']));
+        return view("{$this->viewPath}.index", compact(['stores', 'tickets', 'ticketStatuses']));
     }
 }

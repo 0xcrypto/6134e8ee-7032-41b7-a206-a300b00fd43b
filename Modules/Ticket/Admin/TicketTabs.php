@@ -10,6 +10,7 @@ use Modules\Setting\Entities\TicketService;
 use Modules\Setting\Entities\TicketPriority;
 use Modules\Setting\Entities\TicketStatus;
 use Modules\Setting\Entities\Department;
+use Modules\User\Entities\User;
 
 class TicketTabs extends Tabs
 {
@@ -36,13 +37,24 @@ class TicketTabs extends Tabs
                 'statuses' => TicketStatus::list(),
                 'priorities' => TicketPriority::list(),
                 'departments' => Department::list(),
+                'staffs' => $this->getStaffs()
             ]);
         });
     }
 
     private function getStores()
     {
-        return Store::all()->sortBy('name')->pluck('name', 'id');
+        $currentUser = auth()->user();
+        return $currentUser->stores()->pluck('name', 'id');
+    }
+
+    private function getStaffs(){
+        $customer_role = setting('customer_role');
+        $staffs = User::with('roles')->whereHas('roles', function ($query) use ($customer_role) {
+            $query->where('role_id', '!=', $customer_role); 
+        })->get()->pluck('full_name', 'id');
+
+        return $staffs;
     }
     
 }

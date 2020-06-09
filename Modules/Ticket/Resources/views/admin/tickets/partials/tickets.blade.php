@@ -4,7 +4,7 @@
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 class="panel-title">{{ trans('ticket::tickets.tickets') }}</h4>
+                        <h4 class="panel-title" style="padding: 10px;font-size: 17px;">{{ trans('ticket::tickets.tickets') }}</h4>
                     </div>
                     <div id="messages_information" class="panel-collapse collapse in">
                         <div class="panel-body">
@@ -39,6 +39,19 @@
                             {{ $store['name']." ".trans('ticket::tickets.tickets') }}
                             <span class="badge badge-light">{{ $storeTickets->count() }}</span>
                         </h3>
+                        <hr>
+                        <div class="row">
+                            @foreach($ticketStatuses as $ticketStatus)
+                                <div class="col-md-2 bd-highlight">
+                                    @php
+                                        $count = $storeTickets->where('status_id', '=', $ticketStatus->id)->count() 
+                                    @endphp
+                                    <h5>{{ $count }}</h5><br>
+                                    <div>{{ $ticketStatus->name }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <hr>
                         <div class="row">
                             <table class="table table-striped table-hover" role="grid">
                                 <thead>
@@ -50,6 +63,7 @@
                                         <th>{{ trans('ticket::attributes.form.service_id')}}</th>
                                         <th>{{ trans('ticket::attributes.form.status_id')}}</th>
                                         <th>{{ trans('ticket::attributes.form.priority_id')}}</th>
+                                        <th>{{ trans('ticket::attributes.form.assigned_to')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,10 +76,11 @@
                                                 </a>
                                             </td>
                                             <td>{{ $ticket->customer_name }}</td>
-                                            <td>{{ $ticket->department->name }}</td>
-                                            <td>{{ $ticket->ticketService->name }}</td>
-                                            <td>{{ $ticket->ticketStatus->name }}</td>
-                                            <td>{{ $ticket->ticketPriority->name }}</td>
+                                            <td>{{ $ticket->department ? $ticket->department->name : '' }}</td>
+                                            <td>{{ $ticket->ticketService ? $ticket->ticketService->name : '' }}</td>
+                                            <td>{{ $ticket->ticketStatus ? $ticket->ticketStatus->name : '' }}</td>
+                                            <td>{{ $ticket->ticketPriority ? $ticket->ticketPriority->name : '' }}</td>
+                                            <td>{{ $ticket->assignee ? $ticket->assignee->full_name : '' }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
