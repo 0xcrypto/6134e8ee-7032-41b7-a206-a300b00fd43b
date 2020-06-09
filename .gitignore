@@ -17,4 +17,4 @@ tags
 .env
 /admin-template
 /storage/framework/*
-/storage/logs/*
+storage/logs/laravel.log

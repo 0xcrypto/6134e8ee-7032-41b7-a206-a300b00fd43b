@@ -16,6 +16,17 @@
 
                 <div class="row">
                     <div class="col-sm-8">
+                        <div class="form-group {{ $errors->has('priority_id') ? 'has-error': '' }}">
+                            <label for="priority_id">
+                                {{ trans('storefront::account.tickets.priority_id') }}<span>*</span>
+                            </label>
+                            <select id="priority_id" name="priority_id">
+                                @foreach($ticketPriorities as $id => $name)
+                                <option value="{{ $id }}">{{ $name }}</option>
+                                @endforeach
+                            </select>
+                            {!! $errors->first('priority_id', '<span class="error-message">:message</span>') !!}
+                        </div>
                         <div class="form-group {{ $errors->has('subject') ? 'has-error': '' }}">
                             <label for="subject">
                                 {{ trans('storefront::account.tickets.subject') }}<span>*</span>
@@ -35,7 +46,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary" data-loading>
-            {{ trans('storefront::account.profile.save_changes') }}
+            {{ trans('storefront::account.tickets.raise_ticket') }}
         </button>
     </form>
 @endsection

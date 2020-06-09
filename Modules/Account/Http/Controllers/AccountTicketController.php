@@ -5,6 +5,7 @@ namespace Modules\Account\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Ticket\Entities\Ticket;
+use Modules\Setting\Entities\TicketPriority;
 use Illuminate\Support\Facades\Validator;
 
 class AccountTicketController extends Controller
@@ -46,8 +47,8 @@ class AccountTicketController extends Controller
     public function create()
     {
         $my = auth()->user();
-
-        return view('public.account.tickets.create', compact('my'));
+        $ticketPriorities = TicketPriority::list();
+        return view('public.account.tickets.create', compact('my', 'ticketPriorities'));
     }
 
     /**
@@ -60,8 +61,10 @@ class AccountTicketController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'subject' => 'required',
+            'priority_id' => 'required',
         ], [
             'subject.required' => 'The subject field is required.',
+            'priority_id.required' => 'The priority field is required.',
         ]);
 
         $validator->validate();
@@ -71,9 +74,10 @@ class AccountTicketController extends Controller
             'created_by' => $currentUser->id,
             'customer_id' => $currentUser->customer_id,
             'customer_name' => $currentUser->full_name,
-            'customer_email' => $currentUser->email
+            'customer_email' => $currentUser->email,
+            'status_id' => setting('default_ticket_status')
         ]);
-        
+
         Ticket::create($request->except('_token'));
 
         return redirect()->route('account.tickets.index')->withSuccess(trans('account::messages.ticket_raised'));

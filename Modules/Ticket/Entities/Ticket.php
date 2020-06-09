@@ -51,7 +51,7 @@ class Ticket extends Model
      */
     public function department()
     {
-        return $this->hasOne(Department::class, 'id');
+        return $this->hasOne(Department::class, 'id', 'department_id');
     }
 
     /**
@@ -61,7 +61,7 @@ class Ticket extends Model
      */
     public function ticketService()
     {
-        return $this->hasOne(TicketService::class, 'id');
+        return $this->hasOne(TicketService::class, 'id', 'service_id');
     }
 
     /**
@@ -71,7 +71,7 @@ class Ticket extends Model
      */
     public function ticketStatus()
     {
-        return $this->hasOne(TicketStatus::class, 'id');
+        return $this->hasOne(TicketStatus::class, 'id', 'status_id');
     }
 
     /**
@@ -81,7 +81,7 @@ class Ticket extends Model
      */
     public function ticketPriority()
     {
-        return $this->hasOne(TicketPriority::class, 'id');
+        return $this->hasOne(TicketPriority::class, 'id', 'priority_id');
     }
 
     /**
@@ -91,7 +91,17 @@ class Ticket extends Model
      */
     public function assignee()
     {
-        return $this->hasOne(User::class, 'id');
+        return $this->hasOne(User::class, 'id', 'assigned_to');
+    }
+
+    /**
+     * Get the assignee.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function creator()
+    {
+        return $this->hasOne(User::class, 'id', 'created_by');
     }
 
     /**
@@ -101,6 +111,6 @@ class Ticket extends Model
      */
     public function store()
     {
-        return $this->hasOne(Store::class, 'id');
+        return $this->hasOne(Store::class, 'id', 'store_id');
     }
 }

@@ -61,6 +61,7 @@ return [
         'created_by' => 'Created By',
         'view_ticket' => 'View Ticket',
         'ticket_details' => 'Ticket Details',
+        'raise_ticket' => 'Raise Ticket',
         'no_tickets' => 'You haven\'t raised any tickets yet.',
     ],
     'wishlist' => [
