@@ -54,6 +54,7 @@
                                 <ul class="list-inline">
                                     <li><a href="{{ route('account.dashboard.index') }}">{{ trans('storefront::account.links.dashboard') }}</a></li>
                                     <li><a href="{{ route('account.orders.index') }}">{{ trans('storefront::account.links.my_orders') }}</a></li>
+                                    <li><a href="{{ route('account.tickets.index') }}">{{ trans('storefront::account.links.my_tickets') }}</a></li>
                                     <li><a href="{{ route('account.reviews.index') }}">{{ trans('storefront::account.links.my_reviews') }}</a></li>
                                     <li><a href="{{ route('account.profile.edit') }}">{{ trans('storefront::account.links.my_profile') }}</a></li>
 

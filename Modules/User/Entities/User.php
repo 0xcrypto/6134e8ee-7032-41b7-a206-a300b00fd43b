@@ -3,6 +3,7 @@
 namespace Modules\User\Entities;
 
 use Modules\Store\Entities\Store;
+use Modules\Ticket\Entities\Ticket;
 use Modules\Order\Entities\Order;
 use Modules\User\Admin\UserTable;
 use Modules\Review\Entities\Review;
@@ -221,6 +222,17 @@ class User extends EloquentUser implements AuthenticatableContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'customer_id', 'customer_id');
+    }
+
+    /**
+     * Get the orders of the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+
     public function orders()
     {
         return $this->hasMany(Order::class, 'customer_id');

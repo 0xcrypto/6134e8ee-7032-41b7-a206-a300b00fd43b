@@ -30,6 +30,13 @@
                             </a>
                         </li>
 
+                        <li class="{{ request()->routeIs('account.tickets.index') ? 'active' : '' }}">
+                            <a href="{{ route('account.tickets.index') }}">
+                                <i class="fa fa-comments" aria-hidden="true"></i>
+                                {{ trans('storefront::account.links.my_tickets') }}
+                            </a>
+                        </li>
+
                         <li class="{{ request()->routeIs('account.wishlist.index') ? 'active' : '' }}">
                             <a href="{{ route('account.wishlist.index') }}">
                                 <i class="fa fa-heart" aria-hidden="true"></i>

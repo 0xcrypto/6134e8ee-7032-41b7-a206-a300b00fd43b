@@ -71,7 +71,6 @@ class UserController extends Controller
      */
     public function store(SaveUserRequest $request)
     {
-        
         if((int)$request->validate_staff_information == 1){ 
             $validator = Validator::make($request->all(), [
                 'stores' => 'required',
@@ -171,29 +170,32 @@ class UserController extends Controller
         $user->roles()->sync($request->roles);
         $user->stores()->sync($request->stores);
 
+        if((int)$request->validate_staff_information == 1 ){
+            
         if (Staff::where('user_id', $user->id)->exists()) {
             $staff = Staff::where('user_id', '=', $user->id);
-            $staff->update([
-                'employee_id'=>$request->input('staff_employee_id'),
-                'department_id'=>$request->input('staff_department_id'),
-                'job_type'=>$request->input('staff_job_type'),
-                'joining_date'=>$request->input('staff_joining_date'),
-                'senior_id'=>$request->input('staff_senior_id'),
-                'device_id'=>$request->input('staff_device_id'),
-                'address'=>$request->input('staff_address')
-            ]);
-        }
-        else{
-            Staff::create([
-                'user_id'=>$user->id,
-                'employee_id'=>$request->input('staff_employee_id'),
-                'department_id'=>$request->input('staff_department_id'),
-                'job_type'=>$request->input('staff_job_type'),
-                'joining_date'=>$request->input('staff_joining_date'),
-                'senior_id'=>$request->input('staff_senior_id'),
-                'device_id'=>$request->input('staff_device_id'),
-                'address'=>$request->input('staff_address')
-            ]);
+                $staff->update([
+                    'employee_id'=>$request->input('staff_employee_id'),
+                    'department_id'=>$request->input('staff_department_id'),
+                    'job_type'=>$request->input('staff_job_type'),
+                    'joining_date'=>$request->input('staff_joining_date'),
+                    'senior_id'=>$request->input('staff_senior_id'),
+                    'device_id'=>$request->input('staff_device_id'),
+                    'address'=>$request->input('staff_address')
+                ]);
+            }
+            else{
+                Staff::create([
+                    'user_id'=>$user->id,
+                    'employee_id'=>$request->input('staff_employee_id'),
+                    'department_id'=>$request->input('staff_department_id'),
+                    'job_type'=>$request->input('staff_job_type'),
+                    'joining_date'=>$request->input('staff_joining_date'),
+                    'senior_id'=>$request->input('staff_senior_id'),
+                    'device_id'=>$request->input('staff_device_id'),
+                    'address'=>$request->input('staff_address')
+                ]);
+            }
         }
 
         if (! Activation::completed($user) && $request->activated === '1') {
@@ -206,5 +208,21 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')
             ->withSuccess(trans('admin::messages.resource_saved', ['resource' => trans('user::users.user')]));
+    }
+
+    public function getCustomerNameAndEmail($id){
+        $user = User::where('customer_id', '=', $id)->first();
+
+        if($user){
+            return response()->json([
+                'data' => ['name' => $user->full_name, 'email' => $user->email ],
+            ]);
+        }
+
+        return response()->json([
+            'data' => [],
+            'message' => 'DETAIL_NOT_FOUND'
+        ]);
+        
     }
 }
