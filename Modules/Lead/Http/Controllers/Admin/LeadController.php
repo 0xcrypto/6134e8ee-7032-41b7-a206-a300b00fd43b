@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Traits\HasCrudActions;
 use Modules\Lead\Entities\Lead;
+use Modules\Setting\Entities\LeadStatus;
 use Modules\Store\Entities\Store;
 use Modules\Setting\Entities\Setting;
 use Modules\User\Entities\User;
@@ -19,16 +20,6 @@ class LeadController extends Controller
 {
     public function index()
     {
-        $userId = Auth::id();
-        $userStores = \DB::table('user_stores')->where('user_id', $userId)->pluck('user_id', 'store_id')->toArray();
-        $storeLists = Store::all();
-        $indexCount = \DB::table('lead_statuses')->pluck('name', 'id');
-        $leadsData = Lead::where('lead_status_id', $indexCount)->get();    
-        return view("{$this->viewPath}.index",[
-            'storeLists' => $storeLists,
-        ]);
-
-
         $currentUser = auth()->user();
         $stores = $currentUser->stores->map(function ($store){
             return array('name'=> $store->name, 'id'=> $store->id);
@@ -42,13 +33,13 @@ class LeadController extends Controller
             $leads[$storeName."_count"] = $storeLeads->count();
         }
 
-        $onlineTickets = Ticket::where('store_id', '=', NULL)->where('source', '=', 1)->get();
-        $leads["online"] =  $onlineTickets;
-        $leads["online_count"] =  $onlineTickets->count();
+        $onlineLeads = Lead::where('store_id', '=', NULL)->where('source', '=', 1)->get();
+        $leads["online"] =  $onlineLeads;
+        $leads["online_count"] =  $onlineLeads->count();
 
-        $ticketStatuses = TicketStatus::all();
+        $leadStatuses = LeadStatus::all();
 
-        return view("{$this->viewPath}.index", compact(['stores', 'leads', 'ticketStatuses']));
+        return view("{$this->viewPath}.index", compact(['stores', 'leads', 'leadStatuses']));
 
 
     }
