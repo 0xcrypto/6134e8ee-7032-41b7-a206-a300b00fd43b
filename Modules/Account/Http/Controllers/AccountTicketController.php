@@ -75,6 +75,7 @@ class AccountTicketController extends Controller
             'customer_id' => $currentUser->customer_id,
             'customer_name' => $currentUser->full_name,
             'customer_email' => $currentUser->email,
+            'source' => 1,
             'status_id' => setting('default_ticket_status')
         ]);
 

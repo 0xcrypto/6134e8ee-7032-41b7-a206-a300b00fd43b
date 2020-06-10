@@ -28,7 +28,7 @@ class Ticket extends Model
      * @var array
      */
     protected $fillable = [ 'customer_id', 'customer_name', 'customer_email', 'subject', 'description', 'department_id', 
-    'service_id', 'priority_id', 'status_id', 'store_id', 'assigned_to', 'created_by'];
+    'service_id', 'priority_id', 'status_id', 'store_id', 'assigned_to', 'created_by', 'source'];
 
     /**
      * The attributes that should be cast to native types.

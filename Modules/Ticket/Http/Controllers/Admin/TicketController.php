@@ -67,7 +67,18 @@ class TicketController extends Controller
             return array('name'=> $store->name, 'id'=> $store->id);
         })->toArray();
 
-        $tickets = Ticket::all();
+        $tickets = array();
+        foreach($stores as $store){
+            $storeName = str_replace(" ", "_", $store['name']);
+            $storeTickets = Ticket::where('store_id', '=', $store['id'])->get();
+            $tickets[$storeName] = $storeTickets;
+            $tickets[$storeName."_count"] = $storeTickets->count();
+        }
+
+        $onlineTickets = Ticket::where('store_id', '=', NULL)->where('source', '=', 1)->get();
+        $tickets["online"] =  $onlineTickets;
+        $tickets["online_count"] =  $onlineTickets->count();
+
         $ticketStatuses = TicketStatus::all();
 
         return view("{$this->viewPath}.index", compact(['stores', 'tickets', 'ticketStatuses']));
