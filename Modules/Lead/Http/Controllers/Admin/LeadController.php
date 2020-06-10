@@ -27,6 +27,30 @@ class LeadController extends Controller
         return view("{$this->viewPath}.index",[
             'storeLists' => $storeLists,
         ]);
+
+
+        $currentUser = auth()->user();
+        $stores = $currentUser->stores->map(function ($store){
+            return array('name'=> $store->name, 'id'=> $store->id);
+        })->toArray();
+
+        $leads = array();
+        foreach($stores as $store){
+            $storeName = str_replace(" ", "_", $store['name']);
+            $storeLeads = Lead::where('store_id', '=', $store['id'])->get();
+            $leads[$storeName] = $storeLeads;
+            $leads[$storeName."_count"] = $storeLeads->count();
+        }
+
+        $onlineTickets = Ticket::where('store_id', '=', NULL)->where('source', '=', 1)->get();
+        $leads["online"] =  $onlineTickets;
+        $leads["online_count"] =  $onlineTickets->count();
+
+        $ticketStatuses = TicketStatus::all();
+
+        return view("{$this->viewPath}.index", compact(['stores', 'leads', 'ticketStatuses']));
+
+
     }
 
     public function create()
